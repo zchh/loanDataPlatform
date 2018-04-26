@@ -80,6 +80,26 @@ class Customer extends Base
        $data = User::findEntity($id);
        $this->assign('data',$data);
        return $this->fetch('customer/user');
+    }
+    public function check(){//检查密码
+        if(Request()->isPost()){
+            //$password = password_hash($_POST['password'], PASSWORD_DEFAULT);//加密
+            $id = 1;//获取当前用户id
+            $user = User::findEntity($id);
+            $result = password_verify($_POST['password'],$user['password']);
+            if(!$result){
+                $data = [
+                    'status'=>0,
+                    'msg'=>"密码有误"
+                ];
+                return json($data);
+            }
+        }
+    }
+    public function change(){//修改密码
+        if(Request()->isPost()){
+            $id = 1;//获取当前登录用户id
+        }
 
     }
 
