@@ -1,7 +1,7 @@
 define({ "api": [
   {
     "type": "get",
-    "url": "/user",
+    "url": "/customer",
     "title": "用户列表接口",
     "version": "0.0.2",
     "name": "article_list",

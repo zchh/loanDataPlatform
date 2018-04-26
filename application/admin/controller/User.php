@@ -24,7 +24,7 @@ class User extends Controller
     public function index()
     {
         $data = UserModel::selectEntity();
-        return $this->fetch('/user', $data);
+        return $this->fetch('/customer', $data);
     }
 
     /**

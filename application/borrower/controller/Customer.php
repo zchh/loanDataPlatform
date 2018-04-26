@@ -9,6 +9,7 @@
 namespace app\borrower\controller;
 
 
+use app\common\model\Server;
 use app\user\controller\Base;
 use think\Controller;
 
@@ -24,7 +25,7 @@ class Customer extends Base
     public function index(){//列表信息
         $data = Borrower::selectEntity();
         $this->assign('data',$data);
-        return $this->fetch('user/index',$data);
+        return $this->fetch('customer/index',$data);
     }
     public function single(){//修改
         $id = Request::instance()->param('id');
@@ -33,7 +34,9 @@ class Customer extends Base
         //$data = Borrower::findEntity()
     }
     public function server(){//客户服务
-
+        $data = Server::selectEntity();
+        $this->assign('data',$data);
+        return $this->fetch('customer/service',$data);
 
     }
 

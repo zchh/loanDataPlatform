@@ -14,7 +14,7 @@ var isArray = Array.isArray || function (arr) {
  */
 var PATH_REGEXP = new RegExp([
   // Match escaped characters that would otherwise appear in future matches.
-  // This allows the user to escape special characters that won't transform.
+  // This allows the customer to escape special characters that won't transform.
   '(\\\\.)',
   // Match Express-style parameters and un-named parameters with a prefix
   // and optional suffixes. Matches appear as:
@@ -153,7 +153,7 @@ function replacePath (path, keys) {
  * Normalize the given path string, returning a regular expression.
  *
  * An empty array can be passed in for the keys, which will hold the
- * placeholder key descriptions. For example, using `/user/:id`, `keys` will
+ * placeholder key descriptions. For example, using `/customer/:id`, `keys` will
  * contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
  *
  * @param  {(String|RegExp|Array)} path

@@ -37,7 +37,7 @@ return [
         'test11'  => []
     ],
     //用户端
-    'user' => [
+    'customer' => [
         '__dir__'    => [ 'controller', 'view'],
         'controller' => [],
         'view'       => [],

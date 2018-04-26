@@ -63,7 +63,7 @@ define([
           });
       });
 
-      // grab user-inputted URL
+      // grab customer-inputted URL
       var url = $root.find(".sample-request-url").val();
 
       // Insert url parameter

@@ -30,7 +30,7 @@ class Pic extends Base
      * @title 获取详情图片
      * @description 不用校验登陆，根据条件获取详情图片(作品详情)
      * @author 张池
-     * @url user/getDetailPics
+     * @url customer/getDetailPics
      * @method get
      *
      *

@@ -10,7 +10,7 @@ use think\Route;
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-Route::get('/', 'user/DefaultContro/defaultFunc');                                                        //空跳转
+Route::get('/', 'customer/DefaultContro/defaultFunc');                                                        //空跳转
 
 
 /*******************************************************后台管理接口*******************************************************************/
@@ -28,19 +28,19 @@ Route::get('admin/logout','admin/Login/logout');                                
 Route::post('admin/uploadPic','admin/Pic/uploadPic');                                                    //图片上传
 
 
-Route::resource('admin/user','admin/userAdmin.User');
+Route::resource('admin/customer','admin/userAdmin.User');
 
 /*******************************************************客户管理***********************************************************************************/
-Route::post('user/register','user/Login/register');                                                          //用户注册
-Route::post('user/login','user/Login/login');                                                                //用户登录
-Route::post('user/logout','user/Login/logout');                                                              //用户退出登录
+Route::post('customer/register','customer/Login/register');                                                          //用户注册
+Route::post('customer/login','customer/Login/login');                                                                //用户登录
+Route::post('customer/logout','customer/Login/logout');                                                              //用户退出登录
 
 
-Route::post('user/addFeedback','user/Feedback/addFeedback');                                                  //添加留言反馈
-Route::get('user/getMaterialLibraryType','user/MaterialLibraryType/getMaterialLibraryType');                  //获取材质库类型
+Route::post('customer/addFeedback','customer/Feedback/addFeedback');                                                  //添加留言反馈
+Route::get('customer/getMaterialLibraryType','customer/MaterialLibraryType/getMaterialLibraryType');                  //获取材质库类型
 Route::get('borrower/customer','borrower/Customer/index'); //用户列表首页
 Route::get('borrower/customer/single','borrower/Customer/single'); //单个用户详情
-Route::get('borrower/server','borrower/Customer/server'); //单个用户详情
+Route::get('borrower/customer/server','borrower/Customer/server'); //单个用户详情
 
 
 
