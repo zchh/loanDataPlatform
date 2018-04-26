@@ -62,6 +62,9 @@
                                 </div>
                                 <div class="col-xs-9">
                                     修改密码：<input type="text" class="form-control" placeholder="已设置" readonly>
+                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                                        修改
+                                    </button>
                                 </div>
                                 <div class="col-xs-9">
                                     联系邮箱：<input type="text" class="form-control" placeholder="{$data.email}" readonly>
@@ -99,11 +102,30 @@
                 </div>
                 <!--/.col (left) -->
                 <!-- right column -->
-                <div class="col-md-6">
-                    <!-- Horizontal Form -->
-                    <!-- /.box -->
-                    <!-- general form elements disabled -->
-                    <!-- /.box -->
+                <div class="modal fade" id="modal-default">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">修改密码</h4>
+                            </div>
+                            <div class="col-xs-9">
+                                旧密码：<input type="password" class="form-control" placeholder="请输入旧密码" id="old">
+                            </div>
+                            <div class="col-xs-9">
+                                新密码：<input type="password" class="form-control" placeholder="请输入新密码" id="new">
+                            </div>
+                            <div class="col-xs-9">
+                                确认密码：<input type="password" class="form-control" placeholder="确认密码" id="confirm">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">确认修改</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
                 </div>
                 <!--/.col (right) -->
             </div>
@@ -125,5 +147,8 @@
 <script src="__STATIC__/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="__STATIC__/dist/js/demo.js"></script>
+<script type="text/javascript">
+   
+</script>
 {/block}
 
