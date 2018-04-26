@@ -101,10 +101,22 @@
 <script src="__STATIC__/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="__STATIC__/dist/js/adminlte.min.js"></script>
+<script src="__STATIC__/layer/layer.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="__STATIC__/dist/js/demo.js"></script>
 <script type="text/javascript">
-
+ $(".btn-primary").on('click',function () {
+     var question_type1 = $("#question_type").val();
+     var detail1 = $("#detail").val();
+     if(question_type1.trim() == ''){
+         layer.msg("问题类型不能为空",{icon:0});
+         return false;
+     }
+     if(detail1.trim() == ''){
+         layer.msg("详情不能为空",{icon:0});
+         return false;
+     }
+ })
 </script>
 {/block}
 
