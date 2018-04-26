@@ -38,6 +38,9 @@ Route::post('user/logout','user/Login/logout');                                 
 
 Route::post('user/addFeedback','user/Feedback/addFeedback');                                                  //添加留言反馈
 Route::get('user/getMaterialLibraryType','user/MaterialLibraryType/getMaterialLibraryType');                  //获取材质库类型
+Route::get('borrower/customer','borrower/Customer/index'); //用户列表首页
+Route::get('borrower/customer/single','borrower/Customer/single'); //单个用户详情
+Route::get('borrower/server','borrower/Customer/server'); //单个用户详情
 
 
 

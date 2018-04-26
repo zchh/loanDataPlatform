@@ -18,6 +18,7 @@ class TableConfig
     const SERVICE                                   =            'service';                             //客户服务表
     const USER                                      =            'user';                                //用户表
     const INFORMATION                               =            'information';                         //信息中心表
+    const CUSTOMER                                  =          'customer_list';                         //客户中心
 
 
 
