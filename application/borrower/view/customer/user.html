@@ -177,7 +177,19 @@
                return false;
            }
            else {
-               $.post("{:url('borrower/Customer/check')}",{'id':1});
+               $.post("{:url('borrower/Customer/change')}",{'new_password':new_password},function (data) {
+                   if(data.status == 1){
+                       layer.msg(data.msg,{icon:1,time:2000},function () {
+                           window.location.reload();
+                       });
+                   }
+                   else {
+                       layer.msg(data.msg,{icon:0,time:2000},function () {
+                           window.location.reload();
+                       });
+                       return false;
+                   }
+               });
            }
        });
 
