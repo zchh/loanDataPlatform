@@ -86,6 +86,9 @@
                                 </div>
                                 <div class="col-xs-9">
                                     账户余额：<input type="text" class="form-control" placeholder="{$data.balance}" readonly>
+                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default1">
+                                        查看
+                                    </button>
                                 </div>
                                 <div class="col-xs-9">
                                     流量计划:(<?=$data['flow_plan']?>位/天)<input type="text" class="form-control" placeholder="{$data.flow_plan}" readonly>
@@ -121,6 +124,39 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary">确认修改</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <div class="modal fade" id="modal-default1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">查看余额</h4>
+                                <div class="box-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>金额</th>
+                                            <th>说明</th>
+                                            <th>时间</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                          <?php foreach($snacks as $s):?>
+                                             <tr>
+                                                 <td><?=$s['balance']?></td>
+                                                 <td><?=$s['describe']?></td>
+                                                 <td><?=date('Y-m-d h:i:s',$s['add_time'])?></td>
+                                             </tr>
+                                          <?php endforeach;?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <!-- /.modal-content -->
