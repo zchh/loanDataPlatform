@@ -99,8 +99,22 @@ class Customer extends Base
     public function change(){//修改密码
         if(Request()->isPost()){
             $id = 1;//获取当前登录用户id
+            $password = password_hash($_POST['new_password'],PASSWORD_DEFAULT);//加密
+            $result = User::updateEntity($id,['password'=>$password]);
+            if($result){
+                $data = [
+                    'status'=>1,
+                    'msg'=>'修改成功'
+                ];
+            }
+            else{
+                $data = [
+                    'status'=>0,
+                    'msg'=>'修改失败'
+                ];
+            }
+            return json($data);
         }
-
     }
 
 }
