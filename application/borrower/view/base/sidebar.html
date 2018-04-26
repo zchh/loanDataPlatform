@@ -4,11 +4,13 @@
         <!-- Sidecustomeruser panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="../../static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <a href="{:url('borrower/customer/user')}">
+                    <img src="../../static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                </a>
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <p>用户名：</p>
+                <a href="#"><i class="fa fa-circle text-success"></i>余额：</a>
             </div>
         </div>
         <!-- search form -->
@@ -24,20 +26,43 @@
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-
-            <!--单栏目-->
             <li>
-                <a href="#">
-                    <i class="fa fa-th"></i> <span>Widgets</span>
+                <a href="{:url('borrower/customer/index')}">
+                    <i class="fa fa-th"></i> <span>我要充值</span>
                     <span class="pull-right-container">
                         <!--<small class="label pull-right bg-green">new</small>-->
                         </span>
                 </a>
             </li>
 
+            <!--单栏目-->
             <li>
-                <a href="/admin/test2">
-                    <i class="fa fa-th"></i> <span>test</span>
+                <a href="{:url('borrower/customer/index')}">
+                    <i class="fa fa-th"></i> <span>客户信息</span>
+                    <span class="pull-right-container">
+                        <!--<small class="label pull-right bg-green">new</small>-->
+                        </span>
+                </a>
+            </li>
+            <li>
+                <a href="{:url('/borrower/question')}">
+                    <i class="fa fa-th"></i> <span>信息反馈</span>
+                    <span class="pull-right-container">
+                        <!--<small class="label pull-right bg-green">new</small>-->
+                        </span>
+                </a>
+            </li>
+            <li>
+                <a href="{:url('borrower/customer/server')}">
+                    <i class="fa fa-th"></i> <span>服务支持</span>
+                    <span class="pull-right-container">
+                        <!--<small class="label pull-right bg-green">new</small>-->
+                        </span>
+                </a>
+            </li>
+            <li>
+                <a href="{:url('borrower/customer/information')}">
+                    <i class="fa fa-th"></i> <span>信息中心</span>
                     <span class="pull-right-container">
                         <!--<small class="label pull-right bg-green">new</small>-->
                         </span>
