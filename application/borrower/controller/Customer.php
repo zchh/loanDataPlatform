@@ -9,6 +9,7 @@
 namespace app\borrower\controller;
 
 
+use app\common\model\Balance;
 use app\common\model\Information;
 use app\common\model\Question;
 use app\common\model\Server;
@@ -78,7 +79,9 @@ class Customer extends Base
         //个人用户信息
        $id = 1;
        $data = User::findEntity($id);
-       $this->assign('data',$data);
+        $snacks = Balance::selectEntity(['user_id'=>$id]);
+        $this->assign('data',$data);
+        $this->assign('snacks',$snacks);
        return $this->fetch('customer/user');
     }
     public function check(){//检查密码
