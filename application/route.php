@@ -13,12 +13,16 @@ use think\Route;
 Route::get('/', 'customer/DefaultContro/defaultFunc');                                                        //空跳转
 
 
+
+
 /*******************************************************后台管理接口*******************************************************************/
 
 
 Route::get('admin/test','admin/Test/test');
-Route::get('admin/test2','admin/Test/test2');                                                            //demo
+Route::get('admin/test2','admin/Test/test2');                                                               //demo
 
+Route::get('/admin/user', 'admin/User/index');                                                           //用户列表
+Route::post('/admin/addUser', 'admin/User/addUser');                                                     //添加用户
 
 
 Route::rule('admin/register','admin/Login/adminRegister','POST');                                  //管理员注册
@@ -29,7 +33,6 @@ Route::post('admin/uploadPic','admin/Pic/uploadPic');                           
 
 
 Route::resource('admin/customer','admin/userAdmin.User');
-
 /*******************************************************客户管理***********************************************************************************/
 Route::post('customer/register','customer/Login/register');                                                          //用户注册
 Route::post('customer/login','customer/Login/login');                                                                //用户登录
@@ -40,7 +43,10 @@ Route::post('customer/addFeedback','customer/Feedback/addFeedback');            
 Route::get('customer/getMaterialLibraryType','customer/MaterialLibraryType/getMaterialLibraryType');                  //获取材质库类型
 Route::get('borrower/customer','borrower/Customer/index'); //用户列表首页
 Route::get('borrower/customer/single','borrower/Customer/single'); //单个用户详情
-Route::get('borrower/customer/server','borrower/Customer/server'); //单个用户详情
+Route::get('borrower/customer/server','borrower/Customer/server'); //客户服务详情
+
+
+Route::get('borrower/index','borrower/User/index');                  //获取材质库类型
 
 
 

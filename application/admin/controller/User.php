@@ -23,8 +23,11 @@ class User extends Controller
      */
     public function index()
     {
-        $data = UserModel::selectEntity();
-        return $this->fetch('/customer', $data);
+        $result['data'] = UserModel::selectEntity();
+        foreach ($result['data'] as $k=>$v){
+            unset($v['password']);
+        }
+        return $this->fetch('/user', $result);
     }
 
     /**
@@ -32,7 +35,13 @@ class User extends Controller
      */
     public function addUser()
     {
-
+        $requestParam = Request::instance()->param();
+        $addData['real_name'] = $requestParam['real_name'];
+        $num = UserModel::addEntity($addData);
+        if($num == 0){
+            return json(array('code'=>500, 'msg'=>'添加失败'));
+        }
+        return json(array('code'=>201, 'msg'=>'添加成功'));
     }
 
     /**

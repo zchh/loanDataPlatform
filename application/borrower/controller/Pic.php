@@ -5,7 +5,7 @@
  * Date: 2018/3/13
  * Time: 9:50
  */
-namespace app\admin\controller;
+namespace app\borrower\controller;
 
 use app\common\controller\UploadPicture;
 use think\Controller;
