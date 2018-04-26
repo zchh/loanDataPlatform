@@ -36,6 +36,11 @@ class User extends Model
         return Db::table(TableConfig::USER)->where('user_id', $id)->find();
     }
 
+    public static function addEntity($arr)
+    {
+        return  Db::table(TableConfig::USER)->insert($arr);
+    }
+
     public static function updateEntity($id, $arr)
     {
         $num = Db::table(TableConfig::USER)->where('user_id', $id)->update($arr);

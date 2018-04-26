@@ -14,6 +14,11 @@
             <div class="box-body">
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
+                    <div style="position: relative">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                            添加新用户
+                        </button>
+                    </div>
                     <tr>
                         <th>姓名</th>
                         <th>年龄</th>
@@ -26,7 +31,7 @@
                     </thead>
                     <tbody>
 
-
+                    {notempty name="data"}
                     {volist name="data" id="single"}
                     <tr>
                         <td>{$single.real_name}</td>
@@ -34,23 +39,15 @@
                         <td>{$single.tel}</td>
                         <td>{$single.weixin}</td>
                         <td>{$single.balance}</td>
-                        <td>{$single.credit}</td>
+                        <td>1111</td>
                         <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
                             Launch Default Modal
                         </button></td>
                     </tr>
                     {/volist}
+                    {/notempty}
 
                     </tbody>
-                    <tfoot>
-                    <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
-                    </tr>
-                    </tfoot>
                 </table>
             </div>
 
@@ -62,15 +59,39 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Default Modal</h4>
+                            <h4 class="modal-title">添加新用户</h4>
                         </div>
+                        <form>
                         <div class="modal-body">
-                            <p>One fine body&hellip;</p>
+                            <label>真实姓名</label>
+                            <input id="real_name" type="text" class="form-control my-colorpicker1" required>
+                            <label>密码</label>
+                            <input id="password" type="password" class="form-control my-colorpicker1">
+                            <label>联系邮箱</label>
+                            <input id="email" type="text" class="form-control my-colorpicker1">
+                            <label>联系电话</label>
+                            <input id="tel" type="text" class="form-control my-colorpicker1">
+                            <label>年龄</label>
+                            <input id="age" type="text" class="form-control my-colorpicker1">
+                            <label>锁定城市</label>
+                            <input id="city_id" type="text" class="form-control my-colorpicker1">
+                            <label>联系微信</label>
+                            <input id="weixin" type="text" class="form-control my-colorpicker1">
+                            <label>芝麻信用分</label>
+                            <input id="credit" type="text" class="form-control my-colorpicker1">
+                            <label>备用联系人</label>
+                            <input id="contact" type="text" class="form-control my-colorpicker1">
+                            <label>账户余额</label>
+                            <input id="balance" type="text" class="form-control my-colorpicker1">
+                            <label>流量计划:(0位/天）</label>
+                            <input id="flow_plan" type="text" class="form-control my-colorpicker1">
+
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" id="add" data-dismiss="modal">确认添加</button>
                         </div>
+                        </form>
                     </div>
                     <!-- /.modal-content -->
                 </div>
@@ -84,4 +105,35 @@
     </div>
     <!-- /.col -->
 </div>
+<script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $("#add").click(function () {
+        $.ajax({
+            type: "post",
+            url: '/admin/addUser',
+            data: {
+                'real_name': $("#real_name").val(),
+                'password' : $("#password").val()
+            },
+            dataType: "json",
+            success: function(data) {
+                if(data.code == '500')
+                {
+                    alert('添加失败');
+                }else {
+                    alert('添加成功');
+                }
+                window.location.reload();
+            },
+            error:function(){
+                alert('系统错误');
+            }
+
+
+
+        });
+    });
+
+
+</script>
 {/block}

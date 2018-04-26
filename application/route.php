@@ -13,12 +13,16 @@ use think\Route;
 Route::get('/', 'user/DefaultContro/defaultFunc');                                                        //空跳转
 
 
+
+
 /*******************************************************后台管理接口*******************************************************************/
 
 
 Route::get('admin/test','admin/Test/test');
-Route::get('admin/test2','admin/Test/test2');                                                            //demo
+Route::get('admin/test2','admin/Test/test2');                                                               //demo
 
+Route::get('/admin/user', 'admin/User/index');                                                           //用户列表
+Route::post('/admin/addUser', 'admin/User/addUser');                                                     //添加用户
 
 
 Route::rule('admin/register','admin/Login/adminRegister','POST');                                  //管理员注册
@@ -28,8 +32,6 @@ Route::get('admin/logout','admin/Login/logout');                                
 Route::post('admin/uploadPic','admin/Pic/uploadPic');                                                    //图片上传
 
 
-Route::resource('admin/user','admin/userAdmin.User');
-
 /*******************************************************客户管理***********************************************************************************/
 Route::post('user/register','user/Login/register');                                                          //用户注册
 Route::post('user/login','user/Login/login');                                                                //用户登录
@@ -38,6 +40,9 @@ Route::post('user/logout','user/Login/logout');                                 
 
 Route::post('user/addFeedback','user/Feedback/addFeedback');                                                  //添加留言反馈
 Route::get('user/getMaterialLibraryType','user/MaterialLibraryType/getMaterialLibraryType');                  //获取材质库类型
+
+
+Route::get('borrower/index','borrower/User/index');                  //获取材质库类型
 
 
 
