@@ -1,0 +1,83 @@
+{extend name="base/base" /}
+{block name="main"}
+<div class="row">
+    <div class="col-xs-12">
+        <!-- /.box -->
+
+        <div class="col-md-6">
+            <!-- Horizontal Form -->
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">信息公告</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal" method="post" action="">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <input name="title" type="text" class="form-control" id="inputEmail3" placeholder="请在这里输入标题">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <textarea name="describe" id="myEditor" style="width:100%;height:380px;"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="reset" class="btn btn-default">重置信息</button>
+                            <button type="button" class="btn btn-info pull-right" id="addCustomer">确定发布</button>
+                        </div>
+                        <!-- /.box-footer -->
+                </form>
+            </div>
+        </div>
+
+
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+
+
+
+<script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../static/ueditor/ueditor.config.js"></script>
+<script src="../../static/ueditor/ueditor.all.min.js"></script>
+<script>
+
+
+    //添加用户
+    $("#addCustomer").click(function () {
+        $.ajax({
+            type: "post",
+            url: '/admin/addInformation',
+            data: {
+                'title':  $("[name='title']").val(),
+                'describe':  $("[name='describe']").val()
+            },
+            dataType: "json",
+            success: function(data) {
+                if(data.code == '500') {
+                    alert(data.msg);
+                }else {
+                    alert('添加成功');
+                }
+            },
+            error:function(){
+                alert('系统错误');
+            }
+        });
+    });
+
+    var ue = UE.getEditor('myEditor');
+
+
+
+</script>
+{/block}

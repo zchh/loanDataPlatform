@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2018/3/13
- * Time: 9:55
+ * Date: 2018/4/26
+ * Time: 17:04
  */
 namespace app\common\model;
 
@@ -11,17 +11,17 @@ use app\common\selfConfig\TableConfig;
 use think\Db;
 use think\Model;
 
-class User extends Model
+class CustomerList extends Model
 {
     public static function selectEntity($param = [])
     {
         $whereSql = '';
-        $query = Db::name(TableConfig::USER)->alias('u');
+        $query = Db::name(TableConfig::CUSTOMER_LIST)->alias('u');
         $whereParam = array();
-        if(false == empty($param['real_name'])){
-            $whereSql .= 'real_name=:real_name';
-            $whereParam['real_name'] = $param['real_name'];
-        }
+//        if(false == empty($param['real_name'])){
+//            $whereSql .= 'real_name=:real_name';
+//            $whereParam['real_name'] = $param['real_name'];
+//        }
 //        if(false == empty($param['admin_name'])){
 //            (false == empty($whereSql))?($whereSql.= ' and '):null;
 //            $whereSql .= 'admin_name=:admin_name';
@@ -33,24 +33,24 @@ class User extends Model
 
     public static function findEntity($id)
     {
-        return Db::table(TableConfig::USER)->where('user_id', $id)->find();
+        return Db::table(TableConfig::CUSTOMER_LIST)->where('user_id', $id)->find();
     }
 
     public static function addEntity($arr)
     {
-        $arr['password'] = password_hash($arr['password'], PASSWORD_DEFAULT);
-        return  Db::table(TableConfig::USER)->insert($arr);
+        return  Db::table(TableConfig::CUSTOMER_LIST)->insert($arr);
     }
 
     public static function updateEntity($id, $arr)
     {
-        $num = Db::table(TableConfig::USER)->where('user_id', $id)->update($arr);
+        $num = Db::table(TableConfig::CUSTOMER_LIST)->where('user_id', $id)->update($arr);
         return $num;
     }
 
     public static function deleteEntity($id)
     {
-        $num = Db::table(TableConfig::USER)->delete($id);
+        $num = Db::table(TableConfig::CUSTOMER_LIST)->delete($id);
         return $num;
     }
+
 }
