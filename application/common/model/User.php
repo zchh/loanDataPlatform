@@ -53,4 +53,21 @@ class User extends Model
         $num = Db::table(TableConfig::USER)->delete($id);
         return $num;
     }
+    public static function checkIDPassword($id,$password){
+        $user = User::findEntity($id);
+        if(empty($user)){
+            return false;
+        }
+        else{
+            //校验密码
+            $result = password_verify($user['password'],$password);//未加密 加密
+            if($result){
+                return $user;
+            }
+            else{
+                return false;
+            }
+
+        }
+    }
 }
