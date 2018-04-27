@@ -225,13 +225,25 @@ class Customer extends Cusbase
         }
     }
     public function img(){//修改头像
-        $id = 1;
-        $result = User::findEntity($id);
-        $password = password_hash($result['password'],PASSWORD_DEFAULT);
-        $ceshi = password_verify($result['password'],$password);
-        var_dump($ceshi);
-        exit;
-
+       $file = request()->file('file');
+       if($file){
+           $info = $file->move(ROOT_PATH.'public/static'.DS.'@web');//移动成功
+           if($info){
+               $path = $info->getSaveName();
+               $data = [
+                   'img'=>'/static/@web/'.$path
+               ];
+               //并进行保存
+               $id = $_SESSION['userinfo']['user_id'];
+               $result = User::updateEntity($id,$data);
+               if($result){
+                   return json($data);
+               }
+           }
+       }
     }
+//    public function ceshi(){
+//        return $this->fetch('customer/ceshi');
+//    }
 
 }
