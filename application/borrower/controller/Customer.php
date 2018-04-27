@@ -24,7 +24,7 @@ use think\Session;
 use think\Request;
 
 
-class Customer extends Base
+class Customer extends Cusbase
 {
     public function index(){//列表信息
         $data = Borrower::selectEntity();
@@ -224,8 +224,9 @@ class Customer extends Base
             return json($data);
         }
     }
-    public function ceshi(){
-
+    public function img(){//修改头像
+      var_dump($_FILES);
+      exit;
     }
 
 }
