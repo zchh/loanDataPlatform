@@ -119,5 +119,102 @@ class Customer extends Base
             return json($data);
         }
     }
+    public function check_username(){
+        if(Request()->isPost()){
+            $id = 1;//获取当前用户id
+            $result = User::updateEntity($id,['real_name'=>$_POST['real_name']]);
+            if($result){
+                $data = [
+                    'status'=>1,
+                    'msg'=>'修改姓名成功'
+                ];
+            }
+            else{
+                $data = [
+                    'status'=>0,
+                    'msg'=>'修改姓名失败'
+                ];
+            }
+            return json($data);
+        }
+    }
+    public function check_email(){
+        if(Request()->isPost()){
+            $id = 1;//获取当前用户id
+            $result = User::updateEntity($id,['email'=>$_POST['email']]);
+            if($result){
+                $data = [
+                    'status'=>1,
+                    'msg'=>'修改邮箱成功'
+                ];
+            }
+            else{
+                $data = [
+                    'status'=>0,
+                    'msg'=>'修改邮箱失败'
+                ];
+            }
+            return json($data);
+        }
+
+    }
+    public function check_age(){
+        if(Request()->isPost()){
+            $id = 1;//获取当前用户id
+            $result = User::updateEntity($id,['age'=>$_POST['age']]);
+            if($result){
+                $data = [
+                    'status'=>1,
+                    'msg'=>'设置年龄成功'
+                ];
+            }
+            else{
+                $data = [
+                    'status'=>0,
+                    'msg'=>'设置年龄失败'
+                ];
+            }
+            return json($data);
+        }
+
+    }
+    public function check_weixin(){//设置微信
+        if(Request()->isPost()){
+            $id = 1;//获取当前用户id
+            $result = User::updateEntity($id,['weixin'=>$_POST['weixin']]);
+            if($result){
+                $data = [
+                    'status'=>1,
+                    'msg'=>'设置微信成功'
+                ];
+            }
+            else{
+                $data = [
+                    'status'=>0,
+                    'msg'=>'设置微信失败'
+                ];
+            }
+            return json($data);
+        }
+    }
+    public function check_contack(){//设置备用联系人
+        if(Request()->isPost()){
+            $id = 1;//获取当前用户id
+            $result = User::updateEntity($id,['contact'=>$_POST['contack']]);
+            if($result){
+                $data = [
+                    'status'=>1,
+                    'msg'=>'设置备用联系人成功'
+                ];
+            }
+            else{
+                $data = [
+                    'status'=>0,
+                    'msg'=>'设置备用联系人失败'
+                ];
+            }
+            return json($data);
+        }
+    }
 
 }
