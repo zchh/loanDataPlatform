@@ -26,7 +26,17 @@ Route::post('/admin/addUser', 'admin/User/addUser');                            
 Route::get('admin/customerList', 'admin/CustomerList/index');                                           //客户列表
 Route::any('admin/addCustomer', 'admin/CustomerList/addCustomer');                                      //添加客户
 
+Route::any('admin/information', 'admin/Information/index');                                             //信息公告列表
 Route::any('admin/addInformation', 'admin/Information/addInformation');                                 //添加信息公告
+
+Route::get('admin/know', 'admin/Know/index');                                                           //使用须知
+Route::any('admin/addKnow', 'admin/Know/addKnow');                                                      //添加使用须知
+
+Route::post('admin/addNormalQuestion', 'admin/NormalQuestions/addNormalQuestion');                      //添加常见问题
+
+Route::post('admin/addService', 'admin/Service/addService');                                            //添加客户服务
+Route::get('admin/getOneService', 'admin/Service/getOneService');                                       //获取一条客户服务
+Route::post('admin/editService', 'admin/Service/editService');                                           //编辑一条客户服务
 
 
 Route::get('/admin/provincial', 'admin/Provincial/index');                                               //地址信息

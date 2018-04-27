@@ -16,7 +16,7 @@
                     <div class="box-body">
                         <div class="form-group">
                             <div class="col-sm-10">
-                                <input name="title" type="text" class="form-control" id="inputEmail3" placeholder="请在这里输入标题">
+                                <input id="name" name="title" type="text" class="form-control" id="inputEmail3" placeholder="请在这里输入标题">
                             </div>
                         </div>
 
@@ -30,7 +30,7 @@
                         <!-- /.box-body -->
                         <div class="box-footer">
                             <button type="reset" class="btn btn-default">重置信息</button>
-                            <button type="button" class="btn btn-info pull-right" id="addCustomer">确定发布</button>
+                            <button type="button" class="btn btn-info pull-right" id="addInformation">确定发布</button>
                         </div>
                         <!-- /.box-footer -->
                 </form>
@@ -53,13 +53,13 @@
 
 
     //添加用户
-    $("#addCustomer").click(function () {
+    $("#addInformation").click(function () {
         $.ajax({
             type: "post",
             url: '/admin/addInformation',
             data: {
-                'title':  $("[name='title']").val(),
-                'describe':  $("[name='describe']").val()
+                'title': $("#title").val(),
+                'describe': $("#describe").val()
             },
             dataType: "json",
             success: function(data) {
@@ -67,6 +67,7 @@
                     alert(data.msg);
                 }else {
                     alert('添加成功');
+                    window.location.href= 'customerList';
                 }
             },
             error:function(){

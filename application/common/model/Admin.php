@@ -22,10 +22,10 @@ class Admin extends Model
             $whereSql .= 'role=:role';
             $whereParam['role'] = $param['role'];
         }
-        if(false == empty($param['admin_name'])){
+        if(false == empty($param['username'])){
             (false == empty($whereSql))?($whereSql.= ' and '):null;
-            $whereSql .= 'admin_name=:admin_name';
-            $whereParam['admin_name'] = $param['admin_name'];
+            $whereSql .= 'username=:username';
+            $whereParam['username'] = $param['username'];
         }
         if(false == empty($param['page']) && false == empty($param['pageSize'])){ //分页
             if(false == empty($whereSql)){

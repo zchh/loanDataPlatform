@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2018/4/26
- * Time: 15:39
+ * Date: 2018/4/27
+ * Time: 15:12
  */
 
 namespace app\common\model;
@@ -12,12 +12,12 @@ use think\Model;
 use think\Db;
 use app\common\selfConfig\TableConfig;
 
-class Information extends Model
+class NormalQuestion extends Model
 {
     public static function selectEntity($param = [])
     {
         $whereSql = '';
-        $query = Db::name(TableConfig::INFORMATION)->alias('i');
+        $query = Db::name(TableConfig::NORMAL_QUESTION)->alias('i');
         $whereParam = array();
 //        if(false == empty($param['role'])){
 //            $whereSql .= 'role=:role';
@@ -34,24 +34,24 @@ class Information extends Model
 
     public static function addEntity($arr)
     {
-        $arr['time'] = time();
-        return  Db::table(TableConfig::INFORMATION)->insert($arr);
+        $arr['create_time'] = time();
+        return  Db::table(TableConfig::NORMAL_QUESTION)->insert($arr);
     }
 
     public static function findEntity($id)
     {
-        return Db::table(TableConfig::INFORMATION)->where('information_id', $id)->find();
+        return Db::table(TableConfig::NORMAL_QUESTION)->where('question_id', $id)->find();
     }
 
     public static function updateEntity($id, $arr)
     {
-        $num = Db::table(TableConfig::INFORMATION)->where('information_id', $id)->update($arr);
+        $num = Db::table(TableConfig::NORMAL_QUESTION)->where('question_id', $id)->update($arr);
         return $num;
     }
 
     public static function deleteEntity($id)
     {
-        $num = Db::table(TableConfig::INFORMATION)->delete($id);
+        $num = Db::table(TableConfig::NORMAL_QUESTION)->delete($id);
         return $num;
     }
 

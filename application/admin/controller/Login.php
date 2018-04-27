@@ -69,86 +69,34 @@ class Login extends Base
    }
 
     /**
-     * @title        管理员登录
-     * @description  管理员登录
-     * @author 张池
-     * @url /admin/login
-     * @method POST
-     *
-     *
-     * @param name:admin_name type:text require:1 default:1 other: desc:管理员名
-     * @param name:password type:text require:1 desc:管理员密码
-     *
-     * @return code:200
-     * @return msg:登录成功
-     * @return data: @
-     * @data admin_id:管理员id role:管理员角色（1：超级管理员2：普通管理员）token:校验登录的token
+     *  管理员登录
      */
    public function adminLogin()
    {
        $requestParam = Request::instance()->param();
-       if(true == empty($requestParam['admin_name']) || true == empty($requestParam['password'])){
+       if(true == empty($requestParam['username']) || true == empty($requestParam['password'])){
            return $this->selfResponse(StatusCode::SERVER_ERROR, StatusCode::PARAM_WRONG);
        }
-       $param['admin_name'] = $requestParam['admin_name'];
+       $param['username'] = $requestParam['username'];
        $selectResult = Admin::selectAdmin($param);
        if($selectResult['count'] == 0){
            return $this->selfResponse(StatusCode::NO_PERMISSION, StatusCode::USERNAME_PASSWORD_WRONG);
        }
        if(password_verify($requestParam['password'], $selectResult['data'][0]['password'])){
-           $adminId = $selectResult['data'][0]['admin_id'];
-           $role = $selectResult['data'][0]['role'];
-           unset($param);
-           $param['admin_id'] = $adminId;
-           $adminToken = AdminToken::selectAdminToken($param);
-           if(empty($adminToken)){
-               $token = $this->createAdminToken($adminId);
-               if(0 == $token){
-                   return $this->selfResponse(StatusCode::SERVER_ERROR, StatusCode::SERVER_ERRO_MESSAGE);
-               }
-               $token = $this->createToken();
-               $data = [
-                   'admin_id' => $adminId,
-                   'role' => $role,
-                   'token' => $token
-               ];
-               return $this->selfResponse(StatusCode::GET_SUCCESS, StatusCode::LOGIN_SUCCESS, $data);
-           }
-           $token = $this->updateAdminToken($adminId);
-           $data = [
-               'admin_id' => $adminId,
-               'role' => $role,
-               'token' => $token
-           ];
-           return $this->selfResponse(StatusCode::GET_SUCCESS, StatusCode::LOGIN_SUCCESS, $data);
+           Session::set('admin',$selectResult['data'][0]);
+           return $this->selfResponse(StatusCode::GET_SUCCESS, StatusCode::LOGIN_SUCCESS);
        }else{
            return $this->selfResponse(StatusCode::NO_PERMISSION, StatusCode::USERNAME_PASSWORD_WRONG);
        }
    }
 
     /**
-     * @title        管理员退出登录
-     * @description  要校验登录，管理员退出登录
-     * @author 张池
-     * @url /admin/logout
-     * @method GET
-     *
-     *
-     * @return code:204
-     * @return msg:成功退出登录
+     *  管理员退出登录
      */
    public function logout()
    {
-       $adminId = $this->checkAdminLogin();
-       if(false == $adminId){
-           return $this->selfResponse(StatusCode::NO_PERMISSION, StatusCode::PLEASE_LOGIN);
-       }
-       $updateArr['lose_time'] = 0;
-       $num = AdminToken::updateAdminToken($adminId, $updateArr);
-       if($num == 0){
-           return $this->selfResponse(StatusCode::SERVER_ERROR, StatusCode::SERVER_ERRO_MESSAGE);
-       }
-       return $this->selfResponse(StatusCode::DELETE_SUCCESS, '成功退出登录');
+       Session::delete('admin');
+       return $this->redirect('admin/login');
    }
 
     /**
