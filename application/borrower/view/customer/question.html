@@ -51,7 +51,6 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form role="form" action="{:url('borrower/Customer/question')}" method="post">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="question_type">问题类型</label>
@@ -65,9 +64,8 @@
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">确认提交</button>
+                            <button  class="btn btn-primary">确认提交</button>
                         </div>
-                    </form>
                 </div>
                     <!-- /.box -->
 
@@ -116,6 +114,19 @@
          layer.msg("详情不能为空",{icon:0});
          return false;
      }
+     $.post("{:url('borrower/Customer/question')}",{'question_type':question_type1,'detail':detail1},function (data) {
+         if(data.status == 1){
+             layer.msg(data.msg,{icon:1,time:1000},function () {
+                 window.location.reload();
+             });
+         }
+         else {
+             layer.msg(data.msg,{icon:0,time:1000},function () {
+                 window.location.reload();
+             });
+             return false;
+         }
+     })
  })
 </script>
 {/block}
