@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:86:"F:\php_project\git_project\loanDataPlatform\public/../application/admin\view\user.html";i:1524748519;s:81:"F:\php_project\git_project\loanDataPlatform\application\admin\view\base\base.html";i:1524749555;s:42:"../application/admin/view/base/header.html";i:1524630035;s:43:"../application/admin/view/base/sidebar.html";i:1524799955;s:42:"../application/admin/view/base/footer.html";i:1524624938;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:86:"F:\php_project\git_project\loanDataPlatform\public/../application/admin\view\user.html";i:1524748519;s:81:"F:\php_project\git_project\loanDataPlatform\application\admin\view\base\base.html";i:1524749555;s:42:"../application/admin/view/base/header.html";i:1524827610;s:43:"../application/admin/view/base/sidebar.html";i:1524799955;s:42:"../application/admin/view/base/footer.html";i:1524624938;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,18 +91,59 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="#" class="btn btn-default btn-flat" data-toggle="modal" data-target="#reset-model" id="reset-model">重置密码</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="/admin/logout" class="btn btn-default btn-flat">退出登录</a>
                             </div>
                         </li>
+
+
+
+
+
+                        <div class="modal fade" id="reset-modal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">密码重置</h4>
+                                    </div>
+                                    <form>
+                                        <div class="modal-body">
+                                            <label>原密码</label>
+                                            <input id="oldPassword" value="oldPassword" type="password" class="form-control my-colorpicker1">
+                                            <label>新密码</label>
+                                            <input id="newPassword" value="newPassword" type="password" class="form-control my-colorpicker1">
+                                            <label>确认新密码</label>
+                                            <input id="newPassword2" value="newPassword2" type="password" class="form-control my-colorpicker1">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="reset" class="btn btn-default pull-left" data-dismiss="modal">重置</button>
+                                            <button type="button" class="btn btn-primary" id="add" data-dismiss="modal">确认修改</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+
+
+
+
+
+
+
+
                     </ul>
                 </li>
             </ul>
         </div>
     </nav>
 </header>
+
 
     <!-- 侧边栏 Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">

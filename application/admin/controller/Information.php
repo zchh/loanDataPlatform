@@ -22,6 +22,12 @@ use app\common\model\Information as InformationModel;
 
 class Information extends Base
 {
+    public function _initialize()
+    {
+        if(false == Session::has('admin')){
+            $this->redirect('/admin/login');
+        }
+    }
 
     /**
      * 信息公告列表

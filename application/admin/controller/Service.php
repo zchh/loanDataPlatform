@@ -18,6 +18,13 @@ use app\common\model\Service as ServiceModel;
 
 class Service extends Base
 {
+    public function _initialize()
+    {
+        if(false == Session::has('admin')){
+            $this->redirect('/admin/login');
+        }
+    }
+
     /**
      * 添加客户服务
      */

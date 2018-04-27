@@ -25,6 +25,13 @@ use app\common\model\Service;
 
 class Know extends Base
 {
+    public function _initialize()
+    {
+        if(false == Session::has('admin')){
+            $this->redirect('/admin/login');
+        }
+    }
+
     public function index()
     {
         $data = KnowModel::selectEntity();

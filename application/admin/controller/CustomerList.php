@@ -21,6 +21,13 @@ use app\common\model\CustomerList as CustomerListModel;
 
 class CustomerList extends Base
 {
+    public function _initialize()
+    {
+        if(false == Session::has('admin')){
+            $this->redirect('/admin/login');
+        }
+    }
+
     /**
      * 客户列表
      */

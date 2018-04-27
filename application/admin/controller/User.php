@@ -20,6 +20,14 @@ use app\common\model\Provincial;
 
 class User extends Base
 {
+
+    public function _initialize()
+    {
+        if(false == Session::has('admin')){
+            $this->redirect('/admin/login');
+        }
+    }
+
     /**
      * 平台用户
      */

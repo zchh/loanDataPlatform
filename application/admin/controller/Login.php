@@ -73,21 +73,26 @@ class Login extends Base
      */
    public function adminLogin()
    {
-       $requestParam = Request::instance()->param();
-       if(true == empty($requestParam['username']) || true == empty($requestParam['password'])){
-           return $this->selfResponse(StatusCode::SERVER_ERROR, StatusCode::PARAM_WRONG);
-       }
-       $param['username'] = $requestParam['username'];
-       $selectResult = Admin::selectAdmin($param);
-       if($selectResult['count'] == 0){
-           return $this->selfResponse(StatusCode::NO_PERMISSION, StatusCode::USERNAME_PASSWORD_WRONG);
-       }
-       if(password_verify($requestParam['password'], $selectResult['data'][0]['password'])){
-           Session::set('admin',$selectResult['data'][0]);
-           return $this->selfResponse(StatusCode::GET_SUCCESS, StatusCode::LOGIN_SUCCESS);
+       if($_SERVER['REQUEST_METHOD'] == "POST"){
+           $requestParam = Request::instance()->param();
+           if(true == empty($requestParam['username']) || true == empty($requestParam['password'])){
+               return $this->selfResponse(StatusCode::SERVER_ERROR, StatusCode::PARAM_WRONG);
+           }
+           $param['username'] = $requestParam['username'];
+           $selectResult = Admin::selectAdmin($param);
+           if($selectResult['count'] == 0){
+               return $this->selfResponse(StatusCode::NO_PERMISSION, StatusCode::USERNAME_PASSWORD_WRONG);
+           }
+           if(password_verify($requestParam['password'], $selectResult['data'][0]['password'])){
+               Session::set('admin',$selectResult['data'][0]);
+               return $this->selfResponse(StatusCode::GET_SUCCESS, StatusCode::LOGIN_SUCCESS);
+           }else{
+               return $this->selfResponse(StatusCode::NO_PERMISSION, StatusCode::USERNAME_PASSWORD_WRONG);
+           }
        }else{
-           return $this->selfResponse(StatusCode::NO_PERMISSION, StatusCode::USERNAME_PASSWORD_WRONG);
+           return $this->fetch('/login');
        }
+
    }
 
     /**
@@ -96,7 +101,7 @@ class Login extends Base
    public function logout()
    {
        Session::delete('admin');
-       return $this->redirect('admin/login');
+       return $this->redirect('/admin/login');
    }
 
     /**

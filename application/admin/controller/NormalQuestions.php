@@ -23,6 +23,14 @@ use app\common\model\Information as InformationModel;
 use app\common\model\Know as KnowModel;
 
 class NormalQuestions extends Base{
+
+    public function _initialize()
+    {
+        if(false == Session::has('admin')){
+            $this->redirect('/admin/login');
+        }
+    }
+
     /**
      * 添加常见问题
      */

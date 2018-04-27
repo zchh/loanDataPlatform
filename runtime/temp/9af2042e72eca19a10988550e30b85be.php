@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:86:"F:\php_project\git_project\loanDataPlatform\public/../application/admin\view\know.html";i:1524821423;s:81:"F:\php_project\git_project\loanDataPlatform\application\admin\view\base\base.html";i:1524749555;s:42:"../application/admin/view/base/header.html";i:1524630035;s:43:"../application/admin/view/base/sidebar.html";i:1524799955;s:42:"../application/admin/view/base/footer.html";i:1524624938;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:86:"F:\php_project\git_project\loanDataPlatform\public/../application/admin\view\know.html";i:1524821423;s:81:"F:\php_project\git_project\loanDataPlatform\application\admin\view\base\base.html";i:1524749555;s:42:"../application/admin/view/base/header.html";i:1524826699;s:43:"../application/admin/view/base/sidebar.html";i:1524799955;s:42:"../application/admin/view/base/footer.html";i:1524624938;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,7 +94,7 @@
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="/admin/logout" class="btn btn-default btn-flat">退出登录</a>
                             </div>
                         </li>
                     </ul>
