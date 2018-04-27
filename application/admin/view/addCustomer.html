@@ -1,0 +1,154 @@
+{extend name="base/base" /}
+{block name="main"}
+<div class="row">
+    <div class="col-xs-12">
+        <!-- /.box -->
+
+            <div class="col-md-6">
+                <!-- Horizontal Form -->
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">添加新客户</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal" method="post" action="">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">真实姓名</label>
+                                <div class="col-sm-4">
+                                    <input id="name" name="name" type="text" class="form-control" id="inputEmail3" placeholder="真实姓名">
+                                </div>
+                                <label for="inputEmail3" class="col-sm-2 control-label">电话</label>
+                                <div class="col-sm-4">
+                                    <input id="tel" name="tel" type="text" class="form-control" placeholder="电话">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">申请时间</label>
+                                <div class="col-sm-4">
+                                    <input name="add_time" type="text" class="form-control" id="datepicker">
+                                </div>
+                                <label for="inputEmail3" class="col-sm-2 control-label">贷款金额</label>
+                                <div class="col-sm-4">
+                                    <input id="loan_amount" name="loan_amount" type="text" class="form-control" placeholder="贷款金额">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">有无公积金</label>
+                                <div class="col-sm-4">
+                                    <input id="have_provident" name="have_provident" type="text" class="form-control"  placeholder="有无公积金">
+                                </div>
+                                <label for="inputEmail3" class="col-sm-2 control-label">芝麻分</label>
+                                <div class="col-sm-4">
+                                    <input id="credit" name="credit" type="text" class="form-control" placeholder="芝麻分">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">有无工作</label>
+                                <div class="col-sm-4">
+                                    <input id="have_job" name="have_job" type="text" class="form-control"  placeholder="有无工作">
+                                </div>
+                                <label for="inputEmail3" class="col-sm-2 control-label">有无社保</label>
+                                <div class="col-sm-4">
+                                    <input id="have_social_security" name="have_social_security" type="text" class="form-control" placeholder="有无社保">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">微信</label>
+                                <div class="col-sm-4">
+                                    <input id="wx_number" name="wx_number" type="text" class="form-control"  placeholder="微信">
+                                </div>
+                                <label for="inputEmail3" class="col-sm-2 control-label">年龄</label>
+                                <div class="col-sm-4">
+                                    <input id="age" name="age" type="text" class="form-control" placeholder="年龄">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">QQ号</label>
+                                <div class="col-sm-4">
+                                    <input id="qq" name="qq" type="text" class="form-control"  placeholder="QQ号">
+                                </div>
+                                <label for="inputEmail3" class="col-sm-2 control-label">电话状态</label>
+                                <div class="col-sm-4">
+                                    <input id="tel_status" name="tel_status" type="text" class="form-control" placeholder="电话状态">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">备注</label>
+                                <div class="col-sm-10">
+                                <textarea id="remark" name="remark" class="form-control" rows="3" placeholder="输入 ..."></textarea>
+                                </div>
+                            </div>
+
+
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="reset" class="btn btn-default">取消</button>
+                            <button type="button" class="btn btn-info pull-right" id="addCustomer">确定</button>
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
+                </div>
+            </div>
+
+
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+
+
+
+<script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+
+
+    //添加用户
+    $("#addCustomer").click(function () {
+        $.ajax({
+            type: "post",
+            url: '/admin/addCustomer',
+            data: {
+                'name': $("#name").val(),
+                'tel': $("#tel").val(),
+                'add_time':  $("[name='add_time']").val(),
+                'loan_amount': $("#loan_amount").val(),
+                'have_provident': $("#have_provident").val(),
+                'credit': $("#credit").val(),
+                'have_job': $("#have_job").val(),
+                'have_social_security': $("#have_social_security").val(),
+                'wx_number': $("#wx_number").val(),
+                'age': $("#age").val(),
+                'qq': $("#qq").val(),
+                'tel_status': $("#tel_status").val(),
+                'remark': $("#remark").val(),
+            },
+            dataType: "json",
+            success: function(data) {
+                if(data.code == '500') {
+                    alert(data.msg);
+                }else {
+                    alert('添加成功');
+                    window.location.href= 'customerList';
+                }
+            },
+            error:function(){
+                alert('系统错误');
+            }
+        });
+    });
+
+
+
+
+</script>
+{/block}

@@ -5,7 +5,7 @@
  * Date: 2018/3/9
  * Time: 18:53
  */
-namespace app\admin\controller;
+namespace app\borrower\controller;
 
 use app\common\model\AdminToken;
 use app\common\selfConfig\StatusCode;

@@ -1,10 +1,10 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:88:"D:\www\business\loanDataPlatform\public/../application/borrower\view\customer\index.html";i:1524653334;s:73:"D:\www\business\loanDataPlatform\application\borrower\view\base\base.html";i:1524707104;s:45:"../application/borrower/view/base/header.html";i:1524650783;s:46:"../application/borrower/view/base/sidebar.html";i:1524706443;s:45:"../application/borrower/view/base/footer.html";i:1524650783;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:93:"F:\php_project\git_project\loanDataPlatform\public/../application/admin\view\addCustomer.html";i:1524793569;s:81:"F:\php_project\git_project\loanDataPlatform\application\admin\view\base\base.html";i:1524749555;s:42:"../application/admin/view/base/header.html";i:1524630035;s:43:"../application/admin/view/base/sidebar.html";i:1524735605;s:42:"../application/admin/view/base/footer.html";i:1524624938;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>合作商管理平台</title>
+    <title>AdminLTE 2 | Data Tables</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -21,6 +21,9 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../static/dist/css/skins/_all-skins.min.css">
+
+    <link rel="stylesheet" href="../../static/plugins/timepicker/bootstrap-timepicker.min.css">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -105,7 +108,7 @@
     <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-        <!-- Sidecustomeruser panel -->
+        <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
                 <img src="../../static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
@@ -131,8 +134,8 @@
 
             <!--单栏目-->
             <li>
-                <a href="#">
-                    <i class="fa fa-th"></i> <span>Widgets</span>
+                <a href="/admin/user">
+                    <i class="fa fa-th"></i> <span>平台用户</span>
                     <span class="pull-right-container">
                         <!--<small class="label pull-right bg-green">new</small>-->
                         </span>
@@ -140,14 +143,31 @@
             </li>
 
             <li>
-                <a href="/admin/test2">
-                    <i class="fa fa-th"></i> <span>test</span>
+                <a href="/admin/customerList">
+                    <i class="fa fa-th"></i> <span>客户管理</span>
                     <span class="pull-right-container">
                         <!--<small class="label pull-right bg-green">new</small>-->
                         </span>
                 </a>
             </li>
 
+            <li>
+                <a href="/admin/information">
+                    <i class="fa fa-th"></i> <span>信息公告</span>
+                    <span class="pull-right-container">
+                        <!--<small class="label pull-right bg-green">new</small>-->
+                        </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/service">
+                    <i class="fa fa-th"></i> <span>服务支持</span>
+                    <span class="pull-right-container">
+                        <!--<small class="label pull-right bg-green">new</small>-->
+                        </span>
+                </a>
+            </li>
 
 
             <!--多栏目-->
@@ -187,79 +207,153 @@
     <div class="col-xs-12">
         <!-- /.box -->
 
-        <div class="box">
-
-
-            <div class="box-header">
-                <h3 class="box-title">Data Table With Full Features</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>姓名</th>
-                        <th>年龄</th>
-                        <th>联系电话</th>
-                        <th>微信账号</th>
-                        <th>贷款金额</th>
-                        <th>芝麻信用分</th>
-                        <th>云端分发</th>
-                        <th>详细信息</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-
-                    <?php if(is_array($data) || $data instanceof \think\Collection || $data instanceof \think\Paginator): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$single): $mod = ($i % 2 );++$i;?>
-                    <tr>
-                        <td><?php echo $single['name']; ?></td>
-                        <td><?php echo $single['age']; ?></td>
-                        <td><?php echo $single['tel']; ?></td>
-                        <td><?php echo $single['wx_number']; ?></td>
-                        <td><?php echo $single['loan_amount']; ?></td>
-                        <td><?php echo $single['credit']; ?></td>
-                        <td><?php echo date("Y-m-d H:i:s",$single['add_time']); ?></td>
-                        <td><a href="<?php echo url('borrower/Customer/single',['id'=>$single['customer_id']]); ?>">查看</a></td>
-                    </tr>
-                    <?php endforeach; endif; else: echo "" ;endif; ?>
-
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
-                </table>
-            </div>
-
-
-
-            <div class="modal fade" id="modal-default">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Default Modal</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>One fine body&hellip;</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+            <div class="col-md-6">
+                <!-- Horizontal Form -->
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">添加新客户</h3>
                     </div>
-                    <!-- /.modal-content -->
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal" method="post" action="">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">真实姓名</label>
+                                <div class="col-sm-4">
+                                    <input id="name" name="name" type="text" class="form-control" id="inputEmail3" placeholder="真实姓名">
+                                </div>
+                                <label for="inputEmail3" class="col-sm-2 control-label">电话</label>
+                                <div class="col-sm-4">
+                                    <input id="tel" name="tel" type="text" class="form-control" placeholder="电话">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">申请时间</label>
+                                <div class="col-sm-4">
+                                    <input name="add_time" type="text" class="form-control" id="datepicker">
+                                </div>
+                                <label for="inputEmail3" class="col-sm-2 control-label">贷款金额</label>
+                                <div class="col-sm-4">
+                                    <input id="loan_amount" name="loan_amount" type="text" class="form-control" placeholder="贷款金额">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">有无公积金</label>
+                                <div class="col-sm-4">
+                                    <input id="have_provident" name="have_provident" type="text" class="form-control"  placeholder="有无公积金">
+                                </div>
+                                <label for="inputEmail3" class="col-sm-2 control-label">芝麻分</label>
+                                <div class="col-sm-4">
+                                    <input id="credit" name="credit" type="text" class="form-control" placeholder="芝麻分">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">有无工作</label>
+                                <div class="col-sm-4">
+                                    <input id="have_job" name="have_job" type="text" class="form-control"  placeholder="有无工作">
+                                </div>
+                                <label for="inputEmail3" class="col-sm-2 control-label">有无社保</label>
+                                <div class="col-sm-4">
+                                    <input id="have_social_security" name="have_social_security" type="text" class="form-control" placeholder="有无社保">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">微信</label>
+                                <div class="col-sm-4">
+                                    <input id="wx_number" name="wx_number" type="text" class="form-control"  placeholder="微信">
+                                </div>
+                                <label for="inputEmail3" class="col-sm-2 control-label">年龄</label>
+                                <div class="col-sm-4">
+                                    <input id="age" name="age" type="text" class="form-control" placeholder="年龄">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">QQ号</label>
+                                <div class="col-sm-4">
+                                    <input id="qq" name="qq" type="text" class="form-control"  placeholder="QQ号">
+                                </div>
+                                <label for="inputEmail3" class="col-sm-2 control-label">电话状态</label>
+                                <div class="col-sm-4">
+                                    <input id="tel_status" name="tel_status" type="text" class="form-control" placeholder="电话状态">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">备注</label>
+                                <div class="col-sm-10">
+                                <textarea id="remark" name="remark" class="form-control" rows="3" placeholder="输入 ..."></textarea>
+                                </div>
+                            </div>
+
+
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="reset" class="btn btn-default">取消</button>
+                            <button type="button" class="btn btn-info pull-right" id="addCustomer">确定</button>
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
                 </div>
-                <!-- /.modal-dialog -->
             </div>
 
 
-            <!-- /.box-body -->
-        </div>
         <!-- /.box -->
     </div>
     <!-- /.col -->
 </div>
+
+
+
+
+<script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+
+
+    //添加用户
+    $("#addCustomer").click(function () {
+        $.ajax({
+            type: "post",
+            url: '/admin/addCustomer',
+            data: {
+                'name': $("#name").val(),
+                'tel': $("#tel").val(),
+                'add_time':  $("[name='add_time']").val(),
+                'loan_amount': $("#loan_amount").val(),
+                'have_provident': $("#have_provident").val(),
+                'credit': $("#credit").val(),
+                'have_job': $("#have_job").val(),
+                'have_social_security': $("#have_social_security").val(),
+                'wx_number': $("#wx_number").val(),
+                'age': $("#age").val(),
+                'qq': $("#qq").val(),
+                'tel_status': $("#tel_status").val(),
+                'remark': $("#remark").val(),
+            },
+            dataType: "json",
+            success: function(data) {
+                if(data.code == '500') {
+                    alert(data.msg);
+                }else {
+                    alert('添加成功');
+                    window.location.href= 'customerList';
+                }
+            },
+            error:function(){
+                alert('系统错误');
+            }
+        });
+    });
+
+
+
+
+</script>
 
 
 
@@ -293,6 +387,11 @@
 <script src="../../static/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../static/dist/js/demo.js"></script>
+
+<script src="../../static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+<script src="../../static/plugins/iCheck/icheck.min.js"></script>
+
 <!-- page script -->
 <script>
     $(function () {
@@ -300,12 +399,17 @@
         $('#example2').DataTable({
             'paging'      : true,
             'lengthChange': false,
-            'searching'   : false,
+            'searching'   : true,
             'ordering'    : true,
             'info'        : true,
             'autoWidth'   : false
         })
     })
+
+    $('#datepicker').datepicker({
+        autoclose: true,
+        language:"en",
+    });
 </script>
 </body>
 </html>

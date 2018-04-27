@@ -18,7 +18,7 @@ class Base extends Controller
 {
 
     //json封装
-    protected function selfResponse($code, $message, $data=null, $pageInfo=null)
+    protected function selfResponse($code, $message, $data=null)
     {
         $response['code'] = $code;
         $response['msg'] = $message;
@@ -28,10 +28,7 @@ class Base extends Controller
         if($data != null){
             $response['data'] = $data;
         }
-        if($pageInfo != null){
-            $response['pageInfo'] = $pageInfo;
-        }
-        return json_encode($response, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT);
+        return json($response);
     }
 
     /**

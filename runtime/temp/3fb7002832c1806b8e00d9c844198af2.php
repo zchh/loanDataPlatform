@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:76:"D:\www\business\loanDataPlatform\public/../application/admin\view\test2.html";i:1524650783;s:70:"D:\www\business\loanDataPlatform\application\admin\view\base\base.html";i:1524650783;s:42:"../application/admin/view/base/header.html";i:1524650783;s:43:"../application/admin/view/base/sidebar.html";i:1524650783;s:42:"../application/admin/view/base/footer.html";i:1524650783;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:94:"F:\php_project\git_project\loanDataPlatform\public/../application/admin\view\customerList.html";i:1524793895;s:81:"F:\php_project\git_project\loanDataPlatform\application\admin\view\base\base.html";i:1524749555;s:42:"../application/admin/view/base/header.html";i:1524630035;s:43:"../application/admin/view/base/sidebar.html";i:1524796085;s:42:"../application/admin/view/base/footer.html";i:1524624938;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +21,9 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../static/dist/css/skins/_all-skins.min.css">
+
+    <link rel="stylesheet" href="../../static/plugins/timepicker/bootstrap-timepicker.min.css">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -140,7 +143,7 @@
             </li>
 
             <li>
-                <a href="/admin/customer">
+                <a href="/admin/customerList">
                     <i class="fa fa-th"></i> <span>客户管理</span>
                     <span class="pull-right-container">
                         <!--<small class="label pull-right bg-green">new</small>-->
@@ -149,7 +152,7 @@
             </li>
 
             <li>
-                <a href="/admin/information">
+                <a href="/admin/addInformation">
                     <i class="fa fa-th"></i> <span>信息公告</span>
                     <span class="pull-right-container">
                         <!--<small class="label pull-right bg-green">new</small>-->
@@ -208,70 +211,58 @@
 
 
             <div class="box-header">
-                <h3 class="box-title">Data Table With Full Features</h3>
+                <h3 class="box-title">客户管理</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
+                    <div style="position: relative">
+                        <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                        <a href="addCustomer" type="button" class="btn btn-default pull-right">
+                            添加新客户
+                        </a>
+                    </div>
                     <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
+                        <th></th>
+                        <th>姓名</th>
+                        <th>年龄</th>
+                        <th>联系电话</th>
+                        <th>微信账号</th>
+                        <th>贷款金额</th>
+                        <th>芝麻信用分</th>
+                        <th>申请时间</th>
+                        <th>详细信息</th>
                     </tr>
                     </thead>
                     <tbody>
 
-
-                    <?php if(is_array($data) || $data instanceof \think\Collection || $data instanceof \think\Paginator): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$single): $mod = ($i % 2 );++$i;?>
+                    <?php if(!(empty($data) || (($data instanceof \think\Collection || $data instanceof \think\Paginator ) && $data->isEmpty()))): if(is_array($data) || $data instanceof \think\Collection || $data instanceof \think\Paginator): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$single): $mod = ($i % 2 );++$i;?>
                     <tr>
-                        <td><?php echo $single['material_id']; ?></td>
-                        <td>Lynx</td>
-                        <td>Text only</td>
-                        <td>-</td>
-                        <td>  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
-                            Launch Default Modal
-                        </button></td>
+                        <td><input type="checkbox"></td>
+                        <td><?php echo $single['name']; ?></td>
+                        <td><?php echo $single['age']; ?></td>
+                        <td><?php echo $single['tel']; ?></td>
+                        <td><?php echo $single['wx_number']; ?></td>
+                        <td><?php echo $single['loan_amount']; ?></td>
+                        <td><?php echo $single['credit']; ?></td>
+                        <td><?php echo $single['add_time']; ?></td>
+                        <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                            查看
+                        </button>
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                                编辑
+                        </button>
+                        </td>
                     </tr>
-                    <?php endforeach; endif; else: echo "" ;endif; ?>
+                    <?php endforeach; endif; else: echo "" ;endif; endif; ?>
 
                     </tbody>
-                    <tfoot>
-                    <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
-                    </tr>
-                    </tfoot>
                 </table>
             </div>
 
-
-
-            <div class="modal fade" id="modal-default">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Default Modal</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>One fine body&hellip;</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
 
 
             <!-- /.box-body -->
@@ -280,6 +271,25 @@
     </div>
     <!-- /.col -->
 </div>
+<script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+
+    $(".checkbox-toggle").click(function () {
+        var clicks = $(this).data('clicks');
+        if (clicks) {
+            //Uncheck all checkboxes
+            $("input[type='checkbox']").iCheck("uncheck");
+            $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+        } else {
+            //Check all checkboxes
+            $("input[type='checkbox']").iCheck("check");
+            $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+        }
+        $(this).data("clicks", !clicks);
+    });
+
+
+</script>
 
 
 
@@ -313,6 +323,11 @@
 <script src="../../static/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../static/dist/js/demo.js"></script>
+
+<script src="../../static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+<script src="../../static/plugins/iCheck/icheck.min.js"></script>
+
 <!-- page script -->
 <script>
     $(function () {
@@ -320,12 +335,17 @@
         $('#example2').DataTable({
             'paging'      : true,
             'lengthChange': false,
-            'searching'   : false,
+            'searching'   : true,
             'ordering'    : true,
             'info'        : true,
             'autoWidth'   : false
         })
     })
+
+    $('#datepicker').datepicker({
+        autoclose: true,
+        language:"en",
+    });
 </script>
 </body>
 </html>

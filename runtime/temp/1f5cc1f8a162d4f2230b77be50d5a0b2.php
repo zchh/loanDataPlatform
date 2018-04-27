@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:75:"F:\php_project\loanDataPlatform\public/../application/admin\view\test2.html";i:1524629464;s:69:"F:\php_project\loanDataPlatform\application\admin\view\base\base.html";i:1524628789;s:42:"../application/admin/view/base/header.html";i:1524630035;s:43:"../application/admin/view/base/sidebar.html";i:1524645873;s:42:"../application/admin/view/base/footer.html";i:1524624938;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:86:"F:\php_project\git_project\loanDataPlatform\public/../application/admin\view\user.html";i:1524748519;s:81:"F:\php_project\git_project\loanDataPlatform\application\admin\view\base\base.html";i:1524749555;s:42:"../application/admin/view/base/header.html";i:1524630035;s:43:"../application/admin/view/base/sidebar.html";i:1524735605;s:42:"../application/admin/view/base/footer.html";i:1524624938;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +21,9 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../static/dist/css/skins/_all-skins.min.css">
+
+    <link rel="stylesheet" href="../../static/plugins/timepicker/bootstrap-timepicker.min.css">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -140,7 +143,7 @@
             </li>
 
             <li>
-                <a href="/admin/customer">
+                <a href="/admin/customerList">
                     <i class="fa fa-th"></i> <span>客户管理</span>
                     <span class="pull-right-container">
                         <!--<small class="label pull-right bg-green">new</small>-->
@@ -208,45 +211,48 @@
 
 
             <div class="box-header">
-                <h3 class="box-title">Data Table With Full Features</h3>
+                <h3 class="box-title">平台用户</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
+                    <div style="position: relative">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default" id="add-model">
+                            添加新用户
+                        </button>
+                    </div>
                     <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
+                        <th>姓名</th>
+                        <th>年龄</th>
+                        <th>联系电话</th>
+                        <th>微信账号</th>
+                        <th>账户余额</th>
+                        <th>芝麻信用分</th>
+                        <th>详细信息</th>
                     </tr>
                     </thead>
                     <tbody>
 
-
-                    <?php if(is_array($data) || $data instanceof \think\Collection || $data instanceof \think\Paginator): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$single): $mod = ($i % 2 );++$i;?>
+                    <?php if(!(empty($data) || (($data instanceof \think\Collection || $data instanceof \think\Paginator ) && $data->isEmpty()))): if(is_array($data) || $data instanceof \think\Collection || $data instanceof \think\Paginator): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$single): $mod = ($i % 2 );++$i;?>
                     <tr>
-                        <td><?php echo $single['material_id']; ?></td>
-                        <td>Lynx</td>
-                        <td>Text only</td>
-                        <td>-</td>
-                        <td>  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
-                            Launch Default Modal
-                        </button></td>
+                        <td><?php echo $single['real_name']; ?></td>
+                        <td><?php echo $single['age']; ?></td>
+                        <td><?php echo $single['tel']; ?></td>
+                        <td><?php echo $single['weixin']; ?></td>
+                        <td><?php echo $single['balance']; ?></td>
+                        <td><?php echo $single['credit']; ?></td>
+                        <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                            查看
+                        </button>
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                                编辑
+                        </button>
+                        </td>
                     </tr>
-                    <?php endforeach; endif; else: echo "" ;endif; ?>
+                    <?php endforeach; endif; else: echo "" ;endif; endif; ?>
 
                     </tbody>
-                    <tfoot>
-                    <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
-                    </tr>
-                    </tfoot>
                 </table>
             </div>
 
@@ -258,15 +264,46 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Default Modal</h4>
+                            <h4 class="modal-title">添加新用户</h4>
                         </div>
+                        <form>
                         <div class="modal-body">
-                            <p>One fine body&hellip;</p>
+                            <label>真实姓名</label>
+                            <input id="real_name" type="text" class="form-control my-colorpicker1" required>
+                            <label>密码</label>
+                            <input id="password" type="password" class="form-control my-colorpicker1">
+                            <label>联系邮箱</label>
+                            <input id="email" type="text" class="form-control my-colorpicker1">
+                            <label>联系电话</label>
+                            <input id="tel" type="text" class="form-control my-colorpicker1">
+                            <label>年龄</label>
+                            <input id="age" type="text" class="form-control my-colorpicker1">
+                            <div class="form-group">
+                                <label>锁定城市</label>
+                                <select class="form-control" id="province_id" name="province_id">
+                                    <option>请选择</option>
+                                </select>
+                                <select class="form-control" id="city_id" name="city_id">
+                                    <option>请选择市</option>
+                                </select>
+                            </div>
+                            <label>联系微信</label>
+                            <input id="weixin" type="text" class="form-control my-colorpicker1">
+                            <label>芝麻信用分</label>
+                            <input id="credit" type="text" class="form-control my-colorpicker1">
+                            <label>备用联系人</label>
+                            <input id="contact" type="text" class="form-control my-colorpicker1">
+                            <label>账户余额</label>
+                            <input id="balance" type="text" class="form-control my-colorpicker1">
+                            <label>流量计划:(0位/天）</label>
+                            <input id="flow_plan" type="text" class="form-control my-colorpicker1">
+
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" id="add" data-dismiss="modal">确认添加</button>
                         </div>
+                        </form>
                     </div>
                     <!-- /.modal-content -->
                 </div>
@@ -280,6 +317,86 @@
     </div>
     <!-- /.col -->
 </div>
+<script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    //添加用户
+    $("#add").click(function () {
+        $.ajax({
+            type: "post",
+            url: '/admin/addUser',
+            data: {
+                'real_name': $("#real_name").val(),
+                'password' : $("#password").val(),
+                'email': $("#email").val(),
+                'tel': $("#tel").val(),
+                'age': $("#age").val(),
+                'province_id': $('#province_id').val(),
+                'city_id': $("#city_id").val(),
+                'weixin': $('#weixin').val(),
+                'credit': $('#credit').val(),
+                'contact': $('#contact').val(),
+                'balance': $('#balance').val(),
+                'flow_plan': $('#flow_plan').val()
+            },
+            dataType: "json",
+            success: function(data) {
+                if(data.code == '500') {
+                    alert(data.msg);
+                }else {
+                    alert('添加成功');
+                    window.location.reload();
+                }
+            },
+            error:function(){
+                alert('系统错误');
+            }
+        });
+    });
+
+    //地址选择联动
+    $("#add-model").click(function () {
+        var dataAreas = [];
+        var object = {};
+        var provinceList = JSON.parse('<?php echo $provinceList; ?>');
+        var cityList = JSON.parse('<?php echo $cityList; ?>');
+        for(var i = 0 ; i < provinceList.length ; i ++){
+            object = {
+                'pid':provinceList[i].pid,
+                'address':provinceList[i].Provincial,
+                'parent_type':'0'
+            };
+            dataAreas.push(object);
+        }
+
+        for(var i = 0 ; i < cityList.length ; i ++){
+            object = {
+                'pid':cityList[i].cid,
+                'address':cityList[i].city,
+                'parent_type':cityList[i].pid
+            };
+            dataAreas.push(object);
+        }
+        for (var i = 0; i < provinceList.length; i++) {
+            if (parseInt(dataAreas[i].parent_type) == 0) {
+                var option = $("<option>").val(dataAreas[i].pid).text(dataAreas[i].address);
+                $("#province_id").append(option);
+            }
+        }
+
+        $("#province_id").bind("change", function() {
+            var code = parseInt($(this).val());
+            $("[name='city_id'] option").remove();
+            for (var i = 0; i < dataAreas.length; i++) {
+                if (parseInt(dataAreas[i].parent_type) == code) {
+                    option = $("<option>").val(dataAreas[i].pid).text(dataAreas[i].address);
+                    $("[name='city_id']").append(option);
+                }
+            }
+        });
+    });
+
+
+</script>
 
 
 
@@ -313,6 +430,11 @@
 <script src="../../static/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../static/dist/js/demo.js"></script>
+
+<script src="../../static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+<script src="../../static/plugins/iCheck/icheck.min.js"></script>
+
 <!-- page script -->
 <script>
     $(function () {
@@ -320,12 +442,17 @@
         $('#example2').DataTable({
             'paging'      : true,
             'lengthChange': false,
-            'searching'   : false,
+            'searching'   : true,
             'ordering'    : true,
             'info'        : true,
             'autoWidth'   : false
         })
     })
+
+    $('#datepicker').datepicker({
+        autoclose: true,
+        language:"en",
+    });
 </script>
 </body>
 </html>
