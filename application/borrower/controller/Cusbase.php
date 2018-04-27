@@ -25,10 +25,10 @@ class Cusbase extends Controller
     public function checkLogin(){
         //>>1.先查看session中的用户信息是否存在
         if(empty($_SESSION['userinfo'])){
-            if(isset($_COOKIE['id'])&&isset($_COOKIE['password'])){
+            $id=cookie('id');
+            $password=cookie('password');//二次加密
+            if(isset($id)&&isset($password)){
                 //如果存在cookie，验证cookie中的用户信息是否和数据库的一致
-                $id=$_COOKIE['id'];
-                $password=$_COOKIE['password'];//二次加密
                 $userinfo = User::checkIDPassword($id,$password);
                 if($userinfo===false){
                     //如果不存在，返回false

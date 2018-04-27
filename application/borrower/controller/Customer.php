@@ -85,7 +85,7 @@ class Customer extends Cusbase
     }
     public function user(){
         //个人用户信息
-       $id = 1;
+       $id = $_SESSION['userinfo']['user_id'];
        $data = User::findEntity($id);
         $snacks = Balance::selectEntity(['user_id'=>$id]);
         $this->assign('data',$data);
@@ -95,7 +95,7 @@ class Customer extends Cusbase
     public function check(){//检查密码
         if(Request()->isPost()){
             //$password = password_hash($_POST['password'], PASSWORD_DEFAULT);//加密
-            $id = 1;//获取当前用户id
+            $id = $_SESSION['userinfo']['user_id'];//获取当前用户id
             $user = User::findEntity($id);
             $result = password_verify($_POST['password'],$user['password']);
             if(!$result){
@@ -109,7 +109,7 @@ class Customer extends Cusbase
     }
     public function change(){//修改密码
         if(Request()->isPost()){
-            $id = 1;//获取当前登录用户id
+            $id = $_SESSION['userinfo']['user_id'];//获取当前登录用户id
             $password = password_hash($_POST['new_password'],PASSWORD_DEFAULT);//加密
             $result = User::updateEntity($id,['password'=>$password]);
             if($result){
@@ -129,7 +129,7 @@ class Customer extends Cusbase
     }
     public function check_username(){
         if(Request()->isPost()){
-            $id = 1;//获取当前用户id
+            $id = $_SESSION['userinfo']['user_id'];//获取当前用户id
             $result = User::updateEntity($id,['real_name'=>$_POST['real_name']]);
             if($result){
                 $data = [
@@ -168,7 +168,7 @@ class Customer extends Cusbase
     }
     public function check_age(){
         if(Request()->isPost()){
-            $id = 1;//获取当前用户id
+            $id = $_SESSION['userinfo']['user_id'];//获取当前用户id
             $result = User::updateEntity($id,['age'=>$_POST['age']]);
             if($result){
                 $data = [
@@ -188,7 +188,7 @@ class Customer extends Cusbase
     }
     public function check_weixin(){//设置微信
         if(Request()->isPost()){
-            $id = 1;//获取当前用户id
+            $id = $_SESSION['userinfo']['user_id'];;//获取当前用户id
             $result = User::updateEntity($id,['weixin'=>$_POST['weixin']]);
             if($result){
                 $data = [
@@ -207,7 +207,7 @@ class Customer extends Cusbase
     }
     public function check_contack(){//设置备用联系人
         if(Request()->isPost()){
-            $id = 1;//获取当前用户id
+            $id  = $_SESSION['userinfo']['user_id'];//获取当前用户id
             $result = User::updateEntity($id,['contact'=>$_POST['contack']]);
             if($result){
                 $data = [
@@ -225,8 +225,13 @@ class Customer extends Cusbase
         }
     }
     public function img(){//修改头像
-      var_dump($_FILES);
-      exit;
+        $id = 1;
+        $result = User::findEntity($id);
+        $password = password_hash($result['password'],PASSWORD_DEFAULT);
+        $ceshi = password_verify($result['password'],$password);
+        var_dump($ceshi);
+        exit;
+
     }
 
 }
