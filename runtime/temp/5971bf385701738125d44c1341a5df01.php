@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:76:"D:\www\business\loanDataPlatform\public/../application/admin\view\test2.html";i:1524650783;s:70:"D:\www\business\loanDataPlatform\application\admin\view\base\base.html";i:1524650783;s:42:"../application/admin/view/base/header.html";i:1524650783;s:43:"../application/admin/view/base/sidebar.html";i:1524650783;s:42:"../application/admin/view/base/footer.html";i:1524650783;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:76:"D:\www\business\loanDataPlatform\public/../application/admin\view\test2.html";i:1524650783;s:70:"D:\www\business\loanDataPlatform\application\admin\view\base\base.html";i:1524707550;s:42:"../application/admin/view/base/header.html";i:1524650783;s:43:"../application/admin/view/base/sidebar.html";i:1524650783;s:42:"../application/admin/view/base/footer.html";i:1524650783;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -320,7 +320,7 @@
         $('#example2').DataTable({
             'paging'      : true,
             'lengthChange': false,
-            'searching'   : false,
+            'searching'   : true,
             'ordering'    : true,
             'info'        : true,
             'autoWidth'   : false

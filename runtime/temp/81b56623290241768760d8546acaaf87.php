@@ -1,10 +1,10 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:88:"D:\www\business\loanDataPlatform\public/../application/borrower\view\customer\index.html";i:1524714701;s:73:"D:\www\business\loanDataPlatform\application\borrower\view\base\base.html";i:1524707104;s:45:"../application/borrower/view/base/header.html";i:1524650783;s:46:"../application/borrower/view/base/sidebar.html";i:1524730010;s:45:"../application/borrower/view/base/footer.html";i:1524650783;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:74:"F:\php_project\loanDataPlatform\public/../application/admin\view\user.html";i:1524662579;s:69:"F:\php_project\loanDataPlatform\application\admin\view\base\base.html";i:1524656847;s:42:"../application/admin/view/base/header.html";i:1524630035;s:43:"../application/admin/view/base/sidebar.html";i:1524645873;s:42:"../application/admin/view/base/footer.html";i:1524624938;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>合作商管理平台</title>
+    <title>AdminLTE 2 | Data Tables</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -105,16 +105,14 @@
     <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-        <!-- Sidecustomeruser panel -->
+        <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <a href="<?php echo url('borrower/customer/user'); ?>">
-                    <img src="../../static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                </a>
+                <img src="../../static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>用户名：</p>
-                <a href="#"><i class="fa fa-circle text-success"></i>余额：</a>
+                <p>Alexander Pierce</p>
+                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
         <!-- search form -->
@@ -130,49 +128,43 @@
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
+
+            <!--单栏目-->
             <li>
-                <a href="<?php echo url('borrower/customer/index'); ?>">
-                    <i class="fa fa-th"></i> <span>我要充值</span>
+                <a href="/admin/user">
+                    <i class="fa fa-th"></i> <span>平台用户</span>
                     <span class="pull-right-container">
                         <!--<small class="label pull-right bg-green">new</small>-->
                         </span>
                 </a>
             </li>
 
-            <!--单栏目-->
             <li>
-                <a href="<?php echo url('borrower/customer/index'); ?>">
-                    <i class="fa fa-th"></i> <span>客户信息</span>
+                <a href="/admin/customer">
+                    <i class="fa fa-th"></i> <span>客户管理</span>
                     <span class="pull-right-container">
                         <!--<small class="label pull-right bg-green">new</small>-->
                         </span>
                 </a>
             </li>
+
             <li>
-                <a href="<?php echo url('/borrower/question'); ?>">
-                    <i class="fa fa-th"></i> <span>信息反馈</span>
+                <a href="/admin/information">
+                    <i class="fa fa-th"></i> <span>信息公告</span>
                     <span class="pull-right-container">
                         <!--<small class="label pull-right bg-green">new</small>-->
                         </span>
                 </a>
             </li>
+
             <li>
-                <a href="<?php echo url('borrower/customer/server'); ?>">
+                <a href="/admin/service">
                     <i class="fa fa-th"></i> <span>服务支持</span>
                     <span class="pull-right-container">
                         <!--<small class="label pull-right bg-green">new</small>-->
                         </span>
                 </a>
             </li>
-            <li>
-                <a href="<?php echo url('borrower/customer/information'); ?>">
-                    <i class="fa fa-th"></i> <span>信息中心</span>
-                    <span class="pull-right-container">
-                        <!--<small class="label pull-right bg-green">new</small>-->
-                        </span>
-                </a>
-            </li>
-
 
 
             <!--多栏目-->
@@ -216,42 +208,44 @@
 
 
             <div class="box-header">
-                <h3 class="box-title">Data Table With Full Features</h3>
+                <h3 class="box-title">平台用户</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
+                    <div style="position: relative">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                            添加新用户
+                        </button>
+                    </div>
                     <tr>
                         <th>姓名</th>
                         <th>年龄</th>
                         <th>联系电话</th>
                         <th>微信账号</th>
-                        <th>贷款金额</th>
+                        <th>账户余额</th>
                         <th>芝麻信用分</th>
-                        <th>云端分发</th>
                         <th>详细信息</th>
                     </tr>
                     </thead>
                     <tbody>
 
-
-                    <?php foreach($data as $single):?>
+                    <?php if(!(empty($data) || (($data instanceof \think\Collection || $data instanceof \think\Paginator ) && $data->isEmpty()))): if(is_array($data) || $data instanceof \think\Collection || $data instanceof \think\Paginator): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$single): $mod = ($i % 2 );++$i;?>
                     <tr>
-                        <td><?=$single['name']?></td>
-                        <td><?=$single['age']?></td>
-                        <td><?=$single['tel']?></td>
-                        <td><?=$single['wx_number']?></td>
-                        <td><?=$single['loan_amount']?></td>
-                        <td><?=$single['credit']?></td>
-                        <td><?=date("Y-m-d H:i:s",$single['add_time'])?></td>
-                        <td><a href="/borrower/single/<?=$single['customer_id']?>">查看</a></td>
+                        <td><?php echo $single['real_name']; ?></td>
+                        <td><?php echo $single['age']; ?></td>
+                        <td><?php echo $single['tel']; ?></td>
+                        <td><?php echo $single['weixin']; ?></td>
+                        <td><?php echo $single['balance']; ?></td>
+                        <td>1111</td>
+                        <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                            Launch Default Modal
+                        </button></td>
                     </tr>
-                    <?php endforeach;?>
+                    <?php endforeach; endif; else: echo "" ;endif; endif; ?>
 
                     </tbody>
-                    <tfoot>
-                    </tfoot>
                 </table>
             </div>
 
@@ -263,15 +257,39 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Default Modal</h4>
+                            <h4 class="modal-title">添加新用户</h4>
                         </div>
+                        <form>
                         <div class="modal-body">
-                            <p>One fine body&hellip;</p>
+                            <label>真实姓名</label>
+                            <input id="real_name" type="text" class="form-control my-colorpicker1" required>
+                            <label>密码</label>
+                            <input id="password" type="password" class="form-control my-colorpicker1">
+                            <label>联系邮箱</label>
+                            <input id="email" type="text" class="form-control my-colorpicker1">
+                            <label>联系电话</label>
+                            <input id="tel" type="text" class="form-control my-colorpicker1">
+                            <label>年龄</label>
+                            <input id="age" type="text" class="form-control my-colorpicker1">
+                            <label>锁定城市</label>
+                            <input id="city_id" type="text" class="form-control my-colorpicker1">
+                            <label>联系微信</label>
+                            <input id="weixin" type="text" class="form-control my-colorpicker1">
+                            <label>芝麻信用分</label>
+                            <input id="credit" type="text" class="form-control my-colorpicker1">
+                            <label>备用联系人</label>
+                            <input id="contact" type="text" class="form-control my-colorpicker1">
+                            <label>账户余额</label>
+                            <input id="balance" type="text" class="form-control my-colorpicker1">
+                            <label>流量计划:(0位/天）</label>
+                            <input id="flow_plan" type="text" class="form-control my-colorpicker1">
+
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" id="add" data-dismiss="modal">确认添加</button>
                         </div>
+                        </form>
                     </div>
                     <!-- /.modal-content -->
                 </div>
@@ -285,6 +303,37 @@
     </div>
     <!-- /.col -->
 </div>
+<script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $("#add").click(function () {
+        $.ajax({
+            type: "post",
+            url: '/admin/addUser',
+            data: {
+                'real_name': $("#real_name").val(),
+                'password' : $("#password").val()
+            },
+            dataType: "json",
+            success: function(data) {
+                if(data.code == '500')
+                {
+                    alert('添加失败');
+                }else {
+                    alert('添加成功');
+                }
+                window.location.reload();
+            },
+            error:function(){
+                alert('系统错误');
+            }
+
+
+
+        });
+    });
+
+
+</script>
 
 
 
@@ -325,7 +374,7 @@
         $('#example2').DataTable({
             'paging'      : true,
             'lengthChange': false,
-            'searching'   : false,
+            'searching'   : true,
             'ordering'    : true,
             'info'        : true,
             'autoWidth'   : false

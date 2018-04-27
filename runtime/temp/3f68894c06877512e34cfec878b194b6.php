@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:88:"D:\www\business\loanDataPlatform\public/../application/borrower\view\customer\index.html";i:1524714701;s:73:"D:\www\business\loanDataPlatform\application\borrower\view\base\base.html";i:1524707104;s:45:"../application/borrower/view/base/header.html";i:1524650783;s:46:"../application/borrower/view/base/sidebar.html";i:1524730010;s:45:"../application/borrower/view/base/footer.html";i:1524650783;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:91:"D:\www\business\loanDataPlatform\public/../application/borrower\view\customer\question.html";i:1524797126;s:73:"D:\www\business\loanDataPlatform\application\borrower\view\base\base.html";i:1524707104;s:45:"../application/borrower/view/base/header.html";i:1524650783;s:46:"../application/borrower/view/base/sidebar.html";i:1524730010;s:45:"../application/borrower/view/base/footer.html";i:1524650783;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -208,83 +208,104 @@
 
 
             
-<div class="row">
-    <div class="col-xs-12">
-        <!-- /.box -->
+    <!-- Left side column. contains the logo and sidebar -->
 
-        <div class="box">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-6">
+                    <!-- general form elements -->
+                    <!-- /.box -->
 
-
-            <div class="box-header">
-                <h3 class="box-title">Data Table With Full Features</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>姓名</th>
-                        <th>年龄</th>
-                        <th>联系电话</th>
-                        <th>微信账号</th>
-                        <th>贷款金额</th>
-                        <th>芝麻信用分</th>
-                        <th>云端分发</th>
-                        <th>详细信息</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-
-                    <?php foreach($data as $single):?>
-                    <tr>
-                        <td><?=$single['name']?></td>
-                        <td><?=$single['age']?></td>
-                        <td><?=$single['tel']?></td>
-                        <td><?=$single['wx_number']?></td>
-                        <td><?=$single['loan_amount']?></td>
-                        <td><?=$single['credit']?></td>
-                        <td><?=date("Y-m-d H:i:s",$single['add_time'])?></td>
-                        <td><a href="/borrower/single/<?=$single['customer_id']?>">查看</a></td>
-                    </tr>
-                    <?php endforeach;?>
-
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
-                </table>
-            </div>
-
-
-
-            <div class="modal fade" id="modal-default">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Default Modal</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>One fine body&hellip;</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                    <!-- Form Element sizes -->
+                    <!-- /.box -->
+                    <div class="box-header with-border">
+                        <h3 class="box-title">信息反馈</h3>
                     </div>
-                    <!-- /.modal-content -->
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="question_type">问题类型</label>
+                                <input type="text" class="form-control" id="question_type" name="question_type" placeholder="问题类型">
+                            </div>
+                            <div class="form-group">
+                                <label for="detail">信息反馈描述</label>
+                                <textarea class="form-control" id="detail" placeholder="信息反馈描述" rows="10" cols="200" name="detail">
+                                </textarea>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button  class="btn btn-primary">确认提交</button>
+                        </div>
                 </div>
-                <!-- /.modal-dialog -->
+                    <!-- /.box -->
+
+                    <!-- Input addon -->
+                    <!-- /.box -->
+
+                </div>
+                <!--/.col (left) -->
+                <!-- right column -->
+                <div class="col-md-6">
+                    <!-- Horizontal Form -->
+                    <!-- /.box -->
+                    <!-- general form elements disabled -->
+                    <!-- /.box -->
+                </div>
+                <!--/.col (right) -->
             </div>
-
-
-            <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
     </div>
-    <!-- /.col -->
+    <!-- /.content-wrapper -->
 </div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="/static/bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/dist/js/adminlte.min.js"></script>
+<script src="/static/layer/layer.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/static/dist/js/demo.js"></script>
+<script type="text/javascript">
+ $(".btn-primary").on('click',function () {
+     var question_type1 = $("#question_type").val();
+     var detail1 = $("#detail").val();
+     if(question_type1.trim() == ''){
+         layer.msg("问题类型不能为空",{icon:0});
+         return false;
+     }
+     if(detail1.trim() == ''){
+         layer.msg("详情不能为空",{icon:0});
+         return false;
+     }
+     $.post("<?php echo url('borrower/Customer/question'); ?>",{'question_type':question_type1,'detail':detail1},function (data) {
+         if(data.status == 1){
+             layer.msg(data.msg,{icon:1,time:1000},function () {
+                 window.location.reload();
+             });
+         }
+         else {
+             layer.msg(data.msg,{icon:0,time:1000},function () {
+                 window.location.reload();
+             });
+             return false;
+         }
+     })
+ })
+</script>
 
 
 
