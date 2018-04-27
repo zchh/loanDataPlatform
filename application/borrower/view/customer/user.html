@@ -59,6 +59,9 @@
                                 </div>
                                 <div class="col-xs-9">
                                     真实姓名：<input type="text" class="form-control" placeholder="{$data.real_name}" readonly>
+                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#real_name">
+                                        修改
+                                    </button>
                                 </div>
                                 <div class="col-xs-9">
                                     修改密码：<input type="text" class="form-control" placeholder="已设置" readonly>
@@ -68,26 +71,38 @@
                                 </div>
                                 <div class="col-xs-9">
                                     联系邮箱：<input type="text" class="form-control" placeholder="{$data.email}" readonly>
+                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-email">
+                                        修改
+                                    </button>
                                 </div>
                                 <div class="col-xs-9">
                                     联系电话：<input type="text" class="form-control" placeholder="{$data.tel}" readonly>
                                 </div>
                                 <div class="col-xs-9">
                                     年龄：<input type="text" class="form-control" placeholder="{$data.age}" readonly>
+                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-age">
+                                        设置
+                                    </button>
                                 </div>
                                 <div class="col-xs-9">
                                     锁定城市：<input type="text" class="form-control" placeholder="{$data.city_id}" readonly>
                                 </div>
                                 <div class="col-xs-9">
                                     联系微信：<input type="text" class="form-control" placeholder="{$data.weixin}" readonly>
+                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-weixin">
+                                        设置
+                                    </button>
                                 </div>
                                 <div class="col-xs-9">
                                     备用联系人：<input type="text" class="form-control" placeholder="{$data.contact}" readonly>
+                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-contack">
+                                        设置
+                                    </button>
                                 </div>
                                 <div class="col-xs-9">
                                     账户余额：<input type="text" class="form-control" placeholder="{$data.balance}" readonly>
                                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default1">
-                                        查看
+                                        历史记录
                                     </button>
                                 </div>
                                 <div class="col-xs-9">
@@ -129,8 +144,84 @@
                         <!-- /.modal-content -->
                     </div>
                     <!-- /.modal-dialog -->
-                </div>
-                <div class="modal fade" id="modal-default1">
+                </div><!-- 修改密码 -->
+                <div class="modal fade" id="real_name"><!-- 修改姓名 -->
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">修改姓名</h4>
+                            </div>
+                            <div class="col-xs-9">
+                                姓名：<input type="text" class="form-control" placeholder="请输入真实姓名" id="username">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary1">确认修改</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div><!-- 修改姓名 -->
+                <div class="modal fade" id="modal-email"><!-- 修改姓名 -->
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">修改邮箱</h4>
+                            </div>
+                            <div class="col-xs-9">
+                                邮箱：<input type="text" class="form-control" placeholder="请输入邮箱" id="_email">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary2">确认修改</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div><!-- 修改邮箱 -->
+                <div class="modal fade" id="modal-age"><!-- 修改年龄 -->
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">修改年龄</h4>
+                            </div>
+                            <div class="col-xs-9">
+                                年龄：<input type="text" class="form-control" placeholder="请输入年龄" id="_age">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary3">确认修改</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div><!-- 设置年龄 -->
+                <div class="modal fade" id="modal-weixin"><!-- 修改微信 -->
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">修改微信号</h4>
+                            </div>
+                            <div class="col-xs-9">
+                                微信：<input type="text" class="form-control" placeholder="请输入微信号" id="_weixin">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary4">确认修改</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div><!-- 设置微信 -->
+                <div class="modal fade" id="modal-default1"><!-- 查看余额 -->
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -162,7 +253,26 @@
                         <!-- /.modal-content -->
                     </div>
                     <!-- /.modal-dialog -->
-                </div>
+                </div><!-- 查看余额 -->
+                <div class="modal fade" id="modal-contack"><!-- 修改备用联系人 -->
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">修改备用联系人</h4>
+                            </div>
+                            <div class="col-xs-9">
+                                备用联系人：<input type="text" class="form-control" placeholder="请输入备用联系人" id="_contack">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary5">确认修改</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div><!-- 设置备用联系人 -->
                 <!--/.col (right) -->
             </div>
             <!-- /.row -->
@@ -185,6 +295,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="__STATIC__/dist/js/demo.js"></script>
 <script type="text/javascript">
+    //修改密码
    $(".btn-primary").on('click',function () {
       var old_password =  $("#old").val();//旧密码
       var new_password = $("#new").val();//新密码
@@ -230,6 +341,130 @@
        });
 
    })
+    //修改姓名
+    $(".btn-primary1").on('click',function () {
+        var username = $("#username").val();
+        var checkName = /^[\u4e00-\u9fa5]+(·[\u4e00-\u9fa5]+)*$/;
+        if(checkName.test(username)){
+            $.post("{:url('borrower/Customer/check_username')}",{'real_name':username},function (data) {
+                if(data.status == 1){
+                    layer.msg(data.msg,{icon:1,time:1000},function () {
+                        window.location.reload();
+                    });
+                }
+                else {
+                    layer.msg(data.msg,{icon:0,time:1000},function () {
+                        window.location.reload();
+                    });
+                    return false;
+                }
+            })
+
+        }else{
+            layer.msg("请输入正确的中文名",{icon:0});
+            return false;
+        }
+
+    })
+    //修改邮箱
+    $(".btn-primary2").on('click',function () {
+        var email = $("#_email").val();
+        var checkEmail = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
+        if(checkEmail.test(email)){
+            $.post("{:url('borrower/Customer/check_email')}",{'email':email},function (data) {
+                if(data.status == 1){
+                    layer.msg(data.msg,{icon:1,time:1000},function () {
+                        window.location.reload();
+                    });
+                }
+                else {
+                    layer.msg(data.msg,{icon:0,time:1000},function () {
+                        window.location.reload();
+                    });
+                    return false;
+                }
+            })
+
+        }else{
+            layer.msg("请输入正确的邮箱",{icon:0});
+            return false;
+        }
+
+    })
+    //设置年龄
+    $(".btn-primary3").on('click',function () {
+        var age = $("#_age").val();
+        var checkAge = /^(?:[1-9][0-9]?|1[01][0-9]|120)$/;
+        if(checkAge.test(age)){
+            $.post("{:url('borrower/Customer/check_age')}",{'age':age},function (data) {
+                if(data.status == 1){
+                    layer.msg(data.msg,{icon:1,time:1000},function () {
+                        window.location.reload();
+                    });
+                }
+                else {
+                    layer.msg(data.msg,{icon:0,time:1000},function () {
+                        window.location.reload();
+                    });
+                    return false;
+                }
+            })
+
+        }else{
+            layer.msg("请输入正确的年龄",{icon:0});
+            return false;
+        }
+        
+    })
+    //设置微信
+    $(".btn-primary4").on('click',function () {
+        var weixin = $("#_weixin").val();
+        var checkWei =/^[a-zA-Z]([-_a-zA-Z0-9]{5,19})+$/;
+        if(checkWei.test(weixin)){
+            $.post("{:url('borrower/Customer/check_weixin')}",{'weixin':weixin},function (data) {
+                if(data.status == 1){
+                    layer.msg(data.msg,{icon:1,time:1000},function () {
+                        window.location.reload();
+                    });
+                }
+                else {
+                    layer.msg(data.msg,{icon:0,time:1000},function () {
+                        window.location.reload();
+                    });
+                    return false;
+                }
+            })
+
+        }else{
+            layer.msg("请输入正确的微信号",{icon:0});
+            return false;
+        }
+
+    })
+    //设置备用联系人
+    $(".btn-primary5").on('click',function () {
+        var contack = $("#_contack").val();
+        if(contack.trim() != ''){
+            $.post("{:url('borrower/Customer/check_contack')}",{'contack':contack},function (data) {
+                if(data.status == 1){
+                    layer.msg(data.msg,{icon:1,time:1000},function () {
+                        window.location.reload();
+                    });
+                }
+                else {
+                    layer.msg(data.msg,{icon:0,time:1000},function () {
+                        window.location.reload();
+                    });
+                    return false;
+                }
+            })
+
+        }else{
+            layer.msg("备用联系人不可为空",{icon:0});
+            return false;
+        }
+
+    })
 </script>
 {/block}
 
