@@ -62,11 +62,19 @@ class Customer extends Base
             ];
             $result = $qustion->data($data_q)->save();
             if($result){
-                $this->success('反馈成功','index');
+                $data = [
+                   'status'=>1,
+                    'msg'=>'反馈成功'
+                ];
+
             }
             else{
-                $this->error('反馈失败');
+                $data = [
+                    'status'=>1,
+                    'msg'=>'反馈失败'
+                ];
             }
+            return json($data);
         }
         return $this->fetch('customer/question');//表单添加
     }
@@ -215,9 +223,6 @@ class Customer extends Base
             }
             return json($data);
         }
-    }
-    public function ceshi(){
-        
     }
 
 }
