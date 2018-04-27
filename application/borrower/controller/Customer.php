@@ -216,5 +216,8 @@ class Customer extends Base
             return json($data);
         }
     }
+    public function ceshi(){
+        
+    }
 
 }
