@@ -242,6 +242,21 @@ class Customer extends Cusbase
            }
        }
     }
+    public function logout(){//注销
+        //>>1.接收数据
+        //>>2.处理数据
+        //>>1.删除COOKIE中的id和PASSWord
+        setcookie('id',null,-1,'/');
+        setcookie('password',null,-1,'/');
+        //>>2.删除session中的用户信息
+        unset($_SESSION['userinfo']);
+        //>>3.显示页面
+        $this->redirect('/borrower/login');
+    }
+    public function daochu(){
+        echo 1;
+        exit;
+    }
 //    public function ceshi(){
 //        return $this->fetch('customer/ceshi');
 //    }
