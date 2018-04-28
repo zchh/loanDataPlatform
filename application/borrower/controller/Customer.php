@@ -256,7 +256,13 @@ class Customer extends Cusbase
         $this->redirect('/borrower/login');
     }
     public function daochu(){
-            $data = CustomerList::selectEntity();
+           //获取选中的id值
+            $id_array =Request::instance()->param('ids');
+            $ids = explode(',',$id_array);//所有id的组成数组
+            array_pop($ids);
+            $cus = new CustomerList();
+            $where['customer_id'] = ['in',$ids];
+            $data = $cus->where($where)->select();
             Vendor('PHPExcel.Classes.PHPExcel');//调用类库,路径是基于vendor文件夹的
             Vendor('PHPExcel.Classes.PHPExcel.Worksheet.Drawing');
             Vendor('PHPExcel.Classes.PHPExcel.Writer.Excel2007');
