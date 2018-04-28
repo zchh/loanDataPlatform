@@ -105,82 +105,32 @@ class Login extends Base
    }
 
     /**
-     * @title        管理员修改密码
-     * @description  管理员修改密码
-     * @author 张池
-     * @url /admin/resetPassword
-     * @method POST
-     *
-     *
-     * @param name:admin_id type:text require:1 other: desc:管理员id
-     * @param name:old_password type:text require:1 desc:原始密码
-     * @param name:new_password type:text require:1 desc:新密码
-     *
-     *
-     * @return code:201
-     * @return msg: 密码修改成功
+     *  管理员修改密码
      */
    public function resetPassword()
    {
-       $adminId = $this->checkAdminLogin();
-       if(false == $adminId){
-           return $this->selfResponse(StatusCode::NO_PERMISSION, StatusCode::PLEASE_LOGIN);
+       if(false == Session::has('admin')){
+           $this->redirect('/admin/login');
        }
        $requestParam = Request::instance()->param();
-       if(true == empty($requestParam['admin_id']) || true == empty($requestParam['old_password']) || true == empty($requestParam['new_password'])){
+       if(true == empty($requestParam['oldPassword']) || true == empty($requestParam['newPassword']) || true == empty($requestParam['newPassword2'])){
            return $this->selfResponse(StatusCode::SERVER_ERROR, StatusCode::PARAM_WRONG);
        }
        //判断原来的密码是否正确
-       $admin = Admin::getAdminByAdminId($requestParam['admin_id']);
-       if(false == password_verify($requestParam['old_password'], $admin['password'])){
+       $admin = Session::get('admin');
+       if(false == password_verify($requestParam['oldPassword'], $admin['password'])){
            return $this->selfResponse(StatusCode::NO_PERMISSION, '原始密码不正确');
        }
-       $updateArr['password'] = password_hash( $requestParam['new_password'], PASSWORD_DEFAULT);
-       $num = Admin::updateAdmin($requestParam['admin_id'], $updateArr);
+       if($requestParam['newPassword'] != $requestParam['newPassword2']){
+           return $this->selfResponse(StatusCode::SERVER_ERROR, '两次输入新密码不一致');
+       }
+       $updateArr['password'] = password_hash($requestParam['newPassword'], PASSWORD_DEFAULT);
+       $num = Admin::updateAdmin($admin['admin_id'], $updateArr);
        if($num == 0){
            return $this->selfFailResponse();
        }
        return $this->selfResponse(StatusCode::UPDATE_SUCCESS, '密码修改成功');
    }
-
-
-    //创建用户token记录
-    private function createAdminToken($admin_id)
-    {
-        $token = $this->createToken();
-        $insertData = [
-            'admin_id'=>$admin_id,
-            'token'=>$token,
-            'create_time'=>time(),
-            'lose_time'=>(time()+2592000), //30天过期
-        ];
-        $result = Db::name(TableConfig::ADMIN_TOKEN_TABLE)->insert($insertData);
-        if($result == 0){
-            return $result;
-        }
-        return $token;
-    }
-
-    //更新管理员token
-    private function updateAdminToken($admin_id)
-    {
-        $token = $this->createToken();
-        $updateData = [
-            'token'=>$token,
-            'create_time'=>time(),
-            'lose_time'=>(time()+2592000), //30天过期
-        ];
-        AdminToken::updateAdminToken($admin_id, $updateData);
-        return $token;
-    }
-
-    private function createToken()
-    {
-        return md5(time().rand(0,32768));
-    }
-
-
-
 
 
 }

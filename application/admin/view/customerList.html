@@ -17,7 +17,7 @@
                     <div style="position: relative">
                         <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
                         </button>
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o" id="checkCustomer"></i></button>
                         <a href="addCustomer" type="button" class="btn btn-default pull-right">
                             添加新客户
                         </a>
@@ -39,7 +39,7 @@
                     {notempty name="data"}
                     {volist name="data" id="single"}
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <td><input type="checkbox" name="checkNum" value="{$single.customer_id}" class="checkSingle"></td>
                         <td>{$single.name}</td>
                         <td>{$single.age}</td>
                         <td>{$single.tel}</td>
@@ -74,6 +74,9 @@
 <script>
 
     $(".checkbox-toggle").click(function () {
+
+        $(".checkSingle").attr('checked','checked');
+
         var clicks = $(this).data('clicks');
         if (clicks) {
             //Uncheck all checkboxes
@@ -86,6 +89,44 @@
         }
         $(this).data("clicks", !clicks);
     });
+
+    $(".checkSingle").on("click",function () {
+        $(this).attr('checked','checked');
+    });
+
+    $("#checkCustomer").on("click",function () {
+
+        var obj=document.getElementsByName('checkNum');
+        var s='';
+        for(var i=0; i<obj.length; i++){
+            if(obj[i].checked){
+                s += obj[i].value;
+                if(i != (obj.length - 1)){
+                    s += ',';
+                }
+            }
+        }
+
+        //删除
+        $.ajax({
+            type: "post",
+            url: '/admin/delete',
+            data: {
+                'type': 2,
+                'checkNum': s
+            },
+            dataType: "json",
+            success: function(data) {
+                alert(data.msg);
+                if(data.code == '204'){
+                    window.location.reload();
+                }
+            },
+            error:function(){
+                alert('系统错误');
+            }
+        });
+    })
 
 
 </script>

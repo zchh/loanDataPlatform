@@ -22,6 +22,7 @@ Route::get('admin/test2','admin/Test/test2');                                   
 
 Route::any('admin/login', 'admin/Login/adminLogin');                                                    //管理员登录
 Route::any('admin/logout', 'admin/Login/logout');                                                       //管理员退出登录
+Route::post('admin/resetPassword', 'admin/Login/resetPassword');                                        //管理员密码重置
 
 Route::get('/admin/user', 'admin/User/index');                                                          //用户列表
 Route::post('/admin/addUser', 'admin/User/addUser');                                                    //添加用户
@@ -45,13 +46,10 @@ Route::post('admin/editService', 'admin/Service/editService');                  
 Route::get('/admin/provincial', 'admin/Provincial/index');                                               //地址信息
 
 
-
-Route::rule('admin/register','admin/Login/adminRegister','POST');                                  //管理员注册
-
+Route::post('admin/delete','admin/AdminDelete/deleteRecord');                                           //删除
 
 
-//Route::post('admin/resetPassword','admin/Login/resetPassword');                                          //管理员修改密码
-//Route::get('admin/logout','admin/Login/logout');                                                         //管理员退出登录
+
 Route::post('admin/uploadPic','admin/Pic/uploadPic');                                                    //图片上传
 
 
