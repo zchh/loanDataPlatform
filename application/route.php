@@ -56,6 +56,12 @@ Route::post('borrower/check_email','borrower/Customer/check_email');//修改邮�
 Route::post('borrower/check_age','borrower/Customer/check_age');//修改年龄
 Route::post('borrower/check_weixin','borrower/Customer/check_weixin');//修改微信
 Route::post('borrower/check_contack','borrower/Customer/check_contack');//修改备用联系人
+Route::any('borrower/img','borrower/Customer/img');//修改头像
+//Route::get('borrower/login','borrower/Customer/login');//登录
+Route::any('borrower/login','borrower/Cuslogin/index');//登录
+Route::get('borrower/logout','borrower/Customer/logout');//注销
+Route::get('borrower/export','borrower/Customer/daochu');//注销
+//Route::any('borrower/ceshi','borrower/Customer/ceshi');//测试
 
 
 

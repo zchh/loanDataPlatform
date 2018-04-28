@@ -8,13 +8,22 @@
 
 
             <div class="box-header">
-                <h3 class="box-title">Data Table With Full Features</h3>
+                <h3 class="box-title">客户列表</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
+                    <div style="position: relative">
+                        <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                        <a href="addCustomer" type="button" class="btn btn-default pull-right">
+                            添加新客户
+                        </a>
+                    </div>
                     <tr>
+                        <th></th>
                         <th>姓名</th>
                         <th>年龄</th>
                         <th>联系电话</th>
@@ -30,6 +39,7 @@
 
                     <?php foreach($data as $single):?>
                     <tr>
+                        <td><input type="checkbox"></td>
                         <td><?=$single['name']?></td>
                         <td><?=$single['age']?></td>
                         <td><?=$single['tel']?></td>
