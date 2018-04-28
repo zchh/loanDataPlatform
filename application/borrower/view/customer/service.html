@@ -45,7 +45,7 @@
                         {volist name="question" id="single"}
                         <tr>
                             <td>{$single.question_title}</td>
-                            <td>{$single.create_time}</td>
+                            <td><?=date('Y-m-d h:i:s',$single['create_time'])?></td>
                         </tr>
                         {/volist}
                         {/notempty}
