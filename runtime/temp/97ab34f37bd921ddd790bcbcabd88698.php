@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:88:"D:\www\business\loanDataPlatform\public/../application/borrower\view\customer\index.html";i:1524883738;s:73:"D:\www\business\loanDataPlatform\application\borrower\view\base\base.html";i:1524826486;s:45:"../application/borrower/view/base/header.html";i:1524883165;s:46:"../application/borrower/view/base/sidebar.html";i:1524827581;s:45:"../application/borrower/view/base/footer.html";i:1524650783;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:88:"D:\www\business\loanDataPlatform\public/../application/borrower\view\customer\index.html";i:1524894755;s:73:"D:\www\business\loanDataPlatform\application\borrower\view\base\base.html";i:1524885297;s:45:"../application/borrower/view/base/header.html";i:1524883165;s:46:"../application/borrower/view/base/sidebar.html";i:1524827581;s:45:"../application/borrower/view/base/footer.html";i:1524650783;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -226,9 +226,8 @@
                     <div style="position: relative">
                         <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
                         </button>
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                        <a href="addCustomer" type="button" class="btn btn-default pull-right">
-                            添加新客户
+                        <a href="javascript:;" type="button" class="btn btn-default pull-right" id="export">
+                            导出
                         </a>
                     </div>
                     <tr>
@@ -243,12 +242,10 @@
                         <th>详细信息</th>
                     </tr>
                     </thead>
-                    <tbody>
-
-
+                    <tbody id="result">
                     <?php foreach($data as $single):?>
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <td><input type="checkbox" name="checkNum" value="<?=$single['customer_id']?>" class="checkSingle"></td>
                         <td><?=$single['name']?></td>
                         <td><?=$single['age']?></td>
                         <td><?=$single['tel']?></td>
@@ -265,37 +262,59 @@
                     </tfoot>
                 </table>
             </div>
-
-
-
-            <div class="modal fade" id="modal-default">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Default Modal</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>One fine body&hellip;</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-
-
             <!-- /.box-body -->
         </div>
         <!-- /.box -->
     </div>
     <!-- /.col -->
 </div>
+<script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/static/layer/layer.js"></script>
+<script>
+
+    $(".checkbox-toggle").click(function () {
+
+        $(".checkSingle").attr('checked','checked');
+
+        var clicks = $(this).data('clicks');
+        if (clicks) {
+            //Uncheck all checkboxes
+            $("input[type='checkbox']").iCheck("uncheck");
+            $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+        } else {
+            //Check all checkboxes
+            $("input[type='checkbox']").iCheck("check");
+            $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+        }
+        $(this).data("clicks", !clicks);
+    });
+
+    $(".checkSingle").on("click",function () {
+        $(this).attr('checked','checked');
+    });
+
+    $("#export").on("click",function () {
+        //alert(1);
+        var obj=document.getElementsByName('checkNum');
+        var s='';
+        for(var i=0; i<obj.length; i++){
+            if(obj[i].checked){
+                s += obj[i].value;
+                s += ',';
+            }
+        }
+        //导出
+        if(s == ''){
+            layer.msg("请至少选择一条进行导出",{icon:0});
+            return false;
+        }
+        else {
+            window.location.href = "/borrower/export/"+s;
+        }
+    })
+
+
+</script>
 
 
 
@@ -329,6 +348,9 @@
 <script src="../../static/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../static/dist/js/demo.js"></script>
+<script src="../../static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+<script src="../../static/plugins/iCheck/icheck.min.js"></script>
 <!-- page script -->
 <script>
     $(function () {

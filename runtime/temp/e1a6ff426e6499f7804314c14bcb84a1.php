@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:94:"D:\www\business\loanDataPlatform\public/../application/borrower\view\customer\information.html";i:1524734051;s:73:"D:\www\business\loanDataPlatform\application\borrower\view\base\base.html";i:1524826486;s:45:"../application/borrower/view/base/header.html";i:1524650783;s:46:"../application/borrower/view/base/sidebar.html";i:1524827581;s:45:"../application/borrower/view/base/footer.html";i:1524650783;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:94:"D:\www\business\loanDataPlatform\public/../application/borrower\view\customer\information.html";i:1524897848;s:73:"D:\www\business\loanDataPlatform\application\borrower\view\base\base.html";i:1524885297;s:45:"../application/borrower/view/base/header.html";i:1524883165;s:46:"../application/borrower/view/base/sidebar.html";i:1524827581;s:45:"../application/borrower/view/base/footer.html";i:1524650783;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +43,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>A</b>LT</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Admin</b>LTE</span>
+        <span class="logo-lg"><b>合作商</b>管理平台</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -58,13 +58,13 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="../../static/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <img src="<?=$_SESSION['userinfo']['img']?>" class="user-image" alt="User Image">
+                        <span class="hidden-xs"><?=$_SESSION['userinfo']['real_name']?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img src="<?=$_SESSION['userinfo']['img']?>" class="img-circle" alt="User Image">
 
                             <p>
                                 Alexander Pierce - Web Developer
@@ -92,7 +92,7 @@
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="<?php echo url('borrower/Customer/logout'); ?>" class="btn btn-default btn-flat">注销</a>
                             </div>
                         </li>
                     </ul>
@@ -209,20 +209,12 @@
 
 
             
-    <!-- Left side column. contains the logo and sidebar -->
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <!-- Main content -->
-        <section class="content">
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-6">
                     <div class="box box-solid">
                         <div class="box-header with-border">
                             <i class="fa fa-text-width"></i>
-
                             <h3 class="box-title">信息公告</h3>
                         </div>
                         <!-- /.box-header -->
@@ -236,38 +228,9 @@
                     <!-- /.box -->
                 </div>
                 </div>
-            </div>
-            <!--/.col (left) -->
-            <!-- right column -->
-            <div class="col-md-6">
-                <!-- Horizontal Form -->
-                <!-- /.box -->
-                <!-- general form elements disabled -->
-                <!-- /.box -->
-            </div>
-            <!--/.col (right) -->
-    </div>
-    <!-- /.row -->
-    </section>
-    <!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
-</div>
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="/static/bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="/static/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="/static/dist/js/demo.js"></script>
-<script type="text/javascript">
-
-</script>
 
 
 
@@ -301,6 +264,9 @@
 <script src="../../static/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../static/dist/js/demo.js"></script>
+<script src="../../static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+<script src="../../static/plugins/iCheck/icheck.min.js"></script>
 <!-- page script -->
 <script>
     $(function () {

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:89:"D:\www\business\loanDataPlatform\public/../application/borrower\view\customer\single.html";i:1524723764;s:73:"D:\www\business\loanDataPlatform\application\borrower\view\base\base.html";i:1524826486;s:45:"../application/borrower/view/base/header.html";i:1524883165;s:46:"../application/borrower/view/base/sidebar.html";i:1524827581;s:45:"../application/borrower/view/base/footer.html";i:1524650783;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:89:"D:\www\business\loanDataPlatform\public/../application/borrower\view\customer\single.html";i:1524898037;s:73:"D:\www\business\loanDataPlatform\application\borrower\view\base\base.html";i:1524885297;s:45:"../application/borrower/view/base/header.html";i:1524883165;s:46:"../application/borrower/view/base/sidebar.html";i:1524827581;s:45:"../application/borrower/view/base/footer.html";i:1524650783;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -209,22 +209,9 @@
 
 
             
-    <!-- Left side column. contains the logo and sidebar -->
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <!-- Main content -->
-        <section class="content">
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-6">
-                    <!-- general form elements -->
-                    <!-- /.box -->
-
-                    <!-- Form Element sizes -->
-                    <!-- /.box -->
-
                     <div class="box box-danger">
                         <div class="box-header with-border">
                             <h3 class="box-title">客户信息</h3>
@@ -276,42 +263,17 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /.box-body -->
                     </div>
-                    <!-- /.box -->
 
-                    <!-- Input addon -->
-                    <!-- /.box -->
-
-                </div>
-                <!--/.col (left) -->
-                <!-- right column -->
-                <div class="col-md-6">
-                    <!-- Horizontal Form -->
-                    <!-- /.box -->
-                    <!-- general form elements disabled -->
-                    <!-- /.box -->
                 </div>
                 <!--/.col (right) -->
             </div>
             <!-- /.row -->
-        </section>
         <!-- /.content -->
-    </div>
     <!-- /.content-wrapper -->
-</div>
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="/static/bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="/static/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="/static/dist/js/demo.js"></script>
 
 
 
@@ -345,6 +307,9 @@
 <script src="../../static/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../static/dist/js/demo.js"></script>
+<script src="../../static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+<script src="../../static/plugins/iCheck/icheck.min.js"></script>
 <!-- page script -->
 <script>
     $(function () {

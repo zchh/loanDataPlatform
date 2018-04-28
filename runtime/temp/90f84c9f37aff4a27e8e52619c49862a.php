@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:90:"D:\www\business\loanDataPlatform\public/../application/borrower\view\customer\service.html";i:1524723365;s:73:"D:\www\business\loanDataPlatform\application\borrower\view\base\base.html";i:1524826486;s:45:"../application/borrower/view/base/header.html";i:1524879288;s:46:"../application/borrower/view/base/sidebar.html";i:1524827581;s:45:"../application/borrower/view/base/footer.html";i:1524650783;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:90:"D:\www\business\loanDataPlatform\public/../application/borrower\view\customer\service.html";i:1524896148;s:73:"D:\www\business\loanDataPlatform\application\borrower\view\base\base.html";i:1524885297;s:45:"../application/borrower/view/base/header.html";i:1524883165;s:46:"../application/borrower/view/base/sidebar.html";i:1524827581;s:45:"../application/borrower/view/base/footer.html";i:1524650783;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +43,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>A</b>LT</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Admin</b>LTE</span>
+        <span class="logo-lg"><b>合作商</b>管理平台</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -209,318 +209,92 @@
 
 
             
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                合作商管理平台
-                <small></small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">UI</a></li>
-                <li class="active">General</li>
-            </ol>
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-            <!-- COLOR PALETTE -->
-            <!-- /.box -->
-            <!-- START ALERTS AND CALLOUTS -->
-
-            <!-- /.row -->
-            <!-- END ALERTS AND CALLOUTS -->
-            <!-- START CUSTOM TABS -->
-
-            <div class="row">
-                <div class="col-md-6">
-                    <!-- Custom Tabs -->
-                    <div class="nav-tabs-custom">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab_1" data-toggle="tab">使用须知</a></li>
-                            <li><a href="#tab_2" data-toggle="tab">常见问题</a></li>
-                            <li><a href="#tab_3" data-toggle="tab">客户服务</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tab_1">
-                                <b>使用须知</b>
-
-                                <p>Exactly like the original bootstrap tabs except you should use
-                                    the custom wrapper <code>.nav-tabs-custom</code> to achieve this style.</p>
-                                A wonderful serenity has taken possession of my entire soul,
-                                like these sweet mornings of spring which I enjoy with my whole heart.
-                                I am alone, and feel the charm of existence in this spot,
-                                which was created for the bliss of souls like mine. I am so happy,
-                                my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
-                                that I neglect my talents. I should be incapable of drawing a single stroke
-                                at the present moment; and yet I feel that I never was a greater artist than now.
-                            </div>
-                            <!-- /.tab-pane -->
-                            <div class="tab-pane" id="tab_2">
-                              常见问题
-                            </div>
-                            <!-- /.tab-pane -->
-                            <div class="tab-pane" id="tab_3">
-                                <?php foreach($data as $d):?>
-                               <p><button style="color: tomato"><?=$d['role']?></button></p>
-                               <p>姓名：<?=$d['name']?></p>
-                               <p>邮箱：<?=$d['email']?></p>
-                               <p>电话：<?=$d['tel']?></p>
-                               <p>微信：<?=$d['weixin']?></p>
-                                <?php endforeach;?>
-                            </div>
-                            <!-- /.tab-pane -->
-                        </div>
-                        <!-- /.tab-content -->
-                    </div>
-                    <!-- nav-tabs-custom -->
-                </div>
-                <!-- /.col -->
-
-                <div class="col-md-6">
-                    <!-- Custom Tabs (Pulled to the right) -->
-                    <!-- nav-tabs-custom -->
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-            <!-- END CUSTOM TABS -->
-            <!-- START PROGRESS BARS -->
-
-            <!-- /.row -->
-            <!-- /.row -->
-            <!-- END PROGRESS BARS -->
-
-            <!-- START ACCORDION & CAROUSEL-->
-            <!-- /.row -->
-            <!-- END ACCORDION & CAROUSEL-->
-
-            <!-- START TYPOGRAPHY -->
-            <!-- /.row -->
-            <!-- END TYPOGRAPHY -->
-
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 2.4.0
-        </div>
-        <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-        reserved.
-    </footer>
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Create the tabs -->
-        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-            <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-
-            <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+<div class="col-md-12">
+    <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#activity" data-toggle="tab">使用须知</a></li>
+            <li><a href="#timeline" data-toggle="tab">常见问题</a></li>
+            <li><a href="#settings" data-toggle="tab">客服服务</a></li>
         </ul>
-        <!-- Tab panes -->
         <div class="tab-content">
-            <!-- Home tab content -->
-            <div class="tab-pane" id="control-sidebar-home-tab">
-                <h3 class="control-sidebar-heading">Recent Activity</h3>
-                <ul class="control-sidebar-menu">
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
-                            <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                                <p>Will be 23 on April 24th</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="menu-icon fa fa-user bg-yellow"></i>
-
-                            <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
-
-                                <p>New phone +1(800)555-1234</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-
-                            <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
-
-                                <p>nora@example.com</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="menu-icon fa fa-file-code-o bg-green"></i>
-
-                            <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-
-                                <p>Execution time 5 seconds</p>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.control-sidebar-menu -->
-
-                <h3 class="control-sidebar-heading">Tasks Progress</h3>
-                <ul class="control-sidebar-menu">
-                    <li>
-                        <a href="javascript:void(0)">
-                            <h4 class="control-sidebar-subheading">
-                                Custom Template Design
-                                <span class="label label-danger pull-right">70%</span>
-                            </h4>
-
-                            <div class="progress progress-xxs">
-                                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">
-                            <h4 class="control-sidebar-subheading">
-                                Update Resume
-                                <span class="label label-success pull-right">95%</span>
-                            </h4>
-
-                            <div class="progress progress-xxs">
-                                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">
-                            <h4 class="control-sidebar-subheading">
-                                Laravel Integration
-                                <span class="label label-warning pull-right">50%</span>
-                            </h4>
-
-                            <div class="progress progress-xxs">
-                                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">
-                            <h4 class="control-sidebar-subheading">
-                                Back End Framework
-                                <span class="label label-primary pull-right">68%</span>
-                            </h4>
-
-                            <div class="progress progress-xxs">
-                                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.control-sidebar-menu -->
+            <div class="active tab-pane" id="activity">
+                <div class="box-header">
+                    <h3 class="box-title">使用须知</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        <?php if(!(empty($know) || (($know instanceof \think\Collection || $know instanceof \think\Paginator ) && $know->isEmpty()))): if(is_array($know) || $know instanceof \think\Collection || $know instanceof \think\Paginator): $i = 0; $__LIST__ = $know;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$single): $mod = ($i % 2 );++$i;?>
+                        <tr>
+                            <td><?php echo $single['know_id']; ?></td>
+                            <td><?php echo $single['know_content']; ?></td>
+                        </tr>
+                        <?php endforeach; endif; else: echo "" ;endif; endif; ?>
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
-            <!-- /.tab-pane -->
-            <!-- Stats tab content -->
-            <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-            <!-- /.tab-pane -->
-            <!-- Settings tab content -->
-            <div class="tab-pane" id="control-sidebar-settings-tab">
-                <form method="post">
-                    <h3 class="control-sidebar-heading">General Settings</h3>
 
-                    <div class="form-group">
-                        <label class="control-sidebar-subheading">
-                            Report panel usage
-                            <input type="checkbox" class="pull-right" checked>
-                        </label>
-
-                        <p>
-                            Some information about this general settings option
-                        </p>
-                    </div>
-                    <!-- /.form-group -->
-
-                    <div class="form-group">
-                        <label class="control-sidebar-subheading">
-                            Allow mail redirect
-                            <input type="checkbox" class="pull-right" checked>
-                        </label>
-
-                        <p>
-                            Other sets of options are available
-                        </p>
-                    </div>
-                    <!-- /.form-group -->
-
-                    <div class="form-group">
-                        <label class="control-sidebar-subheading">
-                            Expose author name in posts
-                            <input type="checkbox" class="pull-right" checked>
-                        </label>
-
-                        <p>
-                            Allow the user to show his name in blog posts
-                        </p>
-                    </div>
-                    <!-- /.form-group -->
-
-                    <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-                    <div class="form-group">
-                        <label class="control-sidebar-subheading">
-                            Show me as online
-                            <input type="checkbox" class="pull-right" checked>
-                        </label>
-                    </div>
-                    <!-- /.form-group -->
-
-                    <div class="form-group">
-                        <label class="control-sidebar-subheading">
-                            Turn off notifications
-                            <input type="checkbox" class="pull-right">
-                        </label>
-                    </div>
-                    <!-- /.form-group -->
-
-                    <div class="form-group">
-                        <label class="control-sidebar-subheading">
-                            Delete chat history
-                            <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-                        </label>
-                    </div>
-                    <!-- /.form-group -->
-                </form>
+            <div class="tab-pane" id="timeline">
+                <div class="box-header">
+                    <h3 class="box-title">常见问题</h3>
+                </div>
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        <?php if(!(empty($question) || (($question instanceof \think\Collection || $question instanceof \think\Paginator ) && $question->isEmpty()))): if(is_array($question) || $question instanceof \think\Collection || $question instanceof \think\Paginator): $i = 0; $__LIST__ = $question;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$single): $mod = ($i % 2 );++$i;?>
+                        <tr>
+                            <td><?php echo $single['question_title']; ?></td>
+                            <td><?php echo $single['create_time']; ?></td>
+                        </tr>
+                        <?php endforeach; endif; else: echo "" ;endif; endif; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <!-- /.tab-pane -->
+
+            <div class="tab-pane" id="settings">
+                <div class="box-header">
+                    <h3 class="box-title">客户服务</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>角色</th>
+                            <th>姓名</th>
+                            <th>邮箱</th>
+                            <th>电话</th>
+                            <th>微信</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <?php if(!(empty($data) || (($data instanceof \think\Collection || $data instanceof \think\Paginator ) && $data->isEmpty()))): if(is_array($data) || $data instanceof \think\Collection || $data instanceof \think\Paginator): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$single): $mod = ($i % 2 );++$i;?>
+                        <tr>
+                            <td><?php echo $single['role']; ?></td>
+                            <td><?php echo $single['name']; ?></td>
+                            <td><?php echo $single['email']; ?></td>
+                            <td><?php echo $single['tel']; ?></td>
+                            <td><?php echo $single['weixin']; ?></td>
+                        </tr>
+                        <?php endforeach; endif; else: echo "" ;endif; endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    </aside>
-    <!-- /.control-sidebar -->
-    <!-- Add the sidebar's background. This div must be placed
-         immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
+    </div>
 </div>
-<!-- ./wrapper -->
-
-<!-- jQuery 3 -->
-<script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="/static/bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="/static/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="/static/dist/js/demo.js"></script>
+<script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../static/ueditor/ueditor.config.js"></script>
+<script src="../../static/ueditor/ueditor.all.min.js"></script>
 
 
 
@@ -554,6 +328,9 @@
 <script src="../../static/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../static/dist/js/demo.js"></script>
+<script src="../../static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+<script src="../../static/plugins/iCheck/icheck.min.js"></script>
 <!-- page script -->
 <script>
     $(function () {

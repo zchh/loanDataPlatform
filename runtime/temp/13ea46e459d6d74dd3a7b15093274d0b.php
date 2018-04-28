@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:87:"D:\www\business\loanDataPlatform\public/../application/borrower\view\customer\user.html";i:1524877947;s:73:"D:\www\business\loanDataPlatform\application\borrower\view\base\base.html";i:1524826486;s:45:"../application/borrower/view/base/header.html";i:1524879288;s:46:"../application/borrower/view/base/sidebar.html";i:1524827581;s:45:"../application/borrower/view/base/footer.html";i:1524650783;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:87:"D:\www\business\loanDataPlatform\public/../application/borrower\view\customer\user.html";i:1524898313;s:73:"D:\www\business\loanDataPlatform\application\borrower\view\base\base.html";i:1524885297;s:45:"../application/borrower/view/base/header.html";i:1524883165;s:46:"../application/borrower/view/base/sidebar.html";i:1524827581;s:45:"../application/borrower/view/base/footer.html";i:1524650783;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +43,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>A</b>LT</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Admin</b>LTE</span>
+        <span class="logo-lg"><b>合作商</b>管理平台</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -209,14 +209,8 @@
 
 
             
-    <!-- Left side column. contains the logo and sidebar -->
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <!-- Main content -->
-        <section class="content">
             <div class="row">
+
                 <!-- left column -->
                 <div class="col-md-6">
                     <!-- general form elements -->
@@ -231,16 +225,24 @@
                         </div>
                         <div class="box-body">
                             <div class="row">
-                                <div class="col-xs-9">
-                                    头像：<img src="<?php echo $data['img']; ?>" alt="头像" id="img" width="200px">
+                                <div class="col-xs-4">
+                                    头像：
+                                </div>
+                                <div class="col-xs-4">
+                                    <img src="<?php echo $data['img']; ?>" alt="头像" id="img" width="200px">
                                 </div>
                                 <div id="uploader-demo">
                                     <!--用来存放item-->
                                     <div id="fileList" class="uploader-list"></div>
                                     <div id="filePicker">修改</div>
                                 </div>
-                                <div class="col-xs-9">
+                                <div class="col-xs-6">
                                     真实姓名：<input type="text" class="form-control" placeholder="<?php echo $data['real_name']; ?>" readonly>
+                                </div>
+                                <div class="col-xs-4">
+
+                                </div>
+                                <div class="col-xs-4">
                                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#real_name">
                                         修改
                                     </button>
@@ -457,26 +459,12 @@
                 </div><!-- 设置备用联系人 -->
                 <!--/.col (right) -->
             </div>
-            <!-- /.row -->
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-</div>
-<!-- ./wrapper -->
 
 <!-- jQuery 3 -->
 <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="/static/webuploader/webuploader.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="/static/bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="/static/dist/js/adminlte.min.js"></script>
 <script src="/static/layer/layer.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="/static/dist/js/demo.js"></script>
 <script type="text/javascript">
     //修改头像
     var uploader = WebUploader.create({
@@ -714,6 +702,9 @@
 <script src="../../static/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../static/dist/js/demo.js"></script>
+<script src="../../static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+<script src="../../static/plugins/iCheck/icheck.min.js"></script>
 <!-- page script -->
 <script>
     $(function () {

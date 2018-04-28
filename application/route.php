@@ -73,8 +73,8 @@ Route::any('borrower/img','borrower/Customer/img');//修改头像
 //Route::get('borrower/login','borrower/Customer/login');//登录
 Route::any('borrower/login','borrower/Cuslogin/index');//登录
 Route::get('borrower/logout','borrower/Customer/logout');//注销
-Route::get('borrower/export','borrower/Customer/daochu');//注销
-//Route::any('borrower/ceshi','borrower/Customer/ceshi');//测试
+Route::any('borrower/export/:ids','borrower/Customer/daochu');//批量导出
+Route::any('borrower/ceshi','borrower/Customer/ceshi');//测试
 
 
 
