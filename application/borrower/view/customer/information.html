@@ -12,7 +12,7 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <?php foreach($data as $d):?>
-                            <p class="text-yellow"><a href=""><?=$d['title']?></a>&nbsp;&nbsp;&nbsp;&nbsp;<span><?=date('Y-m-d h:i:s',$d['time'])?></span></p>
+                            <p class="text-yellow"><a href="/borrower/detail/<?=$d['information_id']?>"><?=$d['title']?></a>&nbsp;&nbsp;&nbsp;&nbsp;<span><?=date('Y-m-d h:i:s',$d['time'])?></span></p>
                             <?php endforeach;?>
                         </div>
                         <!-- /.box-body -->
