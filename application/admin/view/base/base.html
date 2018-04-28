@@ -61,6 +61,40 @@
 
     {include file="../application/admin/view/base/footer.html" /}
 
+
+
+
+    <div class="modal fade" id="reset-model">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">密码重置</h4>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <label>原密码</label>
+                        <input id="oldPassword" name="oldPassword" type="password" class="form-control my-colorpicker1">
+                        <label>新密码</label>
+                        <input id="newPassword" name="newPassword" type="password" class="form-control my-colorpicker1">
+                        <label>确认新密码</label>
+                        <input id="newPassword2" name="newPassword2" type="password" class="form-control my-colorpicker1">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-default pull-left" data-dismiss="modal">重置</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"  id="sure_edit">确认修改</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+
+
 </div>
 <!-- ./wrapper -->
 
@@ -102,6 +136,32 @@
         autoclose: true,
         language:"en",
     });
+
+    $("#sure_edit").on("click",function () {
+        //管理员登录
+        $.ajax({
+            type: "post",
+            url: '/admin/resetPassword',
+            data: {
+                'oldPassword':  $("[name='oldPassword']").val(),
+                'newPassword':  $("[name='newPassword']").val(),
+                'newPassword2':  $("[name='newPassword2']").val()
+            },
+            dataType: "json",
+            success: function(data) {
+                if(data.code == '201'){
+                    alert(data.msg);
+                }else{
+                    alert(data.msg);
+                }
+            },
+            error:function(){
+                alert('系统错误');
+            }
+        });
+    })
+
+
 </script>
 </body>
 </html>

@@ -60,4 +60,9 @@ class CustomerList extends Base
             return $this->fetch('/addCustomer');
         }
     }
+
+    public function deleteCustomer()
+    {
+        dump($_POST);die;
+    }
 }
