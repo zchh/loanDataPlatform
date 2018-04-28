@@ -12,6 +12,8 @@ namespace app\borrower\controller;
 use app\common\model\Balance;
 use app\common\model\CustomerList;
 use app\common\model\Information;
+use app\common\model\Know;
+use app\common\model\NormalQuestion;
 use app\common\model\Question;
 use app\common\model\Server;
 use app\common\model\User;
@@ -39,10 +41,14 @@ class Customer extends Cusbase
         return $this->fetch('customer/single');//详情页面
         //$data = Borrower::findEntity()
     }
-    public function server(){//服务支持
-        $data = Server::selectEntity();
+    public function server(){//服务支持 (使用须知 常见问题 客户服务)
+        $data = Server::selectEntity();//客户服务
+        $know = Know::selectEntity();//使用须知
+        $question = NormalQuestion::selectEntity();
         $this->assign('data',$data);
-        return $this->fetch('customer/service',$data);
+        $this->assign('know',$know);
+        $this->assign('question',$question);
+        return $this->fetch('customer/service');
     }
     public function question(){//信息反馈
         if(Request()->isPost()){
