@@ -44,7 +44,7 @@
                         {notempty name="question"}
                         {volist name="question" id="single"}
                         <tr>
-                            <td>{$single.question_title}</td>
+                            <td><a href="/borrower/question_detail/{$single.question_id}">{$single.question_title}</a></td>
                             <td><?=date('Y-m-d h:i:s',$single['create_time'])?></td>
                         </tr>
                         {/volist}
