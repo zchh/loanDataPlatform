@@ -10,6 +10,7 @@ namespace app\borrower\controller;
 
 
 use app\common\model\Balance;
+use app\common\model\CustomerList;
 use app\common\model\Information;
 use app\common\model\Question;
 use app\common\model\Server;
@@ -58,7 +59,8 @@ class Customer extends Cusbase
             $qustion = new Question();
             $data_q = [
               'question_type'=>$question_type,
-                'detail'=>$detail
+                'detail'=>$detail,
+                'user_id'=>$_SESSION['userinfo']['user_id']//反馈人
             ];
             $result = $qustion->data($data_q)->save();
             if($result){
@@ -254,9 +256,56 @@ class Customer extends Cusbase
         $this->redirect('/borrower/login');
     }
     public function daochu(){
-        echo 1;
-        exit;
-    }
+            $data = CustomerList::selectEntity();
+            Vendor('PHPExcel.Classes.PHPExcel');//调用类库,路径是基于vendor文件夹的
+            Vendor('PHPExcel.Classes.PHPExcel.Worksheet.Drawing');
+            Vendor('PHPExcel.Classes.PHPExcel.Writer.Excel2007');
+            $objExcel = new \PHPExcel();
+            //set document Property
+            $objWriter = \PHPExcel_IOFactory::createWriter($objExcel, 'Excel2007');
+
+            $objActSheet = $objExcel->getActiveSheet();
+            $key = ord("A");
+            $letter =explode(',',"A,B,C,D,E,F,G");//7
+            $arrHeader =  array('姓名','年龄','联系电话','微信账号','贷款金额','芝麻信用','云端分发时间');
+            //填充表头信息
+            $lenth =  count($arrHeader);
+            for($i = 0;$i < $lenth;$i++) {
+                $objActSheet->setCellValue("$letter[$i]1","$arrHeader[$i]");
+            };
+            //填充表格信息
+            foreach($data as $k=>$v){
+                $k +=2;
+                $objActSheet->setCellValue('A'.$k,$v['name']);//姓名
+                $objActSheet->setCellValue('B'.$k, $v['age']);//年龄
+                $objActSheet->setCellValue('C'.$k, $v['tel']);//联系电话
+                $objActSheet->setCellValue('D'.$k, $v['wx_number']);//微信账号
+                $objActSheet->setCellValue('E'.$k, $v['loan_amount']);//贷款金额
+                $objActSheet->setCellValue('F'.$k, $v['credit']);//芝麻信用
+                $objActSheet->setCellValue('G'.$k, date('Y-m-d h:i:s',$v['add_time']));//时间
+                $objActSheet->getRowDimension($k)->setRowHeight(20);//表格高度
+            }
+            $width = array(20,20,15,10,10,30,10);
+            //设置表格的宽度
+            $objActSheet->getColumnDimension('A')->setWidth($width[0]);
+            $objActSheet->getColumnDimension('B')->setWidth($width[3]);
+            $objActSheet->getColumnDimension('C')->setWidth($width[5]);
+            $objActSheet->getColumnDimension('D')->setWidth($width[3]);
+            $objActSheet->getColumnDimension('E')->setWidth($width[3]);
+            $objActSheet->getColumnDimension('F')->setWidth($width[3]);
+            $objActSheet->getColumnDimension('G')->setWidth($width[3]);
+            $objActSheet->getColumnDimension('H')->setWidth($width[5]);
+            $outfile = "客户信息".date("Y-m-d").".xls";
+            ob_end_clean();
+            header("Content-Type: application/force-download");
+            header("Content-Type: application/octet-stream");
+            header("Content-Type: application/download");
+            header('Content-Disposition:inline;filename="'.$outfile.'"');
+            header("Content-Transfer-Encoding: binary");
+            header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+            header("Pragma: no-cache");
+            $objWriter->save('php://output');
+        }//导出
 //    public function ceshi(){
 //        return $this->fetch('customer/ceshi');
 //    }
