@@ -42,8 +42,8 @@ class AdminDelete extends Base
         if(empty($requestParam['type']) || empty($requestParam['checkNum'])){
             return $this->selfResponse(StatusCode::SERVER_ERROR,  StatusCode::PARAM_WRONG);
         }
-
-        $idArr = implode(',', $requestParam['checkNum']);
+        $idArr = explode(',', $requestParam['checkNum']);
+        array_pop($idArr);
         switch ($requestParam['type']){
             case NumberConfig::DELETE_USER:
                 UserModel::deleteEntity($idArr);
