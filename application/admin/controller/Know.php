@@ -3,12 +3,13 @@
  * Created by PhpStorm.
  * User: Administrator
  * Date: 2018/4/27
- * Time: 10:06
+ * Time: 11:30
  */
 namespace app\admin\controller;
 
 use app\common\model\City;
 use app\common\model\MaterialLibrary;
+use app\common\model\NormalQuestion;
 use app\common\selfConfig\StatusCode;
 use http\Env\Response;
 use think\Controller;
@@ -19,8 +20,10 @@ use app\admin\controller\Base;
 use app\common\model\Provincial;
 use app\common\model\CustomerList as CustomerListModel;
 use app\common\model\Information as InformationModel;
+use app\common\model\Know as KnowModel;
+use app\common\model\Service;
 
-class Information extends Base
+class Know extends Base
 {
     public function _initialize()
     {
@@ -29,39 +32,40 @@ class Information extends Base
         }
     }
 
-    /**
-     * 信息公告列表
-     */
     public function index()
     {
-        $result['data'] = InformationModel::selectEntity();
-        foreach ($result['data'] as $k=>$v){
-            $result['data'][$k]['time'] = $this->timeToDate($v['time']);
+        $data = KnowModel::selectEntity();
+        $result['know_id'] = $data[0]['know_id'];
+        $result['know_content'] = $data[0]['know_content'];
+
+        //常见问题
+        $result['questionData'] = NormalQuestion::selectEntity();
+        foreach ($result['questionData'] as $k=>$v){
+            $result['questionData'][$k]['create_time'] = $this->timeToDate($v['create_time']);
         }
-        return $this->fetch('/information', $result);
+        //客服服务
+        $result['serviceData'] = Service::selectEntity();
+        return $this->fetch('/know', $result);
     }
 
     /**
-     * 添加信息公告
+     * 添加使用须知
      */
-    public function addInformation()
+    public function addKnow()
     {
         if($_SERVER['REQUEST_METHOD'] == "GET"){
-            return $this->fetch('/addInformation');
+            return $this->fetch('/know');
         }elseif ($_SERVER['REQUEST_METHOD']=="POST"){
             $requestParam = Request::instance()->param();
-            if(empty($requestParam['title']) || empty($requestParam['describe'])){
+            if(empty($requestParam['know_id']) || empty($requestParam['know_content'])){
                 return $this->selfResponse(StatusCode::SERVER_ERROR,  StatusCode::PARAM_WRONG);
             }
-            $num = InformationModel::addEntity($_POST);
-            if($num == 0){
-                return $this->selfResponse(StatusCode::SERVER_ERROR,  StatusCode::SERVER_ERRO_MESSAGE);
-            }
+            $updateArr['know_content'] = $requestParam['know_content'];
+            KnowModel::updateEntity($requestParam['know_id'], $updateArr);
             return $this->selfResponse(StatusCode::CREATED_SUCCESS,  StatusCode::CREATED_SUCCESS_MESSAGE);
         }else{
-            return $this->fetch('/addInformation');
+            return $this->fetch('/know');
         }
     }
-
 
 }

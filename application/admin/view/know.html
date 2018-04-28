@@ -1,0 +1,379 @@
+{extend name="base/base" /}
+{block name="main"}
+<div class="col-md-12">
+    <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#activity" data-toggle="tab">使用须知</a></li>
+            <li><a href="#timeline" data-toggle="tab">常见问题</a></li>
+            <li><a href="#settings" data-toggle="tab">客服服务</a></li>
+        </ul>
+        <div class="tab-content">
+
+            <div class="active tab-pane" id="activity">
+
+                <form action="" enctype="multipart/form-data">
+                <div class="box-body">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="hidden" name="know_id" value="{$know_id}">
+                        <textarea name="know_content" id="myEditor" style="width:100%;height:380px;">{$know_content}</textarea>
+                    </div>
+                </div>
+                </div>
+                <div class="box-footer">
+                    <button type="reset" class="btn btn-default">重置信息</button>
+                    <button type="button" class="btn btn-info pull-right" id="addKnow">确定发布</button>
+                </div>
+                </form>
+            </div>
+
+            <div class="tab-pane" id="timeline">
+                <div class="box-header">
+                    <h3 class="box-title">常见问题</h3>
+                </div>
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                        <div style="position: relative">
+                            <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                            <button type="button" class="btn btn-default pull-right"  data-toggle="modal" data-target="#add_question">
+                                添加
+                            </button>
+                        </div>
+                        </thead>
+                        <tbody>
+
+                        {notempty name="questionData"}
+                        {volist name="questionData" id="single"}
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>{$single.question_title}</td>
+                            <td>{$single.create_time}</td>
+                            <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                                查看
+                            </button>
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                                    编辑
+                                </button>
+                            </td>
+                        </tr>
+                        {/volist}
+                        {/notempty}
+
+                        </tbody>
+                    </table>
+
+
+                    <div class="modal fade" id="add_question">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">添加常见问题</h4>
+                                </div>
+                                <form enctype="multipart/form-data form-horizontal">
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                          <div class="col-sm-10">
+                                            <input name="question_title" type="text" class="form-control my-colorpicker1" id="inputEmail3" placeholder="请在这里输入标题">
+                                          </div>
+                                        </div>
+                                        <div class="form-group">
+                                          <div class="col-sm-12">
+                                            <textarea name="question_content" id="questionEditor" style="width:100%;height:380px;"></textarea>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                                        <button type="button" class="btn btn-primary" id="addQuestion" data-dismiss="modal">确认添加</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <div class="tab-pane" id="settings">
+                <div class="box-header">
+                    <h3 class="box-title">客户服务</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <div style="position: relative">
+                            <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                            <button type="button" class="btn btn-default pull-right"  data-toggle="modal" data-target="#add_service">
+                                添加
+                            </button>
+                        </div>
+                        <tr>
+                            <th></th>
+                            <th>角色</th>
+                            <th>姓名</th>
+                            <th>邮箱</th>
+                            <th>电话</th>
+                            <th>微信</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {notempty name="serviceData"}
+                        {volist name="serviceData" id="single"}
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>{$single.role}</td>
+                            <td>{$single.name}</td>
+                            <td>{$single.email}</td>
+                            <td>{$single.tel}</td>
+                            <td>{$single.weixin}</td>
+                            <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                                查看
+                            </button>
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#edit_service" value="{$single.service_id}" id="edit_service_button">
+                                    编辑
+                            </button>
+                            </td>
+
+                        </tr>
+                        {/volist}
+                        {/notempty}
+
+                        </tbody>
+                    </table>
+
+
+                    <div class="modal fade" id="add_service">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">添加客户服务</h4>
+                                </div>
+                                <form enctype="multipart/form-data form-horizontal">
+                                    <div class="modal-body">
+                                        <label>角色</label>
+                                        <input id="role" name="role" type="text" class="form-control my-colorpicker1">
+                                        <label>姓名</label>
+                                        <input id="name" name="name" type="text" class="form-control my-colorpicker1">
+                                        <label>邮箱</label>
+                                        <input id="email" name="email" type="text" class="form-control my-colorpicker1">
+                                        <label>电话</label>
+                                        <input id="tel" name="tel" type="text" class="form-control my-colorpicker1">
+                                        <label>微信</label>
+                                        <input id="weixin" name="weixin" type="text" class="form-control my-colorpicker1">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                                        <button type="button" class="btn btn-primary" id="addService" data-dismiss="modal">确认添加</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal fade" id="edit_service">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">编辑客户服务</h4>
+                                </div>
+                                <form enctype="multipart/form-data form-horizontal">
+                                    <div class="modal-body">
+                                        <input type="hidden" name="service_id">
+                                        <lable>角色</lable>
+                                        <input  name="role2" type="text" class="form-control my-colorpicker1">
+                                        <label>姓名</label>
+                                        <input  name="name2" type="text" class="form-control my-colorpicker1">
+                                        <label>邮箱</label>
+                                        <input  name="email2" type="text" class="form-control my-colorpicker1">
+                                        <label>电话</label>
+                                        <input  name="tel2" type="text" class="form-control my-colorpicker1">
+                                        <label>微信</label>
+                                        <input name="weixin2" type="text" class="form-control my-colorpicker1">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                                        <button type="button" class="btn btn-primary" id="editService" data-dismiss="modal">确认修改</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../static/ueditor/ueditor.config.js"></script>
+<script src="../../static/ueditor/ueditor.all.min.js"></script>
+<script>
+
+    $(".checkbox-toggle").click(function () {
+        var clicks = $(this).data('clicks');
+        if (clicks) {
+            //Uncheck all checkboxes
+            $("input[type='checkbox']").iCheck("uncheck");
+            $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+        } else {
+            //Check all checkboxes
+            $("input[type='checkbox']").iCheck("check");
+            $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+        }
+        $(this).data("clicks", !clicks);
+    });
+
+    var ue = UE.getEditor('myEditor');
+    var ue2 = UE.getEditor('questionEditor');
+
+    //添加信息
+    $("#addKnow").click(function () {
+        $.ajax({
+            type: "post",
+            url: '/admin/addKnow',
+            data: {
+                'title': $("[name='title']").val(),
+                'know_content':  $("[name='know_content']").val()
+            },
+            dataType: "json",
+            success: function(data) {
+                if(data.code == '500') {
+                    alert(data.msg);
+                }else {
+                    alert('添加成功');
+                    window.location.reload();
+                }
+            },
+            error:function(){
+                alert('系统错误');
+            }
+        });
+    });
+
+
+    //添加常见问题
+    $("#addQuestion").click(function () {
+        $.ajax({
+            type: "post",
+            url: '/admin/addNormalQuestion',
+            data: {
+                'question_title': $("[name='question_title']").val(),
+                'question_content':  $("[name='question_content']").val()
+            },
+            dataType: "json",
+            success: function(data) {
+                if(data.code == '500') {
+                    alert(data.msg);
+                }else {
+                    alert('添加成功');
+                    window.location.reload();
+                }
+            },
+            error:function(){
+                alert('系统错误');
+            }
+        });
+    });
+
+    //添加客户服务
+    $("#addService").click(function () {
+        $.ajax({
+            type: "post",
+            url: '/admin/addService',
+            data: {
+                'role': $("[name='role']").val(),
+                'name': $("[name='name']").val(),
+                'tel': $("[name='tel']").val(),
+                'weixin': $("[name='weixin']").val(),
+                'email': $("[name='email']").val(),
+            },
+            dataType: "json",
+            success: function(data) {
+                if(data.code == '500') {
+                    alert(data.msg);
+                }else {
+                    alert('添加成功');
+                    window.location.reload();
+                }
+            },
+            error:function(){
+                alert('系统错误');
+            }
+        });
+    });
+
+
+    //编辑客户服务
+    $("#editService").click(function () {
+        $.ajax({
+            type: "post",
+            url: '/admin/editService',
+            data: {
+                'service_id': $("[name='service_id']").val(),
+                'role': $("[name='role2']").val(),
+                'name': $("[name='name2']").val(),
+                'tel': $("[name='tel2']").val(),
+                'weixin': $("[name='weixin2']").val(),
+                'email': $("[name='email2']").val(),
+            },
+            dataType: "json",
+            success: function(data) {
+                if(data.code == '500') {
+                    alert(data.msg);
+                }else {
+                    alert('修改成功');
+                    window.location.reload();
+                }
+            },
+            error:function(){
+                alert('系统错误');
+            }
+        });
+    });
+
+    //获取单条记录
+    $("#edit_service_button").click(function () {
+        $.ajax({
+            type: "get",
+            url: '/admin/getOneService',
+            data: {
+                'service_id': $(this).val()
+            },
+            dataType: "json",
+            success: function(result) {
+                $("[name='service_id']").val(result.data.service_id);
+                $("[name='role2']").val(result.data.role);
+                $("[name='name2']").val(result.data.name);
+                $("[name='tel2']").val(result.data.tel);
+                $("[name='weixin2']").val(result.data.weixin);
+                $("[name='email2']").val(result.data.email);
+            },
+            error:function(){
+                alert('系统错误');
+            }
+        });
+    });
+
+
+
+</script>
+{/block}

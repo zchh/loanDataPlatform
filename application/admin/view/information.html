@@ -1,0 +1,76 @@
+{extend name="base/base" /}
+{block name="main"}
+<div class="row">
+    <div class="col-xs-12">
+        <!-- /.box -->
+
+        <div class="box">
+
+
+            <div class="box-header">
+                <h3 class="box-title">信息公告</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <div style="position: relative">
+                        <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                        <a href="addInformation" type="button" class="btn btn-default pull-right">
+                            添加信息公告
+                        </a>
+                    </div>
+                    </thead>
+                    <tbody>
+
+                    {notempty name="data"}
+                    {volist name="data" id="single"}
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>{$single.title}</td>
+                        <td>{$single.time}</td>
+                        <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                            查看
+                        </button>
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                                编辑
+                            </button>
+                        </td>
+                    </tr>
+                    {/volist}
+                    {/notempty}
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+
+    $(".checkbox-toggle").click(function () {
+        var clicks = $(this).data('clicks');
+        if (clicks) {
+            //Uncheck all checkboxes
+            $("input[type='checkbox']").iCheck("uncheck");
+            $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+        } else {
+            //Check all checkboxes
+            $("input[type='checkbox']").iCheck("check");
+            $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+        }
+        $(this).data("clicks", !clicks);
+    });
+
+
+</script>
+{/block}
