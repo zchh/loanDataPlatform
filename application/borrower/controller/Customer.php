@@ -281,6 +281,12 @@ class Customer extends Cusbase
         return $this->fetch('customer/detail');//信息详情
 
     }
+    public function question_detail(){
+        $id = Request::instance()->param('id');
+        $data = NormalQuestion::findEntity($id);
+        $this->assign('data',$data);
+        return $this->fetch('customer/question_detail');//信息详情
+    }
 //    public function ceshi(){
 //        return $this->fetch('customer/ceshi');
 //    }
