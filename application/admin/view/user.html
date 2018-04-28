@@ -15,11 +15,15 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <div style="position: relative">
+                        <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o" id="delete"></i></button>
                         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default" id="add-model">
                             添加新用户
                         </button>
                     </div>
                     <tr>
+                        <th></th>
                         <th>姓名</th>
                         <th>年龄</th>
                         <th>联系电话</th>
@@ -34,6 +38,7 @@
                     {notempty name="data"}
                     {volist name="data" id="single"}
                     <tr>
+                        <td><input type="checkbox" name="checkNum" value="{$single.user_id}" class="checkSingle"></td>
                         <td>{$single.real_name}</td>
                         <td>{$single.age}</td>
                         <td>{$single.tel}</td>
@@ -118,6 +123,9 @@
 </div>
 <script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
 <script>
+
+
+
     //添加用户
     $("#add").click(function () {
         $.ajax({
@@ -193,6 +201,62 @@
             }
         });
     });
+
+
+
+
+    $(".checkbox-toggle").click(function () {
+
+        $(".checkSingle").attr('checked','checked');
+
+        var clicks = $(this).data('clicks');
+        if (clicks) {
+            //Uncheck all checkboxes
+            $("input[type='checkbox']").iCheck("uncheck");
+            $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+        } else {
+            //Check all checkboxes
+            $("input[type='checkbox']").iCheck("check");
+            $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+        }
+        $(this).data("clicks", !clicks);
+    });
+
+    $(".checkSingle").on("click",function () {
+        $(this).attr('checked','checked');
+    });
+
+    //删除
+    $("#delete").on("click",function () {
+
+        var obj=document.getElementsByName('checkNum');
+        var s='';
+        for(var i=0; i<obj.length; i++){
+            if(obj[i].checked){
+                s += obj[i].value;
+                s += ',';
+            }
+        }
+
+        $.ajax({
+            type: "post",
+            url: '/admin/delete',
+            data: {
+                'type': 1,
+                'checkNum': s
+            },
+            dataType: "json",
+            success: function (data) {
+                alert(data.msg);
+                if (data.code == '204') {
+                    window.location.reload();
+                }
+            },
+            error: function () {
+                alert('系统错误');
+            }
+        });
+    })
 
 
 </script>

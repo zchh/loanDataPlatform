@@ -58,8 +58,8 @@
             type: "post",
             url: '/admin/addInformation',
             data: {
-                'title': $("#title").val(),
-                'describe': $("#describe").val()
+                'title': $("[name='title']").val(),
+                'describe': $("[name='describe']").val()
             },
             dataType: "json",
             success: function(data) {
@@ -67,7 +67,7 @@
                     alert(data.msg);
                 }else {
                     alert('添加成功');
-                    window.location.href= 'customerList';
+                    window.location.href= 'information';
                 }
             },
             error:function(){

@@ -17,7 +17,7 @@
                     <div style="position: relative">
                         <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
                         </button>
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o" id="delete"></i></button>
                         <a href="addInformation" type="button" class="btn btn-default pull-right">
                             添加信息公告
                         </a>
@@ -28,7 +28,7 @@
                     {notempty name="data"}
                     {volist name="data" id="single"}
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <td><input type="checkbox" name="checkNum" value="{$single.information_id}"></td>
                         <td>{$single.title}</td>
                         <td>{$single.time}</td>
                         <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
@@ -58,18 +58,53 @@
 <script>
 
     $(".checkbox-toggle").click(function () {
+        $(".checkSingle").attr('checked','checked');
         var clicks = $(this).data('clicks');
         if (clicks) {
-            //Uncheck all checkboxes
             $("input[type='checkbox']").iCheck("uncheck");
             $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
         } else {
-            //Check all checkboxes
             $("input[type='checkbox']").iCheck("check");
             $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
         }
         $(this).data("clicks", !clicks);
     });
+
+    $(".checkSingle").on("click",function () {
+        $(this).attr('checked','checked');
+    });
+
+    //删除
+    $("#delete").on("click",function () {
+
+        var obj=document.getElementsByName('checkNum');
+        var s='';
+        for(var i=0; i<obj.length; i++){
+            if(obj[i].checked){
+                s += obj[i].value;
+                s += ',';
+            }
+        }
+
+        $.ajax({
+            type: "post",
+            url: '/admin/delete',
+            data: {
+                'type': 3,
+                'checkNum': s
+            },
+            dataType: "json",
+            success: function (data) {
+                alert(data.msg);
+                if (data.code == '204') {
+                    window.location.reload();
+                }
+            },
+            error: function () {
+                alert('系统错误');
+            }
+        });
+    })
 
 
 </script>

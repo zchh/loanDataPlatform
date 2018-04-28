@@ -69,6 +69,21 @@ class User extends Base
     }
 
     /**
+     * 用户详情
+     */
+    public function userDetail()
+    {
+        $requestParam = Request::instance()->param();
+        $requestParam['user_id'] = 9;
+        if(empty($requestParam['user_id'])){
+            return $this->selfResponse(StatusCode::SERVER_ERROR,  StatusCode::PARAM_WRONG);
+        }
+        $result = UserModel::findEntity($requestParam['user_id']);
+        unset($result['password']);
+        return $this->fetch('/userDetail', $result);
+    }
+
+    /**
      * 编辑用户
      */
     public function editUser()

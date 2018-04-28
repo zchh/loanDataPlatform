@@ -26,6 +26,7 @@ Route::post('admin/resetPassword', 'admin/Login/resetPassword');                
 
 Route::get('/admin/user', 'admin/User/index');                                                          //用户列表
 Route::post('/admin/addUser', 'admin/User/addUser');                                                    //添加用户
+Route::get('admin/userDetail', 'admin/User/userDetail');                                               //用户详情
 
 Route::get('admin/customerList', 'admin/CustomerList/index');                                           //客户列表
 Route::any('admin/addCustomer', 'admin/CustomerList/addCustomer');                                      //添加客户
