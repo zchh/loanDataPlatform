@@ -57,7 +57,7 @@ Route::post('admin/uploadPic','admin/Pic/uploadPic');                           
 Route::resource('admin/customer','admin/userAdmin.User');
 /*******************************************************客户管理***********************************************************************************/
 
-Route::get('borrower/customer','borrower/Customer/index'); //用户列表首页
+Route::get('borrower/customer/:id','borrower/Customer/index'); //用户列表首页
 Route::get('borrower/single/:id','borrower/Customer/single'); //单个用户详情
 Route::get('borrower/customer/server','borrower/Customer/server'); //客户服务详情
 Route::any('borrower/question','borrower/Customer/question'); //信息反馈
@@ -65,10 +65,8 @@ Route::get('borrower/information','borrower/Customer/information'); //信息中�
 Route::any('borrower/user','borrower/Customer/user'); //个人中心
 Route::post('borrower/check','borrower/Customer/check');//修改密码
 Route::post('borrower/change','borrower/Customer/change');//修改密码
-Route::post('borrower/check_name','borrower/Customer/check_username');//修改姓名
-Route::post('borrower/check_email','borrower/Customer/check_email');//修改邮箱
-Route::post('borrower/check_age','borrower/Customer/check_age');//修改年龄
-Route::post('borrower/check_weixin','borrower/Customer/check_weixin');//修改微信
+Route::post('borrower/check_flow','borrower/Customer/check_flow');//修改流量计划
+Route::get('borrower/question_detail/:id','borrower/Customer/question_detail');//常见问题详情
 Route::post('borrower/check_contack','borrower/Customer/check_contack');//修改备用联系人
 Route::any('borrower/img','borrower/Customer/img');//修改头像
 //Route::get('borrower/login','borrower/Customer/login');//登录
@@ -76,6 +74,7 @@ Route::any('borrower/login','borrower/Cuslogin/index');//登录
 Route::get('borrower/logout','borrower/Customer/logout');//注销
 Route::any('borrower/export/:ids','borrower/Customer/daochu');//批量导出
 Route::any('borrower/ceshi','borrower/Customer/ceshi');//测试
+Route::get('borrower/detail/:id','borrower/Customer/detail');//信息中心详情
 
 
 
