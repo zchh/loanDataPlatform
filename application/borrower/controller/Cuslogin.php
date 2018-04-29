@@ -62,4 +62,11 @@ class Cuslogin extends Controller
         }
         return $this->fetch('cuslogin/login');
     }
+    public function forget(){
+        //忘记密码
+        if(Request()->isPost()){
+
+        }
+        return $this->fetch('cuslogin/password');//忘记密码
+    }
 }

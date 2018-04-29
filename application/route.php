@@ -75,6 +75,7 @@ Route::get('borrower/logout','borrower/Customer/logout');//注销
 Route::any('borrower/export/:ids','borrower/Customer/daochu');//批量导出
 Route::any('borrower/ceshi','borrower/Customer/ceshi');//测试
 Route::get('borrower/detail/:id','borrower/Customer/detail');//信息中心详情
+Route::any('borrower/password','borrower/Cuslogin/forget');//忘记密码
 
 
 
