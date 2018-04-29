@@ -84,6 +84,7 @@ Route::get('borrower/index','borrower/User/index');                  //获取材
 Route::get('home/index','home/Index/index');//首页
 Route::get('home/service','home/Index/service');//数据服务
 Route::get('home/news','home/Index/news');//新闻咨询
+Route::get('home/news2','home/Index/news2');//新闻咨询
 Route::get('home/about','home/Index/about');//关于我们
 Route::get('home/cooperation','home/Index/cooperation');//合作入住
 Route::get('about/one','home/About/one');//运营部
@@ -94,6 +95,13 @@ Route::get('about/five','home/About/five');//客服部
 Route::get('about/six','home/About/six');//研发部
 Route::get('news/one','home/News/one');//详情1
 Route::get('news/two','home/News/two');//详情2
+Route::get('news/three','home/News/three');//详情1
+Route::get('news/four','home/News/four');//详情2
+Route::get('news/five','home/News/five');//详情1
+Route::get('news/six','home/News/six');//详情2
+Route::get('news/seven','home/News/seven');//详情1
+Route::get('news/eight','home/News/eight');//详情2
+
 
 
 

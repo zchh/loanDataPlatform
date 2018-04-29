@@ -19,6 +19,9 @@ class Index extends Controller
     public function news(){//新闻咨询
         return $this->fetch('index/news');//新闻咨询
     }
+    public function news2(){//咨询2页
+        return $this->fetch('index/news2');//新闻咨询
+    }
     public function about(){//关于我们
         return $this->fetch('index/about-us');
     }
