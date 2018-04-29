@@ -86,6 +86,14 @@ Route::get('home/service','home/Index/service');//数据服务
 Route::get('home/news','home/Index/news');//新闻咨询
 Route::get('home/about','home/Index/about');//关于我们
 Route::get('home/cooperation','home/Index/cooperation');//合作入住
+Route::get('about/one','home/About/one');//运营部
+Route::get('about/two','home/About/two');//设计部
+Route::get('about/three','home/About/three');//市场部
+Route::get('about/four','home/About/four');//BD
+Route::get('about/five','home/About/five');//客服部
+Route::get('about/six','home/About/six');//研发部
+Route::get('news/one','home/News/one');//详情1
+Route::get('news/two','home/News/two');//详情2
 
 
 
