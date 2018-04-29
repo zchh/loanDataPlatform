@@ -337,6 +337,14 @@
            layer.msg("请再确认一次密码",{icon:0});
            return false;
        }
+       if(/^[A-Za-z0-9]{6,12}$/.test(old_password) === false){
+           layer.msg("请输入6到12位密码",{icon:0});
+           return false;
+       }
+       if(/^[A-Za-z0-9]{6,12}$/.test(new_password) === false){
+           layer.msg("请输入6到12位密码",{icon:0});
+           return false;
+       }
        if(confirm_password.trim() != new_password.trim()){
            layer.msg("确认密码必须与新密码一致",{icon:0});
            return false;
