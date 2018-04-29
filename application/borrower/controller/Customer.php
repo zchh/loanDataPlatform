@@ -30,9 +30,23 @@ use think\Request;
 class Customer extends Cusbase
 {
     public function index(){//列表信息
-        $data = Borrower::selectEntity();
+        //条件查询
+        //$where['loan_amount'] = array('between','1,8');//区间(贷款金额)
+        $where = [];
+        if(input('start_time')){
+            $time = input('start_time');//获取当前时间
+            $time = strtotime($time);//转成时间戳
+            $start_time = date("Y-m-d h:i:s",$time);//string(19) "2018-04-10 12:00:00"
+            $start_time = strtotime($start_time);//转成时间戳
+            $start = $start_time-12*3600;
+            $end = $start_time+12*3600;
+            $where['add_time'] = array('between',"$start,$end");
+        }
+        //条件查询
+        $cu = new CustomerList();
+        $data = $cu->where($where)->select();
         $this->assign('data',$data);
-        return $this->fetch('customer/index',$data);
+        return $this->fetch('customer/index');
     }
     public function single(){//个人信息
         $id = Request::instance()->param('id');
