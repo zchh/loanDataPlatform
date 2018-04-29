@@ -79,7 +79,12 @@ Route::get('borrower/detail/:id','borrower/Customer/detail');//信息中心详�
 
 
 Route::get('borrower/index','borrower/User/index');                  //获取材质库类型
-
+/*******************************************************前台管理***********************************************************************************/
+Route::get('home/index','home/Index/index');//首页
+Route::get('home/service','home/Index/service');//数据服务
+Route::get('home/news','home/Index/news');//新闻咨询
+Route::get('home/about','home/Index/about');//关于我们
+Route::get('home/cooperation','home/Index/cooperation');//合作入住
 
 
 
