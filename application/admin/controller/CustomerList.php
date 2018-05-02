@@ -61,8 +61,34 @@ class CustomerList extends Base
         }
     }
 
-    public function deleteCustomer()
+    /**
+     * 客户详情
+     */
+    public function customerDetail($id)
     {
-        dump($_POST);die;
+        $result = CustomerListModel::findEntity($id);
+        return $this->fetch('/customerDetail', $result);
+    }
+
+    /**
+     * 编辑客户
+     */
+    public function editCustomer($id)
+    {
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            $requestParam = Request::instance()->param();
+            if(empty($requestParam['name']) || empty($requestParam['tel']) || empty($requestParam['add_time']) || empty($requestParam['loan_amount']) ||
+                empty($requestParam['have_provident']) || empty($requestParam['credit']) ||  empty($requestParam['have_job']) || empty($requestParam['have_social_security']) ||
+                empty($requestParam['wx_number']) || empty($requestParam['age']) || empty($requestParam['qq']) || empty($requestParam['tel_status']) || empty($requestParam['remark']) ){
+                return $this->selfResponse(StatusCode::SERVER_ERROR,  StatusCode::PARAM_WRONG);
+            }
+            CustomerListModel::updateEntity($id, $_POST);
+            return $this->selfResponse(StatusCode::UPDATE_SUCCESS,  StatusCode::UPDATE_SUCCESS_MESSAGE);
+        }else{
+            $result = CustomerListModel::findEntity($id);
+            return $this->fetch('/editCustomer', $result);
+        }
+
+
     }
 }

@@ -18,22 +18,30 @@ class CustomerList extends Model
         $whereSql = '';
         $query = Db::name(TableConfig::CUSTOMER_LIST)->alias('u');
         $whereParam = array();
-//        if(false == empty($param['real_name'])){
-//            $whereSql .= 'real_name=:real_name';
-//            $whereParam['real_name'] = $param['real_name'];
-//        }
-//        if(false == empty($param['admin_name'])){
-//            (false == empty($whereSql))?($whereSql.= ' and '):null;
-//            $whereSql .= 'admin_name=:admin_name';
-//            $whereParam['admin_name'] = $param['admin_name'];
-//        }
-        $data = $query->where($whereSql)->bind($whereParam)->select();
+        if(false == empty($param['small_loan_amount'])){
+            $whereSql .= 'loan_amount >= :small_loan_amount';
+            $whereParam['small_loan_amount'] = $param['small_loan_amount'];
+        }
+        if(false == empty($param['big_loan_amount'])){
+            (false == empty($whereSql))?($whereSql.= ' and '):null;
+            $whereSql .= 'loan_amount <= :small_loan_amount';
+            $whereParam['big_loan_amount'] = $param['big_loan_amount'];
+        }
+        if(false == empty($param['start_time'])){
+
+        }
+        $query = $query->where($whereSql)->bind($whereParam);
+        if(false == empty($param['limit'])){
+            $data = $query->limit(0, $param['limit'])->select();
+        }else{
+            $data = $query->select();
+        }
         return $data;
     }
 
     public static function findEntity($id)
     {
-        return Db::table(TableConfig::CUSTOMER_LIST)->where('user_id', $id)->find();
+        return Db::table(TableConfig::CUSTOMER_LIST)->where('customer_id', $id)->find();
     }
 
     public static function addEntity($arr)
@@ -43,7 +51,7 @@ class CustomerList extends Model
 
     public static function updateEntity($id, $arr)
     {
-        $num = Db::table(TableConfig::CUSTOMER_LIST)->where('user_id', $id)->update($arr);
+        $num = Db::table(TableConfig::CUSTOMER_LIST)->where('customer_id', $id)->update($arr);
         return $num;
     }
 

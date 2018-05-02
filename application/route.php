@@ -26,10 +26,12 @@ Route::post('admin/resetPassword', 'admin/Login/resetPassword');                
 
 Route::get('/admin/user', 'admin/User/index');                                                          //用户列表
 Route::post('/admin/addUser', 'admin/User/addUser');                                                    //添加用户
-Route::get('admin/userDetail', 'admin/User/userDetail');                                               //用户详情
+Route::get('admin/userDetail/:id', 'admin/User/userDetail');                                               //用户详情
 
 Route::get('admin/customerList', 'admin/CustomerList/index');                                           //客户列表
+Route::get('admin/customerDetail/:id', 'admin/CustomerList/customerDetail');                            //客户详情
 Route::any('admin/addCustomer', 'admin/CustomerList/addCustomer');                                      //添加客户
+Route::any('admin/editCustomer/:id', 'admin/CustomerList/editCustomer');                                //编辑客户
 
 Route::any('admin/information', 'admin/Information/index');                                             //信息公告列表
 Route::any('admin/addInformation', 'admin/Information/addInformation');                                 //添加信息公告

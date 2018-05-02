@@ -22,11 +22,6 @@ class User extends Model
             $whereSql .= 'real_name=:real_name';
             $whereParam['real_name'] = $param['real_name'];
         }
-//        if(false == empty($param['admin_name'])){
-//            (false == empty($whereSql))?($whereSql.= ' and '):null;
-//            $whereSql .= 'admin_name=:admin_name';
-//            $whereParam['admin_name'] = $param['admin_name'];
-//        }
         $data = $query->where($whereSql)->bind($whereParam)->select();
         return $data;
     }

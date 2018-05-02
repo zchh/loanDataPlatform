@@ -71,14 +71,14 @@ class User extends Base
     /**
      * 用户详情
      */
-    public function userDetail()
+    public function userDetail($id)
     {
-        $requestParam = Request::instance()->param();
-        $requestParam['user_id'] = 9;
-        if(empty($requestParam['user_id'])){
-            return $this->selfResponse(StatusCode::SERVER_ERROR,  StatusCode::PARAM_WRONG);
-        }
-        $result = UserModel::findEntity($requestParam['user_id']);
+        $result = UserModel::findEntity($id);
+        $province = Provincial::findEntity($result['province_id']);
+        Provincial::findEntity($result['province_id']);
+        $result['province'] = $province['Provincial'];
+        $city = City::findEntity($result['city_id']);
+        $result['city'] = $city['city'];
         unset($result['password']);
         return $this->fetch('/userDetail', $result);
     }
@@ -88,7 +88,27 @@ class User extends Base
      */
     public function editUser()
     {
-
+        $requestParam = Request::instance()->param();
+        if($requestParam['user_id']){
+            return $this->selfResponse(StatusCode::SERVER_ERROR,  StatusCode::PARAM_WRONG);
+        }
+        empty($requestParam['flow_plan_status']) ? null : $updateArr['flow_plan_status'] = $requestParam['flow_plan_status'];
+        empty($requestParam['real_name']) ? null : $updateArr['real_name'] = $requestParam['real_name'];
+        empty($requestParam['password']) ? null : $updateArr['password'] =  password_hash($requestParam['password'], PASSWORD_DEFAULT);
+        empty($requestParam['email']) ? null : $updateArr['email'] = $requestParam['email'];
+        empty($requestParam['tel']) ? null : $updateArr['tel'] = $requestParam['tel'];
+        empty($requestParam['age']) ? null : $updateArr['age'] = $requestParam['age'];
+        empty($requestParam['weixin']) ? null : $updateArr['weixin'] = $requestParam['weixin'];
+        empty($requestParam['contact']) ? null : $updateArr['contact'] = $requestParam['contact'];
+        empty($requestParam['flow_plan']) ? null : $updateArr['flow_plan'] = $requestParam['flow_plan'];
+        if(empty($updateArr)){
+            return $this->selfResponse(StatusCode::SERVER_ERROR,  StatusCode::PARAM_WRONG);
+        }
+        if(isset($requestParam['flow_plan'])){
+            $updateArr['flow_plan_status'] = StatusCode::CHECK_PASS;
+        }
+        UserModel::updateEntity($requestParam['user_id'], $updateArr);
+        return $this->selfResponse(StatusCode::UPDATE_SUCCESS,  StatusCode::UPDATE_SUCCESS_MESSAGE);
     }
 
     /**

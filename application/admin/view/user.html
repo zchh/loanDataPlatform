@@ -29,6 +29,7 @@
                         <th>联系电话</th>
                         <th>微信账号</th>
                         <th>账户余额</th>
+                        <th>流量计划</th>
                         <th>芝麻信用分</th>
                         <th>详细信息</th>
                     </tr>
@@ -44,13 +45,17 @@
                         <td>{$single.tel}</td>
                         <td>{$single.weixin}</td>
                         <td>{$single.balance}</td>
+
+                        {switch name="$single.flow_plan_status"}
+                        {case value="0"} <td style="color: green"><a data-toggle="modal" data-target="#edit-status" id="not_check" class="{$single.user_id}"> {$single.flow_plan}</a></td>{/case}
+                        {case value="1"} <td>{$single.flow_plan}</td>{/case}
+                        {case value="2"} <td style="color: red"><a data-toggle="modal" data-target="#modal-status" id="not_pass_check" class="{$single.user_id}">{$single.flow_plan}</a></td>{/case}
+                        {/switch}
+
                         <td>{$single.credit}</td>
-                        <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                        <td><a type="button" href="/admin/userDetail/{$single.user_id}" class="btn btn-default">
                             查看
-                        </button>
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
-                                编辑
-                        </button>
+                        </a>
                         </td>
                     </tr>
                     {/volist}
@@ -109,17 +114,46 @@
                         </div>
                         </form>
                     </div>
-                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-dialog -->
             </div>
 
 
-            <!-- /.box-body -->
+
+
+            <div class="modal fade" id="edit-status">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">审核流量计划</h4>
+                        </div>
+                        <form>
+                            <input type="hidden" name="user_id" id="user_id">
+                            <div class="modal-body">
+                                是否审核通过?
+                                <select name="flow_plan_status">
+                                    <option value="1" id="pass">通过</option>
+                                    <option value="2" id="not_pass">不通过</option>
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" id="edit-status-sure" data-dismiss="modal">确认修改</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
         </div>
-        <!-- /.box -->
     </div>
-    <!-- /.col -->
 </div>
 <script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
 <script>
@@ -200,6 +234,51 @@
                 }
             }
         });
+    });
+
+    //赋值
+    $("#not_pass_check").click(function () {
+        var str = $(this).val();
+        var arr = str.split(" ");
+        $("#user_id").val(arr[0]);
+        $("#not_pass").attr('selected', 'selected');
+    });
+
+    //赋值
+    $("#not_check").click(function () {
+        var user_id = $(this).attr("class");
+        $("#user_id").val(user_id);
+    });
+
+    //编辑状态
+    $("#edit-status-sure").click(function () {
+
+        $.ajax({
+            type: "post",
+            url: '/admin/editUserStatus',
+            data: {
+                'user_id': $("#user_id").val(),
+                'flow_plan_status':  $("[name='flow_plan_status']").val()
+            },
+            dataType: "json",
+            success: function (data) {
+                alert(data.msg);
+                if (data.code == '204') {
+                    window.location.reload();
+                }
+            },
+            error: function () {
+                alert('系统错误');
+            }
+        });
+
+
+
+
+
+
+
+
     });
 
 

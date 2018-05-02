@@ -1,0 +1,152 @@
+{extend name="base/base" /}
+{block name="main"}
+
+<div class="box box-success">
+    <div class="box-header with-border">
+        <h3 class="box-title">客户信息</h3>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <input type="hidden" name="customer_id" value="{$customer_id}">
+            <div class="col-xs-2">
+                <label class="pull-right">姓名</label>
+            </div>
+            <div class="col-xs-4">
+                <input name="name" value="{$name}" type="text" class="form-control">
+            </div>
+            <div class="col-xs-2">
+                <label class="pull-right">电话</label>
+            </div>
+            <div class="col-xs-4">
+                <input name="tel" value="{$tel}" type="text" class="form-control">
+            </div>
+
+            <div class="col-xs-2">
+                <label class="pull-right">贷款金额</label>
+            </div>
+            <div class="col-xs-4">
+                <input name="loan_amount" value="{$loan_amount}" type="text" class="form-control">
+            </div>
+
+            <div class="col-xs-2">
+                <label class="pull-right">芝麻分</label>
+            </div>
+            <div class="col-xs-4">
+                <input name="credit" value="{$credit}" type="text" class="form-control">
+            </div>
+            <div class="col-xs-2">
+                <label class="pull-right">有无公积金</label>
+            </div>
+            <div class="col-xs-4">
+                <input name="have_provident" value="{$have_provident}" type="text" class="form-control">
+            </div>
+
+            <div class="col-xs-2">
+                <label class="pull-right">有无社保</label>
+            </div>
+            <div class="col-xs-4">
+                <input name="have_social_security" value="{$have_social_security}" type="text" class="form-control">
+            </div>
+            <div class="col-xs-2">
+                <label class="pull-right">有无工作</label>
+            </div>
+            <div class="col-xs-4">
+                <input name="have_job" value="{$have_job}" type="text" class="form-control">
+            </div>
+
+
+
+            <div class="col-xs-2">
+                <label class="pull-right">年龄</label>
+            </div>
+            <div class="col-xs-4">
+                <input name="age" value="{$age}" type="text" class="form-control">
+            </div>
+            <div class="col-xs-2">
+                <label class="pull-right">QQ号码</label>
+            </div>
+            <div class="col-xs-4">
+                <input name="qq" value="{$qq}" type="text" class="form-control">
+            </div>
+
+
+
+            <div class="col-xs-2">
+                <label class="pull-right">微信</label>
+            </div>
+            <div class="col-xs-4">
+                <input name="wx_number" value="{$wx_number}" type="text" class="form-control">
+            </div>
+            <div class="col-xs-2">
+                <label class="pull-right">申请时间</label>
+            </div>
+            <div class="col-xs-4">
+                <input name="add_time" value="{$add_time}" type="text" class="form-control">
+            </div>
+
+            <div class="col-xs-2">
+                <label class="pull-right">电话状态</label>
+            </div>
+            <div class="col-xs-4">
+                <input name="tel_status" value="{$tel_status}" type="text" class="form-control">
+            </div>
+            <div class="col-xs-6">
+            </div>
+
+            <div class="col-xs-2">
+                <label class="pull-right">信息备注</label>
+            </div>
+            <div class="col-xs-4">
+                <textarea name="remark" style="width: 100%;height: 100%;">{$remark}</textarea>
+            </div>
+            <div class="col-xs-10">
+                <button type="button" class="btn btn-default pull-right">取消</button>
+                <button type="button" class="btn btn-primary pull-right" id="editCustomer">确认修改</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+
+    //编辑客户服务
+    $("#editCustomer").click(function () {
+        $.ajax({
+            type: "post",
+            url: '/admin/editCustomer/'+$("[name='customer_id']").val(),
+            data: {
+                'name': $("[name='name']").val(),
+                'tel': $("[name='tel']").val(),
+                'loan_amount': $("[name='loan_amount']").val(),
+                'credit': $("[name='credit']").val(),
+                'have_provident': $("[name='have_provident']").val(),
+                'have_social_security': $("[name='have_social_security']").val(),
+                'have_job': $("[name='have_job']").val(),
+                'age': $("[name='age']").val(),
+                'qq': $("[name='qq']").val(),
+                'wx_number': $("[name='wx_number']").val(),
+                'add_time': $("[name='add_time']").val(),
+                'tel_status': $("[name='tel_status']").val(),
+                'remark': $("[name='remark']").val(),
+            },
+            dataType: "json",
+            success: function(data) {
+                if(data.code == '500') {
+                    alert(data.msg);
+                    window.location.reload();
+                }else {
+                    alert('修改成功');
+                    window.location.reload();
+                }
+            },
+            error:function(){
+                alert('系统错误');
+            }
+        });
+    });
+
+</script>
+{/block}

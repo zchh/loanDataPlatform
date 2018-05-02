@@ -1,0 +1,121 @@
+{extend name="base/base" /}
+{block name="main"}
+
+<div class="box box-success">
+    <div class="box-header with-border">
+        <h3 class="box-title">客户信息</h3>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-xs-2">
+                <label class="pull-right">姓名</label>
+            </div>
+            <div class="col-xs-4">
+                <input value="{$name}" type="text" class="form-control" disabled>
+            </div>
+            <div class="col-xs-2">
+                <label class="pull-right">电话</label>
+            </div>
+            <div class="col-xs-4">
+                <input value="{$tel}" type="text" class="form-control" disabled>
+            </div>
+
+
+            <!--<div class="col-xs-2">-->
+                <!--<label class="pull-right">客户来源</label>-->
+            <!--</div>-->
+            <!--<div class="col-xs-4">-->
+                <!--<input value="{$}" type="text" class="form-control">-->
+            <!--</div>-->
+            <div class="col-xs-2">
+                <label class="pull-right">贷款金额</label>
+            </div>
+            <div class="col-xs-4">
+                <input value="{$loan_amount}" type="text" class="form-control" disabled>
+            </div>
+
+            <div class="col-xs-2">
+                <label class="pull-right">芝麻分</label>
+            </div>
+            <div class="col-xs-4">
+                <input value="{$credit}" type="text" class="form-control" disabled>
+            </div>
+            <div class="col-xs-2">
+                <label class="pull-right">有无公积金</label>
+            </div>
+            <div class="col-xs-4">
+                <input value="{$have_provident}" type="text" class="form-control" disabled>
+            </div>
+
+            <div class="col-xs-2">
+                <label class="pull-right">有无社保</label>
+            </div>
+            <div class="col-xs-4">
+                <input value="{$have_social_security}" type="text" class="form-control" disabled>
+            </div>
+            <div class="col-xs-2">
+                <label class="pull-right">有无工作</label>
+            </div>
+            <div class="col-xs-4">
+                <input value="{$have_job}" type="text" class="form-control" disabled>
+            </div>
+
+
+
+            <div class="col-xs-2">
+                <label class="pull-right">年龄</label>
+            </div>
+            <div class="col-xs-4">
+                <input value="{$age}" type="text" class="form-control" disabled>
+            </div>
+            <div class="col-xs-2">
+                <label class="pull-right">QQ号码</label>
+            </div>
+            <div class="col-xs-4">
+                <input value="{$qq}" type="text" class="form-control" disabled>
+            </div>
+
+
+
+            <div class="col-xs-2">
+                <label class="pull-right">微信</label>
+            </div>
+            <div class="col-xs-4">
+                <input value="{$wx_number}" type="text" class="form-control" disabled>
+            </div>
+            <div class="col-xs-2">
+                <label class="pull-right">申请时间</label>
+            </div>
+            <div class="col-xs-4">
+                <input value="{$add_time}" type="text" class="form-control" disabled>
+            </div>
+
+            <div class="col-xs-2">
+                <label class="pull-right">电话状态</label>
+            </div>
+            <div class="col-xs-4">
+                <input value="{$tel_status}" type="text" class="form-control" disabled>
+            </div>
+            <div class="col-xs-6">
+            </div>
+
+
+            <div class="col-xs-2">
+                <label class="pull-right">信息备注</label>
+            </div>
+            <div class="col-xs-4">
+               <textarea style="width: 100%;height: 100%;" disabled>{$remark}</textarea>
+            </div>
+
+
+
+
+            <!--<div class="col-xs-5">-->
+                <!--<input type="text" class="form-control" placeholder=".col-xs-5">-->
+            <!--</div>-->
+        </div>
+    </div>
+    <!-- /.box-body -->
+</div>
+
+{/block}

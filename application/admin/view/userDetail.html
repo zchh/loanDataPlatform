@@ -4,6 +4,7 @@
 
 
 <div class="box">
+    <a type="button" class="btn margin pull-right" href="/admin/user">返回</a>
     <div class="box-header">
         <h3 class="box-title">账户信息</h3>
     </div>
@@ -17,8 +18,8 @@
             </tr>
             <tr>
                 <td>真实姓名</td>
-                <td>{$real_name}</td>
-                <td></td>
+                <td id="real_name_value">{$real_name}</td>
+                <td data-toggle="modal" data-target="#edit-user" class="edit-user" id="real_name">修改</td>
             </tr>
             <tr>
                 <td>修改密码</td>
@@ -28,48 +29,91 @@
             <tr>
                 <td>联系电话：</td>
                 <td>{$tel}</td>
-                <td></td>
+                <td>修改</td>
             </tr>
             <tr>
                 <td>年龄</td>
                 <td>{$age}</td>
-                <td></td>
+                <td>修改</td>
             </tr>
             <tr>
                 <td>锁定城市</td>
-                <td></td>
+                <td>{$province}{$city}</td>
                 <td></td>
             </tr>
             <tr>
                 <td>联系微信</td>
-                <td>5556645</td>
-                <td></td>
+                <td>{$weixin}</td>
+                <td>修改</td>
             </tr>
             <tr>
                 <td>备用联系人</td>
-                <td>xx  132554545</td>
-                <td></td>
+                <td>{$contact}</td>
+                <td>修改</td>
             </tr>
             <tr>
                 <td>芝麻信用积分</td>
-                <td>55</td>
+                <td>{$credit}</td>
                 <td></td>
             </tr>
             <tr>
                 <td>账户余额</td>
-                <td>100</td>
+                <td>{$balance}</td>
                 <td>历史记录</td>
             </tr>
             <tr>
                 <td>流量计划：(0位/天）</td>
-                <td>0</td>
+                <td>{$flow_plan}</td>
                 <td>设置</td>
             </tr>
 
+
+
+            <div class="modal fade" id="edit-user">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">修改用户</h4>
+                        </div>
+                        <form>
+                            <input type="hidden" name="user_id" value="{$user_id}" id="user_id">
+                            <div class="modal-body">
+                              <input name="" value="" id="input" class="form-control">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" id="edit-status-sure" data-dismiss="modal">确认修改</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
         </table>
     </div>
-    <!-- /.box-body -->
 </div>
+<script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+
+  $(".edit-user").click(function () {
+
+      if($(this).attr("id") == 'real_name'){
+          $("#input").attr('name', 'real_name');
+          $("#input").attr('value', $('#real_name_value').text());
+      }
+
+
+
+
+  })
+
+
+
+</script>
 
 
 {/block}

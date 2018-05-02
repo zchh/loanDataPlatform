@@ -47,12 +47,12 @@
                         <td>{$single.loan_amount}</td>
                         <td>{$single.credit}</td>
                         <td>{$single.add_time}</td>
-                        <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                        <td><a href="/admin/customerDetail/{$single.customer_id}" type="button" class="btn btn-default">
                             查看
-                        </button>
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                        </a>
+                        <a href="/admin/editCustomer/{$single.customer_id}" type="button" class="btn btn-default">
                                 编辑
-                        </button>
+                        </a>
                         </td>
                     </tr>
                     {/volist}
