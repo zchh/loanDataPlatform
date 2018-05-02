@@ -24,11 +24,18 @@ class CustomerList extends Model
         }
         if(false == empty($param['big_loan_amount'])){
             (false == empty($whereSql))?($whereSql.= ' and '):null;
-            $whereSql .= 'loan_amount <= :small_loan_amount';
+            $whereSql .= 'loan_amount <= :big_loan_amount';
             $whereParam['big_loan_amount'] = $param['big_loan_amount'];
         }
         if(false == empty($param['start_time'])){
-
+            (false == empty($whereSql))?($whereSql.= ' and '):null;
+            $whereSql .= 'time >= :start_time';
+            $whereParam['start_time'] = $param['start_time'];
+        }
+        if(false == empty($param['end_time'])){
+            (false == empty($whereSql))?($whereSql.= ' and '):null;
+            $whereSql .= 'time <= :end_time';
+            $whereParam['end_time'] = $param['end_time'];
         }
         $query = $query->where($whereSql)->bind($whereParam);
         if(false == empty($param['limit'])){

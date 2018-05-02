@@ -33,8 +33,43 @@ class CustomerList extends Base
      */
     public function index()
     {
-        $result['data'] = CustomerListModel::selectEntity();
-        return $this->fetch('/customerList', $result);
+        return $this->fetch('/customerList');
+    }
+
+    /**
+     *  客户数据
+     */
+    public function getCustomerData()
+    {
+        $requestParam = Request::instance()->param();
+        $param = [];
+        if(isset($requestParam['selectMoney']) && $requestParam['selectMoney'] != ''){
+            $paramArr = explode(" ", $requestParam['selectMoney']);
+            if($paramArr[0] == '￥1000'){
+                $param['small_loan_amount'] = 1000;
+                $param['big_loan_amount'] = 2000;
+            }elseif($paramArr[0] == '￥2001'){
+                $param['small_loan_amount'] = 2001;
+                $param['big_loan_amount'] = 5000;
+            }elseif($paramArr[0] == '￥5001'){
+                $param['small_loan_amount'] = 5001;
+                $param['big_loan_amount'] = 10000;
+            }elseif ($paramArr[0] == '￥10001'){
+                $param['small_loan_amount'] = 10001;
+                $param['big_loan_amount'] = 20000;
+            }elseif ($paramArr[0] == '￥20000以上'){
+                $param['small_loan_amount'] = 20000;
+            }else{
+                $param = [];
+            }
+        }
+        if(isset($requestParam['time']) && $requestParam['time'] != ''){
+            $param['start_time'] = $this->dateToTime($requestParam['time'].' 00:00:00');
+            $param['end_time'] = $this->dateToTime($requestParam['time'].' 23:59:59');
+        }
+        $result['param'] = $requestParam;
+        $result = CustomerListModel::selectEntity($param);
+        return $this->selfResponse(StatusCode::GET_SUCCESS,  StatusCode::GET_SUCCESS_MESSAGE, $result);
     }
 
     /**

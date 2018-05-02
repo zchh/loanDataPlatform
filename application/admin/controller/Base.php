@@ -76,5 +76,11 @@ class Base extends Controller
         return  date('Y-m-d H:i:s', $time);
     }
 
+    public function dateToTime($date)
+    {
+        return strtotime($date);
+
+    }
+
 
 }

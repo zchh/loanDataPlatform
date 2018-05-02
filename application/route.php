@@ -28,7 +28,11 @@ Route::get('/admin/user', 'admin/User/index');                                  
 Route::post('/admin/addUser', 'admin/User/addUser');                                                    //添加用户
 Route::get('admin/userDetail/:id', 'admin/User/userDetail');                                               //用户详情
 
-Route::get('admin/customerList', 'admin/CustomerList/index');                                           //客户列表
+Route::get('admin/customerList', 'admin/CustomerList/index');                                           //客户列表页面
+Route::get('admin/getCustomerData', 'admin/CustomerList/getCustomerData');                              //客户列表数据
+
+
+
 Route::get('admin/customerDetail/:id', 'admin/CustomerList/customerDetail');                            //客户详情
 Route::any('admin/addCustomer', 'admin/CustomerList/addCustomer');                                      //添加客户
 Route::any('admin/editCustomer/:id', 'admin/CustomerList/editCustomer');                                //编辑客户
@@ -57,6 +61,10 @@ Route::post('admin/uploadPic','admin/Pic/uploadPic');                           
 
 
 Route::resource('admin/customer','admin/userAdmin.User');
+
+
+Route::resource('admin/customer','admin/userAdmin.User');
+
 /*******************************************************客户管理***********************************************************************************/
 
 Route::get('borrower/customer/:id','borrower/Customer/index'); //用户列表首页
