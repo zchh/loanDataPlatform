@@ -10,7 +10,10 @@ namespace app\borrower\controller;
 
 
 use app\common\model\Balance;
+use app\common\model\CustomerList;
 use app\common\model\Information;
+use app\common\model\Know;
+use app\common\model\NormalQuestion;
 use app\common\model\Question;
 use app\common\model\Server;
 use app\common\model\User;
@@ -27,9 +30,23 @@ use think\Request;
 class Customer extends Cusbase
 {
     public function index(){//列表信息
-        $data = Borrower::selectEntity();
+        //条件查询
+        //$where['loan_amount'] = array('between','1,8');//区间(贷款金额)
+        $where = [];
+        if(input('start_time')){
+            $time = input('start_time');//获取当前时间
+            $time = strtotime($time);//转成时间戳
+            $start_time = date("Y-m-d h:i:s",$time);//string(19) "2018-04-10 12:00:00"
+            $start_time = strtotime($start_time);//转成时间戳
+            $start = $start_time-12*3600;
+            $end = $start_time+12*3600;
+            $where['add_time'] = array('between',"$start,$end");
+        }
+        //条件查询
+        $cu = new CustomerList();
+        $data = $cu->where($where)->select();
         $this->assign('data',$data);
-        return $this->fetch('customer/index',$data);
+        return $this->fetch('customer/index');
     }
     public function single(){//个人信息
         $id = Request::instance()->param('id');
@@ -38,10 +55,14 @@ class Customer extends Cusbase
         return $this->fetch('customer/single');//详情页面
         //$data = Borrower::findEntity()
     }
-    public function server(){//服务支持
-        $data = Server::selectEntity();
+    public function server(){//服务支持 (使用须知 常见问题 客户服务)
+        $data = Server::selectEntity();//客户服务
+        $know = Know::selectEntity();//使用须知
+        $question = NormalQuestion::selectEntity();
         $this->assign('data',$data);
-        return $this->fetch('customer/service',$data);
+        $this->assign('know',$know);
+        $this->assign('question',$question);
+        return $this->fetch('customer/service');
     }
     public function question(){//信息反馈
         if(Request()->isPost()){
@@ -58,7 +79,8 @@ class Customer extends Cusbase
             $qustion = new Question();
             $data_q = [
               'question_type'=>$question_type,
-                'detail'=>$detail
+                'detail'=>$detail,
+                'user_id'=>$_SESSION['userinfo']['user_id']//反馈人
             ];
             $result = $qustion->data($data_q)->save();
             if($result){
@@ -127,82 +149,38 @@ class Customer extends Cusbase
             return json($data);
         }
     }
-    public function check_username(){
+    public function check_flow(){//设置流量计划
         if(Request()->isPost()){
             $id = $_SESSION['userinfo']['user_id'];//获取当前用户id
-            $result = User::updateEntity($id,['real_name'=>$_POST['real_name']]);
-            if($result){
-                $data = [
-                    'status'=>1,
-                    'msg'=>'修改姓名成功'
-                ];
-            }
-            else{
+            $check = User::findEntity($id);
+            if($_POST['flow'] == $check['flow_plan']){//不进行修改
                 $data = [
                     'status'=>0,
-                    'msg'=>'修改姓名失败'
+                    'msg'=>'设置流量计划失败'
                 ];
-            }
-            return json($data);
-        }
-    }
-    public function check_email(){
-        if(Request()->isPost()){
-            $id = 1;//获取当前用户id
-            $result = User::updateEntity($id,['email'=>$_POST['email']]);
-            if($result){
-                $data = [
-                    'status'=>1,
-                    'msg'=>'修改邮箱成功'
-                ];
+                return json($data);
             }
             else{
-                $data = [
-                    'status'=>0,
-                    'msg'=>'修改邮箱失败'
-                ];
+                //进行修改
+                        $change = [
+                        'flow_plan_status'=>0,
+                        'flow_plan'=>$_POST['flow']
+                    ];
+                $result = User::updateEntity($id,$change);
+                if($result){
+                    $data = [
+                        'status'=>1,
+                        'msg'=>'设置流量计划成功'
+                    ];
+                }
+                else{
+                    $data = [
+                        'status'=>0,
+                        'msg'=>'设置流量计划失败'
+                    ];
+                }
+                return json($data);
             }
-            return json($data);
-        }
-
-    }
-    public function check_age(){
-        if(Request()->isPost()){
-            $id = $_SESSION['userinfo']['user_id'];//获取当前用户id
-            $result = User::updateEntity($id,['age'=>$_POST['age']]);
-            if($result){
-                $data = [
-                    'status'=>1,
-                    'msg'=>'设置年龄成功'
-                ];
-            }
-            else{
-                $data = [
-                    'status'=>0,
-                    'msg'=>'设置年龄失败'
-                ];
-            }
-            return json($data);
-        }
-
-    }
-    public function check_weixin(){//设置微信
-        if(Request()->isPost()){
-            $id = $_SESSION['userinfo']['user_id'];;//获取当前用户id
-            $result = User::updateEntity($id,['weixin'=>$_POST['weixin']]);
-            if($result){
-                $data = [
-                    'status'=>1,
-                    'msg'=>'设置微信成功'
-                ];
-            }
-            else{
-                $data = [
-                    'status'=>0,
-                    'msg'=>'设置微信失败'
-                ];
-            }
-            return json($data);
         }
     }
     public function check_contack(){//设置备用联系人
@@ -241,6 +219,87 @@ class Customer extends Cusbase
                }
            }
        }
+    }
+    public function logout(){//注销
+        //>>1.接收数据
+        //>>2.处理数据
+        //>>1.删除COOKIE中的id和PASSWord
+        setcookie('id',null,-1,'/');
+        setcookie('password',null,-1,'/');
+        //>>2.删除session中的用户信息
+        unset($_SESSION['userinfo']);
+        //>>3.显示页面
+        $this->redirect('/borrower/login');
+    }
+    public function daochu(){
+           //获取选中的id值
+            $id_array =Request::instance()->param('ids');
+            $ids = explode(',',$id_array);//所有id的组成数组
+            array_pop($ids);
+            $cus = new CustomerList();
+            $where['customer_id'] = ['in',$ids];
+            $data = $cus->where($where)->select();
+            Vendor('PHPExcel.Classes.PHPExcel');//调用类库,路径是基于vendor文件夹的
+            Vendor('PHPExcel.Classes.PHPExcel.Worksheet.Drawing');
+            Vendor('PHPExcel.Classes.PHPExcel.Writer.Excel2007');
+            $objExcel = new \PHPExcel();
+            //set document Property
+            $objWriter = \PHPExcel_IOFactory::createWriter($objExcel, 'Excel2007');
+
+            $objActSheet = $objExcel->getActiveSheet();
+            $key = ord("A");
+            $letter =explode(',',"A,B,C,D,E,F,G");//7
+            $arrHeader =  array('姓名','年龄','联系电话','微信账号','贷款金额','芝麻信用','云端分发时间');
+            //填充表头信息
+            $lenth =  count($arrHeader);
+            for($i = 0;$i < $lenth;$i++) {
+                $objActSheet->setCellValue("$letter[$i]1","$arrHeader[$i]");
+            };
+            //填充表格信息
+            foreach($data as $k=>$v){
+                $k +=2;
+                $objActSheet->setCellValue('A'.$k,$v['name']);//姓名
+                $objActSheet->setCellValue('B'.$k, $v['age']);//年龄
+                $objActSheet->setCellValue('C'.$k, $v['tel']);//联系电话
+                $objActSheet->setCellValue('D'.$k, $v['wx_number']);//微信账号
+                $objActSheet->setCellValue('E'.$k, $v['loan_amount']);//贷款金额
+                $objActSheet->setCellValue('F'.$k, $v['credit']);//芝麻信用
+                $objActSheet->setCellValue('G'.$k, date('Y-m-d h:i:s',$v['add_time']));//时间
+                $objActSheet->getRowDimension($k)->setRowHeight(20);//表格高度
+            }
+            $width = array(20,20,15,10,10,30,10);
+            //设置表格的宽度
+            $objActSheet->getColumnDimension('A')->setWidth($width[0]);
+            $objActSheet->getColumnDimension('B')->setWidth($width[3]);
+            $objActSheet->getColumnDimension('C')->setWidth($width[5]);
+            $objActSheet->getColumnDimension('D')->setWidth($width[3]);
+            $objActSheet->getColumnDimension('E')->setWidth($width[3]);
+            $objActSheet->getColumnDimension('F')->setWidth($width[3]);
+            $objActSheet->getColumnDimension('G')->setWidth($width[3]);
+            $objActSheet->getColumnDimension('H')->setWidth($width[5]);
+            $outfile = "客户信息".date("Y-m-d").".xls";
+            ob_end_clean();
+            header("Content-Type: application/force-download");
+            header("Content-Type: application/octet-stream");
+            header("Content-Type: application/download");
+            header('Content-Disposition:inline;filename="'.$outfile.'"');
+            header("Content-Transfer-Encoding: binary");
+            header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+            header("Pragma: no-cache");
+            $objWriter->save('php://output');
+        }//导出
+    public function detail(){//信息公告详情
+        $id = Request::instance()->param('id');
+        $information = Information::findEntity($id);
+        $this->assign('data',$information);
+        return $this->fetch('customer/detail');//信息详情
+
+    }
+    public function question_detail(){
+        $id = Request::instance()->param('id');
+        $data = NormalQuestion::findEntity($id);
+        $this->assign('data',$data);
+        return $this->fetch('customer/question_detail');//信息详情
     }
 //    public function ceshi(){
 //        return $this->fetch('customer/ceshi');

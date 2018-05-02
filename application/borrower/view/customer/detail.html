@@ -1,0 +1,23 @@
+{extend name="base/base" /}
+{block name="main"}
+<div class="tab-pane" id="timeline">
+    <div class="box-header">
+        <h3 class="box-title">信息公告详情</h3>
+    </div>
+    <div class="box-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{$data.title}</td>
+                <td><?=date('Y-m-d H:i:s',$data['time'])?></td>
+            </tr>
+            <tr>
+                <td style="font-size: larger">{$data['describe']}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{/block}

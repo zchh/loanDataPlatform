@@ -59,7 +59,7 @@ Route::post('admin/uploadPic','admin/Pic/uploadPic');                           
 Route::resource('admin/customer','admin/userAdmin.User');
 /*******************************************************客户管理***********************************************************************************/
 
-Route::get('borrower/customer','borrower/Customer/index'); //用户列表首页
+Route::get('borrower/customer/:id','borrower/Customer/index'); //用户列表首页
 Route::get('borrower/single/:id','borrower/Customer/single'); //单个用户详情
 Route::get('borrower/customer/server','borrower/Customer/server'); //客户服务详情
 Route::any('borrower/question','borrower/Customer/question'); //信息反馈
@@ -67,15 +67,42 @@ Route::get('borrower/information','borrower/Customer/information'); //信息中�
 Route::any('borrower/user','borrower/Customer/user'); //个人中心
 Route::post('borrower/check','borrower/Customer/check');//修改密码
 Route::post('borrower/change','borrower/Customer/change');//修改密码
-Route::post('borrower/check_name','borrower/Customer/check_username');//修改姓名
-Route::post('borrower/check_email','borrower/Customer/check_email');//修改邮箱
-Route::post('borrower/check_age','borrower/Customer/check_age');//修改年龄
-Route::post('borrower/check_weixin','borrower/Customer/check_weixin');//修改微信
+Route::post('borrower/check_flow','borrower/Customer/check_flow');//修改流量计划
+Route::get('borrower/question_detail/:id','borrower/Customer/question_detail');//常见问题详情
 Route::post('borrower/check_contack','borrower/Customer/check_contack');//修改备用联系人
+Route::any('borrower/img','borrower/Customer/img');//修改头像
+//Route::get('borrower/login','borrower/Customer/login');//登录
+Route::any('borrower/login','borrower/Cuslogin/index');//登录
+Route::get('borrower/logout','borrower/Customer/logout');//注销
+Route::any('borrower/export/:ids','borrower/Customer/daochu');//批量导出
+Route::any('borrower/ceshi','borrower/Customer/ceshi');//测试
+Route::get('borrower/detail/:id','borrower/Customer/detail');//信息中心详情
+Route::any('borrower/password','borrower/Cuslogin/forget');//忘记密码
 
 
 
 Route::get('borrower/index','borrower/User/index');                  //获取材质库类型
+/*******************************************************前台管理***********************************************************************************/
+Route::get('home/index','home/Index/index');//首页
+Route::get('home/service','home/Index/service');//数据服务
+Route::get('home/news','home/Index/news');//新闻咨询
+Route::get('home/news2','home/Index/news2');//新闻咨询
+Route::get('home/about','home/Index/about');//关于我们
+Route::get('home/cooperation','home/Index/cooperation');//合作入住
+Route::get('about/one','home/About/one');//运营部
+Route::get('about/two','home/About/two');//设计部
+Route::get('about/three','home/About/three');//市场部
+Route::get('about/four','home/About/four');//BD
+Route::get('about/five','home/About/five');//客服部
+Route::get('about/six','home/About/six');//研发部
+Route::get('news/one','home/News/one');//详情1
+Route::get('news/two','home/News/two');//详情2
+Route::get('news/three','home/News/three');//详情1
+Route::get('news/four','home/News/four');//详情2
+Route::get('news/five','home/News/five');//详情1
+Route::get('news/six','home/News/six');//详情2
+Route::get('news/seven','home/News/seven');//详情1
+Route::get('news/eight','home/News/eight');//详情2
 
 
 

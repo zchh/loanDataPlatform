@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html class="h_mfw">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+    <!-- 让IE浏览器用最高级内核渲染页面 还有用 Chrome 框架的页面用webkit -->
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,initial-scale=1,maximum-scale=1,user-scalable=0">
+
+    <!-- IOS6全屏 Chrome高版本全屏 ================================================== -->
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!--[if IE 8]>
+
+    <meta http-equiv="refresh" content="2; url=index_ie8.html">
+
+    <![endif]-->
+
+    <title>福州腾云数据 - 首页</title>
+
+    <meta name="description" content="福州腾云数据是专注于信贷大数据的专业平台">
+    <meta name="keywords" content="福州腾云数据,信贷数据,盘古数据,贷款数据,借条引流,借条导流,借款人数据,网贷借款人数据,网贷乙方,现金贷乙方,现金贷甲方">
+
+    <!-- swiper3版本插件调用库 -->
+
+    <link rel="stylesheet" type="text/css" href="__STATIC__/home/css/style.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/home/css/animate.min.css">
+    <script type="text/javascript" src="__STATIC__/home/js/jquery-1.10.1.min.js"></script>
+</head>
+
+<body class="b_mfw">
+
+<div class="box ">
+
+    {include file="base/header"}
+    <link rel="stylesheet" type="text/css" href="__STATIC__/home/css/swiper.min.css">
+    <script type="text/javascript" src="__STATIC__/home/js/swiper.jquery.min.js"></script>
+    <style>
+        .swiper-container {
+            height: 100%;
+
+        }
+
+        .swiper-container-vertical>.swiper-pagination-bullets {
+            left: 10px;
+        }
+    </style>
+    <script type="text/javascript">
+        $('#topMenu1').attr('class', 'active')
+    </script>
+    <div class="swiper-container swiper-container-vertical">
+        <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
+            <div class="swiper-slide swiper-slide-active" style="height: 391px;">
+                <div class="content ind_content	" style="background: url(__STATIC__/home/images/59db2069853dd.png) no-repeat center center; background-size:100% 100%;">
+                    <div>
+                        <em></em>
+                        <div class="ind_tit">
+                            <h2>
+                                <img src="__STATIC__/home/images/59db20725b8b5.png">
+                            </h2>
+                            <p>聚焦金融大数据&nbsp;&nbsp;&nbsp;&nbsp;助力企业新高度&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide swiper-slide-next" style="height: 391px;">
+                <div class="swiper-content" style="height:100%;width:100%;background:url(__STATIC__/home/images/banner03-20161208.jpg) center no-repeat;background-size:100% 100%;">
+                </div>
+
+            </div>
+            <div class="swiper-slide" style="height: 391px;">
+                <div class="swiper-content" style="height:100%;width:100%;background:url(__STATIC__/home/images/banner02-20161208.png) center no-repeat;background-size:100% 100%;">
+                </div>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+            <span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
+            <span class="swiper-pagination-bullet"></span>
+            <span class="swiper-pagination-bullet"></span>
+        </div>
+    </div>
+    <div class="slider">
+        <ul>
+            <li>
+                <div>
+                    <em></em>
+                    <div>
+                        <small>
+                            <img src="__STATIC__/home/images/fl_1.png">
+                        </small>
+                        <span>商务合作</span>
+                    </div>
+                </div>
+                <div>
+                    <img src="__STATIC__/home/images/201711241715517472.png">
+                </div>
+            </li>
+            <li>
+                <div>
+                    <em></em>
+                    <div>
+                        <a href="/about/one" title="招聘信息">
+                            <small>
+                                <img src="__STATIC__/home/images/fl_3.png">
+                            </small>
+                            <span>招聘信息</span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            direction: 'vertical',
+            mousewheelControl: true
+        });
+    </script>
+  {include file="base/footer"}

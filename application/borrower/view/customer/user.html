@@ -1,131 +1,110 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>客户信息</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.7 -->
-    <!--<link rel="stylesheet" href="__STATIC__/bower_components/bootstrap/dist/css/bootstrap.min.css">-->
 
-    <!-- Font Awesome -->
-    <!--<link rel="stylesheet" href="__STATIC__/bower_components/font-awesome/css/font-awesome.min.css">-->
-    <!-- Ionicons -->
-    <!--<link rel="stylesheet" href="__STATIC__/bower_components/Ionicons/css/ionicons.min.css">-->
-    <!-- Theme style -->
-    <!--<link rel="stylesheet" href="__STATIC__/dist/css/AdminLTE.min.css">-->
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <!--<link rel="stylesheet" href="__STATIC__/dist/css/skins/_all-skins.min.css">-->
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <!--<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>-->
-    <!--<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>-->
-    <![endif]-->
-
-    <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
     {extend name="base/base" /}
     {block name="main"}
-    <!-- Left side column. contains the logo and sidebar -->
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <!-- Main content -->
-        <section class="content">
             <div class="row">
-                <!-- left column -->
-                <div class="col-md-6">
-                    <!-- general form elements -->
-                    <!-- /.box -->
-
-                    <!-- Form Element sizes -->
-                    <!-- /.box -->
-
-                    <div class="box box-danger">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">账户信息</h3>
-                        </div>
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-xs-9">
-                                    头像：<img src="{$data.img}" alt="头像" id="img" width="200px">
-                                </div>
-                                <div id="uploader-demo">
-                                    <!--用来存放item-->
-                                    <div id="fileList" class="uploader-list"></div>
-                                    <div id="filePicker">修改</div>
-                                </div>
-                                <div class="col-xs-9">
-                                    真实姓名：<input type="text" class="form-control" placeholder="{$data.real_name}" readonly>
-                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#real_name">
-                                        修改
-                                    </button>
-                                </div>
-                                <div class="col-xs-9">
-                                    修改密码：<input type="text" class="form-control" placeholder="已设置" readonly>
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">账户信息</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body no-padding">
+                        <table class="table table-condensed">
+                            <tr>
+                                <td>头像</td>
+                                <td><img src="{$data.img}" id="img" width="200px"></td>
+                                <td>
+                                    <div id="uploader-demo">
+                                        <!--用来存放item-->
+                                        <div id="fileList" class="uploader-list"></div>
+                                        <div id="filePicker">修改</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>真实姓名</td>
+                                <td>{$data.real_name}</td>
+                                <!--<td>-->
+                                    <!--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#real_name">-->
+                                    <!--修改-->
+                                   <!--</button>-->
+                                <!--</td>-->
+                            </tr>
+                            <tr>
+                                <td>修改密码</td>
+                                <td>已设置</td>
+                                <td>
                                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
                                         修改
                                     </button>
-                                </div>
-                                <div class="col-xs-9">
-                                    联系邮箱：<input type="text" class="form-control" placeholder="{$data.email}" readonly>
-                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-email">
-                                        修改
-                                    </button>
-                                </div>
-                                <div class="col-xs-9">
-                                    联系电话：<input type="text" class="form-control" placeholder="{$data.tel}" readonly>
-                                </div>
-                                <div class="col-xs-9">
-                                    年龄：<input type="text" class="form-control" placeholder="{$data.age}" readonly>
-                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-age">
-                                        设置
-                                    </button>
-                                </div>
-                                <div class="col-xs-9">
-                                    锁定城市：<input type="text" class="form-control" placeholder="{$data.city_id}" readonly>
-                                </div>
-                                <div class="col-xs-9">
-                                    联系微信：<input type="text" class="form-control" placeholder="{$data.weixin}" readonly>
-                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-weixin">
-                                        设置
-                                    </button>
-                                </div>
-                                <div class="col-xs-9">
-                                    备用联系人：<input type="text" class="form-control" placeholder="{$data.contact}" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>联系邮箱：</td>
+                                <td>{$data.email}</td>
+                                <!--<td>-->
+                                    <!--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-email">-->
+                                        <!--修改-->
+                                    <!--</button>-->
+                                <!--</td>-->
+                            </tr>
+                            <tr>
+                                <td>联系电话：</td>
+                                <td>{$data.tel}</td>
+                            </tr>
+                            <tr>
+                                <td>年龄</td>
+                                <td>{$data.age}</td>
+                                <!--<td>-->
+                                    <!--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-age">-->
+                                        <!--设置-->
+                                    <!--</button>-->
+                                <!--</td>-->
+                            </tr>
+                            <tr>
+                                <td>锁定城市</td>
+                                <td>{$data.city_id}</td>
+                            </tr>
+                            <tr>
+                                <td>联系微信</td>
+                                <td>{$data.weixin}</td>
+                                <!--<td>-->
+                                    <!--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-weixin">-->
+                                        <!--设置-->
+                                    <!--</button>-->
+                                <!--</td>-->
+                            </tr>
+                            <tr>
+                                <td>备用联系人</td>
+                                <td>{$data.contact}</td>
+                                <td>
                                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-contack">
                                         设置
                                     </button>
-                                </div>
-                                <div class="col-xs-9">
-                                    账户余额：<input type="text" class="form-control" placeholder="{$data.balance}" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>账户余额</td>
+                                <td>{$data.balance}</td>
+                                <td>
                                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default1">
                                         历史记录
                                     </button>
-                                </div>
-                                <div class="col-xs-9">
-                                    流量计划:(<?=$data['flow_plan']?>位/天)<input type="text" class="form-control" placeholder="{$data.flow_plan}" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>流量计划：({$data.flow_plan}位/天）</td>
+                                <td>{$data.flow_plan}</td>
+                                <td>
+                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-flow">
+                                        设置
+                                    </button>
+                                </td>
+                            </tr>
+
+                        </table>
                     </div>
-                    <!-- /.box -->
-
-                    <!-- Input addon -->
-                    <!-- /.box -->
-
+                    <!-- /.box-body -->
                 </div>
-                <!--/.col (left) -->
-                <!-- right column -->
                 <div class="modal fade" id="modal-default">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -151,25 +130,25 @@
                     </div>
                     <!-- /.modal-dialog -->
                 </div><!-- 修改密码 -->
-                <div class="modal fade" id="real_name"><!-- 修改姓名 -->
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">修改姓名</h4>
-                            </div>
-                            <div class="col-xs-9">
-                                姓名：<input type="text" class="form-control" placeholder="请输入真实姓名" id="username">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary1">确认修改</button>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div><!-- 修改姓名 -->
+                <!--<div class="modal fade" id="real_name">&lt;!&ndash; 修改姓名 &ndash;&gt;-->
+                    <!--<div class="modal-dialog">-->
+                        <!--<div class="modal-content">-->
+                            <!--<div class="modal-header">-->
+                                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                                    <!--<span aria-hidden="true">&times;</span></button>-->
+                                <!--<h4 class="modal-title">修改姓名</h4>-->
+                            <!--</div>-->
+                            <!--<div class="col-xs-9">-->
+                                <!--姓名：<input type="text" class="form-control" placeholder="请输入真实姓名" id="username">-->
+                            <!--</div>-->
+                            <!--<div class="modal-footer">-->
+                                <!--<button type="button" class="btn btn-primary1">确认修改</button>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash; /.modal-content &ndash;&gt;-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+                <!--</div>&lt;!&ndash; 修改姓名 &ndash;&gt;-->
                 <div class="modal fade" id="modal-email"><!-- 修改姓名 -->
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -279,28 +258,33 @@
                     </div>
                     <!-- /.modal-dialog -->
                 </div><!-- 设置备用联系人 -->
+                <div class="modal fade" id="modal-flow"><!-- 设置流量计划 -->
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">修改流量计划</h4>
+                            </div>
+                            <div class="col-xs-9">
+                                流量计划：<input type="text" class="form-control" placeholder="请填写您的流量计划" id="_flow">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary6">确认修改</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div><!-- 设置流量计划 -->
                 <!--/.col (right) -->
             </div>
-            <!-- /.row -->
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-</div>
-<!-- ./wrapper -->
 
 <!-- jQuery 3 -->
 <script src="__STATIC__/bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="__STATIC__/webuploader/webuploader.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="__STATIC__/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="__STATIC__/bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="__STATIC__/dist/js/adminlte.min.js"></script>
 <script src="__STATIC__/layer/layer.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="__STATIC__/dist/js/demo.js"></script>
 <script type="text/javascript">
     //修改头像
     var uploader = WebUploader.create({
@@ -331,6 +315,8 @@
         //response图片地址
         //console.log(response.url);
         $("#img").attr("src",response.img);
+        //强制刷新
+        window.location.reload();
         //$("#goods-logo").val(response.url);
         //console.debug($("#goods-logo").val());
     });
@@ -349,6 +335,14 @@
        }
        if(confirm_password.trim() == ''){
            layer.msg("请再确认一次密码",{icon:0});
+           return false;
+       }
+       if(/^[A-Za-z0-9]{6,12}$/.test(old_password) === false){
+           layer.msg("请输入6到12位密码",{icon:0});
+           return false;
+       }
+       if(/^[A-Za-z0-9]{6,12}$/.test(new_password) === false){
+           layer.msg("请输入6到12位密码",{icon:0});
            return false;
        }
        if(confirm_password.trim() != new_password.trim()){
@@ -500,6 +494,31 @@
 
         }else{
             layer.msg("备用联系人不可为空",{icon:0});
+            return false;
+        }
+
+    })
+    //设置流量计划
+    $(".btn-primary6").on('click',function () {
+        var flow = $("#_flow").val();
+        var checkFlow = /^\+?[1-9][0-9]*$/;
+        if(checkFlow.test(flow)){
+            $.post("{:url('borrower/Customer/check_flow')}",{'flow':flow},function (data) {
+                if(data.status == 1){
+                    layer.msg(data.msg,{icon:1,time:1000},function () {
+                        window.location.reload();
+                    });
+                }
+                else {
+                    layer.msg(data.msg,{icon:0,time:1000},function () {
+                        window.location.reload();
+                    });
+                    return false;
+                }
+            })
+
+        }else{
+            layer.msg("请输入正确的流量计划",{icon:0});
             return false;
         }
 
