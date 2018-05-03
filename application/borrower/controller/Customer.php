@@ -10,6 +10,7 @@ namespace app\borrower\controller;
 
 
 use app\common\model\Balance;
+use app\common\model\CustomerDistribute;
 use app\common\model\CustomerList;
 use app\common\model\Information;
 use app\common\model\Know;
@@ -32,7 +33,15 @@ class Customer extends Cusbase
     public function index(){//列表信息
         //条件查询
         //$where['loan_amount'] = array('between','1,8');//区间(贷款金额)
-        $where = [];
+        //根据当前用户查询客户信息
+        $uid = $_SESSION['userinfo']['user_id'];
+        $cus_d = new CustomerDistribute();
+        $cus = $cus_d->where(['user_id'=>$uid])->select();
+        $ids = [];
+        foreach ($cus as $c){
+          $ids[] = $c['customer_id'];
+        }
+        $where['customer_id'] = ['in',$ids];
         if(input('start_time')){
             $time = input('start_time');//获取当前时间
             $time = strtotime($time);//转成时间戳
@@ -42,16 +51,31 @@ class Customer extends Cusbase
             $end = $start_time+12*3600;
             $where['add_time'] = array('between',"$start,$end");
         }
+        $loan1 = input('loan1');
+        $loan2 = input('loan2');
+        if($loan1){
+            if($loan1 <= 20000){//值1
+                $where['loan_amount'] = array('between',"$loan1,$loan2");
+            }
+            else{
+                $where['loan_amount'] = ['egt',$loan1];
+            }
+        }
         //条件查询
-        $cu = new CustomerList();
+        $cu = new CustomerList();//客户表
         $data = $cu->where($where)->select();
         $this->assign('data',$data);
+        $this->assign('loan1',$loan1);//回显
+        $active1 = 1;
+        $this->assign('active1',$active1);
         return $this->fetch('customer/index');
     }
     public function single(){//个人信息
         $id = Request::instance()->param('id');
         $data = Borrower::findEntity($id);
         $this->assign('data',$data);
+        $active1 =1;
+        $this->assign('active1',$active1);
         return $this->fetch('customer/single');//详情页面
         //$data = Borrower::findEntity()
     }
@@ -62,6 +86,8 @@ class Customer extends Cusbase
         $this->assign('data',$data);
         $this->assign('know',$know);
         $this->assign('question',$question);
+        $active3 = 1;
+        $this->assign('active3',$active3);
         return $this->fetch('customer/service');
     }
     public function question(){//信息反馈
@@ -98,10 +124,14 @@ class Customer extends Cusbase
             }
             return json($data);
         }
+        $active2 = 1;
+        $this->assign('active2',$active2);//选中
         return $this->fetch('customer/question');//表单添加
     }
     public function information(){//信息中心
        $data = Information::selectEntity();
+       $active4 =1;
+       $this->assign('active4',$active4);
        $this->assign('data',$data);
        return $this->fetch('customer/information');
     }
@@ -292,12 +322,16 @@ class Customer extends Cusbase
         $id = Request::instance()->param('id');
         $information = Information::findEntity($id);
         $this->assign('data',$information);
+        $active4 =1;
+        $this->assign('active4',$active4);
         return $this->fetch('customer/detail');//信息详情
 
     }
     public function question_detail(){
         $id = Request::instance()->param('id');
         $data = NormalQuestion::findEntity($id);
+        $active3 =1;
+        $this->assign('active3',$active3);
         $this->assign('data',$data);
         return $this->fetch('customer/question_detail');//信息详情
     }

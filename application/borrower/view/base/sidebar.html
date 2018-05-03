@@ -35,7 +35,7 @@
             </li>
 
             <!--单栏目-->
-            <li>
+            <li class="<?=isset($active1) ? 'active':''?>">
                 <a href="{:url('borrower/customer/index')}">
                     <i class="fa fa-th"></i> <span>客户信息</span>
                     <span class="pull-right-container">
@@ -43,7 +43,7 @@
                         </span>
                 </a>
             </li>
-            <li>
+            <li  class="<?=isset($active2) ? 'active':''?>">
                 <a href="{:url('/borrower/question')}">
                     <i class="fa fa-th"></i> <span>信息反馈</span>
                     <span class="pull-right-container">
@@ -51,7 +51,7 @@
                         </span>
                 </a>
             </li>
-            <li>
+            <li class="<?=isset($active3) ? 'active':''?>">
                 <a href="{:url('borrower/customer/server')}">
                     <i class="fa fa-th"></i> <span>服务支持</span>
                     <span class="pull-right-container">
@@ -59,7 +59,7 @@
                         </span>
                 </a>
             </li>
-            <li>
+            <li class="<?=isset($active4) ? 'active':''?>">
                 <a href="{:url('borrower/customer/information')}">
                     <i class="fa fa-th"></i> <span>信息中心</span>
                     <span class="pull-right-container">
