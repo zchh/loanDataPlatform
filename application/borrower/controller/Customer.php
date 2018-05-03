@@ -66,12 +66,16 @@ class Customer extends Cusbase
         $data = $cu->where($where)->select();
         $this->assign('data',$data);
         $this->assign('loan1',$loan1);//回显
+        $active1 = 1;
+        $this->assign('active1',$active1);
         return $this->fetch('customer/index');
     }
     public function single(){//个人信息
         $id = Request::instance()->param('id');
         $data = Borrower::findEntity($id);
         $this->assign('data',$data);
+        $active1 =1;
+        $this->assign('active1',$active1);
         return $this->fetch('customer/single');//详情页面
         //$data = Borrower::findEntity()
     }
@@ -82,6 +86,8 @@ class Customer extends Cusbase
         $this->assign('data',$data);
         $this->assign('know',$know);
         $this->assign('question',$question);
+        $active3 = 1;
+        $this->assign('active3',$active3);
         return $this->fetch('customer/service');
     }
     public function question(){//信息反馈
@@ -118,10 +124,14 @@ class Customer extends Cusbase
             }
             return json($data);
         }
+        $active2 = 1;
+        $this->assign('active2',$active2);//选中
         return $this->fetch('customer/question');//表单添加
     }
     public function information(){//信息中心
        $data = Information::selectEntity();
+       $active4 =1;
+       $this->assign('active4',$active4);
        $this->assign('data',$data);
        return $this->fetch('customer/information');
     }
@@ -312,12 +322,16 @@ class Customer extends Cusbase
         $id = Request::instance()->param('id');
         $information = Information::findEntity($id);
         $this->assign('data',$information);
+        $active4 =1;
+        $this->assign('active4',$active4);
         return $this->fetch('customer/detail');//信息详情
 
     }
     public function question_detail(){
         $id = Request::instance()->param('id');
         $data = NormalQuestion::findEntity($id);
+        $active3 =1;
+        $this->assign('active3',$active3);
         $this->assign('data',$data);
         return $this->fetch('customer/question_detail');//信息详情
     }
