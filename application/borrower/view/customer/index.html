@@ -5,13 +5,14 @@
         <div class="search_type cc mb10">
             <div class="mb11">
                 贷款金额：
-                <input type="hidden" value="" name="loan">
-                <button class="bg-red" id="bt1">全部</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button id="bt2">￥1000-￥2000</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button id="bt3">￥2001-￥5000</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button id="bt4">￥5001-￥10000</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button id="bt5">￥10001-￥20000</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button id="bt6">￥20000以上</button>
+                <input type="hidden" value="" name="loan1" id="loan1">
+                <input type="hidden" value="" name="loan2" id="loan2">
+                <div id="bt1" >全部</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                <div id="bt2" >￥1000-￥2000</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                <div id="bt3">￥2001-￥5000</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                <div id="bt4">￥5001-￥10000</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                <div id="bt5">￥10001-￥20000</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                <div id="bt6">￥20000以上</div>
             </div>
             <div class="mb10">
                 申请时间：
@@ -83,6 +84,36 @@
 <script src="__STATIC__/layDate/laydate/laydate.js"></script>
 <script src="__STATIC__/layer/layer.js"></script>
 <script>
+    $(".mb11").find('div').css('display','inline-block');
+    $(".mb11").find('div').css('background-color','#ddd');
+    $(".mb11").find("div").css('cursor','pointer');
+    $(".mb11").find("div").click(function(){
+        $(".mb11").find("div").css("background-color","#ddd");
+        $(".selectMoney").removeClass("selectMoney");
+        $(this).attr("class","selectMoney");
+        $(this).css("background-color","#999");
+        var pay = $(".mb11 .selectMoney").text();
+        if(pay == "￥1000-￥2000"){
+            $("#loan1").attr('value',1000);
+            $("#loan2").attr('value',2000);
+        }
+        if(pay == "￥2001-￥5000"){
+            $("#loan1").attr('value',2001);
+            $("#loan2").attr('value',5000);
+        }
+        if(pay == "￥5001-￥10000"){
+            $("#loan1").attr('value',5001);
+            $("#loan1").attr('value',10000);
+        }
+        if(pay == "￥10001-￥20000"){
+            $("#loan1").attr('value',10001);
+            $("#loan2").attr('value',20000);
+        }
+        if(pay == "￥20000以上"){
+            $("#loan1").attr('value',20001);
+            $("#loan2").attr('value',0);
+        }
+    });
     laydate.render({
         elem: '#test' //或 elem: document.getElementById('test')、elem: lay('#test') 等
     });
