@@ -51,10 +51,21 @@ class Customer extends Cusbase
             $end = $start_time+12*3600;
             $where['add_time'] = array('between',"$start,$end");
         }
+        $loan1 = input('loan1');
+        $loan2 = input('loan2');
+        if($loan1){
+            if($loan1 <= 20000){//值1
+                $where['loan_amount'] = array('between',"$loan1,$loan2");
+            }
+            else{
+                $where['loan_amount'] = ['egt',$loan1];
+            }
+        }
         //条件查询
         $cu = new CustomerList();//客户表
         $data = $cu->where($where)->select();
         $this->assign('data',$data);
+        $this->assign('loan1',$loan1);//回显
         return $this->fetch('customer/index');
     }
     public function single(){//个人信息
