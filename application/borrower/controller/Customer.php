@@ -10,6 +10,7 @@ namespace app\borrower\controller;
 
 
 use app\common\model\Balance;
+use app\common\model\CustomerDistribute;
 use app\common\model\CustomerList;
 use app\common\model\Information;
 use app\common\model\Know;
@@ -32,7 +33,15 @@ class Customer extends Cusbase
     public function index(){//列表信息
         //条件查询
         //$where['loan_amount'] = array('between','1,8');//区间(贷款金额)
-        $where = [];
+        //根据当前用户查询客户信息
+        $uid = $_SESSION['userinfo']['user_id'];
+        $cus_d = new CustomerDistribute();
+        $cus = $cus_d->where(['user_id'=>$uid])->select();
+        $ids = [];
+        foreach ($cus as $c){
+          $ids[] = $c['customer_id'];
+        }
+        $where['customer_id'] = ['in',$ids];
         if(input('start_time')){
             $time = input('start_time');//获取当前时间
             $time = strtotime($time);//转成时间戳
@@ -43,7 +52,7 @@ class Customer extends Cusbase
             $where['add_time'] = array('between',"$start,$end");
         }
         //条件查询
-        $cu = new CustomerList();
+        $cu = new CustomerList();//客户表
         $data = $cu->where($where)->select();
         $this->assign('data',$data);
         return $this->fetch('customer/index');
