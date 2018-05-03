@@ -8,6 +8,7 @@
 
 namespace app\admin\controller;
 
+use app\common\model\Balance;
 use app\common\model\City;
 use app\common\model\MaterialLibrary;
 use app\common\model\NormalQuestion;
@@ -22,6 +23,7 @@ use app\admin\controller\Base;
 use app\common\model\Provincial;
 use app\common\model\CustomerList;
 use app\common\model\Information;
+use app\common\model\Service;
 
 class AdminDelete extends Base
 {
@@ -59,6 +61,14 @@ class AdminDelete extends Base
                 break;
             case NumberConfig::DELETE_NORMAL_QUESTION:
                 NormalQuestion::deleteEntity($idArr);
+                return $this->selfResponse(StatusCode::DELETE_SUCCESS,  StatusCode::DELETE_SUCCESS_MESSAGE);
+                break;
+            case NumberConfig::DELETE_SERVICE:
+                Service::deleteEntity($idArr);
+                return $this->selfResponse(StatusCode::DELETE_SUCCESS,  StatusCode::DELETE_SUCCESS_MESSAGE);
+                break;
+            case NumberConfig::DELETE_BALANCE_MANAGE:
+                Balance::deleteEntity($idArr);
                 return $this->selfResponse(StatusCode::DELETE_SUCCESS,  StatusCode::DELETE_SUCCESS_MESSAGE);
                 break;
             default:

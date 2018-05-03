@@ -28,6 +28,14 @@ Route::get('/admin/user', 'admin/User/index');                                  
 Route::post('/admin/addUser', 'admin/User/addUser');                                                    //添加用户
 Route::get('admin/userDetail/:id', 'admin/User/userDetail');                                            //用户详情
 Route::post('admin/editUserStatus', 'admin/User/editUserStatus');                                       //编辑用户流量计划状态
+Route::post('admin/editUser', 'admin/User/editUser');                                                   //编辑用户
+
+Route::get('admin/balanceManage/:id', 'admin/BalanceManage/index');                                     //账户余额历史记录列表
+Route::get('admin/getBalanceManage', 'admin/BalanceManage/getBalanceManage');                           //获取一条账户余额历史记录
+Route::post('admin/addBalanceManage', 'admin/BalanceManage/addBalanceManage');                          //添加账户余额历史记录
+Route::post('admin/editBalanceManage', 'admin/BalanceManage/editBalanceManage');                        //编辑账户余额历史记录
+
+
 
 Route::get('admin/customerList', 'admin/CustomerList/index');                                           //客户列表页面
 Route::get('admin/getCustomerData', 'admin/CustomerList/getCustomerData');                              //客户列表数据

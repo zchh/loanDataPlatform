@@ -89,7 +89,7 @@ class User extends Base
     public function editUser()
     {
         $requestParam = Request::instance()->param();
-        if($requestParam['user_id']){
+        if(empty($requestParam['user_id'])){
             return $this->selfResponse(StatusCode::SERVER_ERROR,  StatusCode::PARAM_WRONG);
         }
         empty($requestParam['flow_plan_status']) ? null : $updateArr['flow_plan_status'] = $requestParam['flow_plan_status'];
@@ -108,7 +108,7 @@ class User extends Base
             $updateArr['flow_plan_status'] = StatusCode::CHECK_PASS;
         }
         UserModel::updateEntity($requestParam['user_id'], $updateArr);
-        return $this->selfResponse(StatusCode::UPDATE_SUCCESS,  StatusCode::UPDATE_SUCCESS_MESSAGE);
+        return $this->selfResponse(StatusCode::UPDATE_SUCCESS,  '修改用户信息成功');
     }
 
     /**
@@ -117,7 +117,7 @@ class User extends Base
     public function editUserStatus()
     {
         $requestParam = Request::instance()->param();
-        if($requestParam['user_id'] || $requestParam['flow_plan_status']){
+        if(empty($requestParam['user_id']) || empty($requestParam['flow_plan_status'])){
             return $this->selfResponse(StatusCode::SERVER_ERROR,  StatusCode::PARAM_WRONG);
         }
         $updateArr['flow_plan_status'] = $requestParam['flow_plan_status'];

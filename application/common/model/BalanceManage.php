@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2018/4/26
- * Time: 18:53
+ * Date: 2018/5/3
+ * Time: 16:49
  */
 
 namespace app\common\model;
@@ -12,7 +12,7 @@ use think\Db;
 use think\Model;
 use app\common\selfConfig\TableConfig;
 
-class Balance extends Model
+class BalanceManage extends Model
 {
     public static function selectEntity($param = [])
     {
@@ -48,12 +48,5 @@ class Balance extends Model
         $num = Db::table(TableConfig::BALANCE)->delete($id);
         return $num;
     }
-
-    public static function addEntity($arr)
-    {
-        $arr['add_time'] = time();
-        return  Db::table(TableConfig::BALANCE)->insert($arr);
-    }
-
 
 }

@@ -51,13 +51,6 @@
                             <td><input type="checkbox" name="checkNum" value="{$single.question_id}"></td>
                             <td>{$single.question_title}</td>
                             <td>{$single.create_time}</td>
-                            <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
-                                查看
-                            </button>
-                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
-                                    编辑
-                                </button>
-                            </td>
                         </tr>
                         {/volist}
                         {/notempty}
@@ -113,7 +106,7 @@
                         <div style="position: relative">
                             <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
                             </button>
-                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o" id="delete_service"></i></button>
                             <button type="button" class="btn btn-default pull-right"  data-toggle="modal" data-target="#add_service">
                                 添加
                             </button>
@@ -133,15 +126,13 @@
                         {notempty name="serviceData"}
                         {volist name="serviceData" id="single"}
                         <tr>
-                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox" name="checkService" value="{$single.service_id}"></td>
                             <td>{$single.role}</td>
                             <td>{$single.name}</td>
                             <td>{$single.email}</td>
                             <td>{$single.tel}</td>
                             <td>{$single.weixin}</td>
-                            <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
-                                查看
-                            </button>
+                            <td>
                             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#edit_service" value="{$single.service_id}" id="edit_service_button">
                                     编辑
                             </button>
@@ -395,6 +386,38 @@
             url: '/admin/delete',
             data: {
                 'type': 4,
+                'checkNum': s
+            },
+            dataType: "json",
+            success: function (data) {
+                alert(data.msg);
+                if (data.code == '204') {
+                    window.location.reload();
+                }
+            },
+            error: function () {
+                alert('系统错误');
+            }
+        });
+    });
+
+
+    //删除服务
+    $("#delete_service").click(function () {
+        var obj=document.getElementsByName('checkService');
+        var s='';
+        for(var i=0; i<obj.length; i++){
+            if(obj[i].checked){
+                s += obj[i].value;
+                s += ',';
+            }
+        }
+
+        $.ajax({
+            type: "post",
+            url: '/admin/delete',
+            data: {
+                'type': 5,
                 'checkNum': s
             },
             dataType: "json",

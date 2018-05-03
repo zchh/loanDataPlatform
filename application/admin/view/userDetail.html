@@ -19,22 +19,22 @@
             <tr>
                 <td>真实姓名</td>
                 <td id="real_name_value">{$real_name}</td>
-                <td data-toggle="modal" data-target="#edit-user" class="edit-user" id="real_name">修改</td>
+                <td data-toggle="modal" data-target="#edit-user" class="edit-user" id="edit_real_name">修改</td>
             </tr>
             <tr>
                 <td>修改密码</td>
                 <td>已设置</td>
-                <td>修改</td>
+                <td data-toggle="modal" data-target="#edit-user" class="edit-user"  id="edit_password">修改</td>
             </tr>
             <tr>
                 <td>联系电话：</td>
                 <td>{$tel}</td>
-                <td>修改</td>
+                <td data-toggle="modal" data-target="#edit-user" class="edit-user" id="edit_tel">修改</td>
             </tr>
             <tr>
                 <td>年龄</td>
                 <td>{$age}</td>
-                <td>修改</td>
+                <td data-toggle="modal" data-target="#edit-user" class="edit-user" id="edit_age">修改</td>
             </tr>
             <tr>
                 <td>锁定城市</td>
@@ -44,12 +44,12 @@
             <tr>
                 <td>联系微信</td>
                 <td>{$weixin}</td>
-                <td>修改</td>
+                <td data-toggle="modal" data-target="#edit-user" class="edit-user" id="edit_weixin">修改</td>
             </tr>
             <tr>
                 <td>备用联系人</td>
                 <td>{$contact}</td>
-                <td>修改</td>
+                <td data-toggle="modal" data-target="#edit-user" class="edit-user" id="edit_contact">修改</td>
             </tr>
             <tr>
                 <td>芝麻信用积分</td>
@@ -59,12 +59,12 @@
             <tr>
                 <td>账户余额</td>
                 <td>{$balance}</td>
-                <td>历史记录</td>
+                <td><a href="/admin/balanceManage/{$user_id}">历史记录</a></td>
             </tr>
             <tr>
                 <td>流量计划：(0位/天）</td>
                 <td>{$flow_plan}</td>
-                <td>设置</td>
+                <td data-toggle="modal" data-target="#edit-user" class="edit-user" id="edit_flow_plan">设置</td>
             </tr>
 
 
@@ -79,12 +79,11 @@
                         </div>
                         <form>
                             <input type="hidden" name="user_id" value="{$user_id}" id="user_id">
-                            <div class="modal-body">
-                              <input name="" value="" id="input" class="form-control">
+                            <div class="modal-body" id="edit_content">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
-                                <button type="button" class="btn btn-primary" id="edit-status-sure" data-dismiss="modal">确认修改</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" id="sure_edit_user">确认修改</button>
                             </div>
                         </form>
                     </div>
@@ -99,18 +98,77 @@
 <script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
 <script>
 
-  $(".edit-user").click(function () {
+    var edit_content = '';
+    //赋值
+    $("#edit_real_name").click(function () {
+        $("#edit_content").empty();
+        edit_content = '  <lable>姓名</lable>\n' +
+            '                            <input type="text" name="real_name" value="'+'{$real_name}'+'" id="input" class="form-control">';
+        $("#edit_content").append(edit_content);
+    });
+    $("#edit_password").click(function () {
+        $("#edit_content").empty();
+        edit_content = '  <lable>密码</lable>\n' +
+            '                            <input type="password" name="password" value="" id="input" class="form-control">';
+        $("#edit_content").append(edit_content);
+    });
+    $("#edit_tel").click(function () {
+        $("#edit_content").empty();
+        edit_content = '  <lable>联系电话</lable>\n' +
+            '                            <input type="text" name="tel" value="{$tel}" id="input" class="form-control">';
+        $("#edit_content").append(edit_content);
+    });
+    $("#edit_age").click(function () {
+        $("#edit_content").empty();
+        edit_content = '  <lable>年龄</lable>\n' +
+            '                            <input type="text" name="age" value="{$age}" id="input" class="form-control">';
+        $("#edit_content").append(edit_content);
+    });
+    $("#edit_weixin").click(function () {
+        $("#edit_content").empty();
+        edit_content = '  <lable>微信</lable>\n' +
+            '                            <input type="text" name="weixin" value="{$weixin}" id="input" class="form-control">';
+        $("#edit_content").append(edit_content);
+    });
+    $("#edit_contact").click(function () {
+        $("#edit_content").empty();
+        edit_content = '  <lable>备用联系人</lable>\n' +
+            '                            <input type="text" name="contact" value="{$contact}" id="input" class="form-control">';
+        $("#edit_content").append(edit_content);
+    });
+    $("#edit_flow_plan").click(function () {
+        $("#edit_content").empty();
+        edit_content = '  <lable>流量计划</lable>\n' +
+            '                            <input type="text" name="flow_plan" value="{$flow_plan}" id="input" class="form-control">';
+        $("#edit_content").append(edit_content);
+    });
 
-      if($(this).attr("id") == 'real_name'){
-          $("#input").attr('name', 'real_name');
-          $("#input").attr('value', $('#real_name_value').text());
-      }
-
-
-
-
-  })
-
+    $("#sure_edit_user").click(function () {
+        $.ajax({
+            type: "post",
+            url: '/admin/editUser',
+            data: {
+                'user_id' : $("[name='user_id']").val(),
+                'real_name':  $("[name='real_name']").val(),
+                'password':  $("[name='password']").val(),
+                'tel':  $("[name='tel']").val(),
+                'age':  $("[name='age']").val(),
+                'weixin':  $("[name='weixin']").val(),
+                'contact':  $("[name='contact']").val(),
+                'flow_plan':  $("[name='flow_plan']").val(),
+            },
+            dataType: "json",
+            success: function(data) {
+                alert(data.msg);
+                if(data.code == '201'){
+                    window.location.reload();
+                }
+            },
+            error:function(){
+                alert('系统错误');
+            }
+        });
+    })
 
 
 </script>
