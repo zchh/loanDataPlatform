@@ -112,11 +112,17 @@ class User extends Base
     }
 
     /**
-     * 修改密码
+     * 编辑用户流量计划状态
      */
-    public function editUserPassword()
+    public function editUserStatus()
     {
-
+        $requestParam = Request::instance()->param();
+        if($requestParam['user_id'] || $requestParam['flow_plan_status']){
+            return $this->selfResponse(StatusCode::SERVER_ERROR,  StatusCode::PARAM_WRONG);
+        }
+        $updateArr['flow_plan_status'] = $requestParam['flow_plan_status'];
+        UserModel::updateEntity($requestParam['user_id'], $updateArr);
+        return $this->selfResponse(StatusCode::UPDATE_SUCCESS,  StatusCode::UPDATE_SUCCESS_MESSAGE);
     }
 
 

@@ -8,6 +8,7 @@
 namespace app\admin\controller;
 
 use app\common\model\City;
+use app\common\model\CustomerDistribute;
 use app\common\model\MaterialLibrary;
 use app\common\selfConfig\StatusCode;
 use http\Env\Response;
@@ -69,7 +70,61 @@ class CustomerList extends Base
         }
         $result['param'] = $requestParam;
         $result = CustomerListModel::selectEntity($param);
-        return $this->selfResponse(StatusCode::GET_SUCCESS,  StatusCode::GET_SUCCESS_MESSAGE, $result);
+        $userList = UserModel::selectEntity();
+        foreach ($userList as $k=>$v){
+            unset($userList[$k]['password']);
+        }
+        $data = [
+            'userList' => $userList,
+            'customerList' => $result
+        ];
+        return $this->selfResponse(StatusCode::GET_SUCCESS,  StatusCode::GET_SUCCESS_MESSAGE, $data);
+    }
+
+    /**
+     * 确认分配
+     */
+    public function distributeCustomer()
+    {
+        $requestParam = Request::instance()->param();
+        $userIdArr = explode(',', $requestParam['checkUser']);
+        array_pop($userIdArr);
+        if(empty($userIdArr)){
+            return $this->selfResponse(StatusCode::SERVER_ERROR,  StatusCode::PARAM_WRONG);
+        }
+        if(false == empty($requestParam['distributeNum'])){ //快速分配
+            $param['limit'] = $requestParam['distributeNum'];
+            $customerList = CustomerListModel::selectEntity($param);
+            foreach ($userIdArr as $userId){
+                foreach ($customerList as $single){
+                 $insertArr['user_id'] = $userId;
+                 $insertArr['customer_id'] = $single['customer_id'];
+                 $num = CustomerDistribute::addEntity($insertArr);
+                 if($num == 0){
+                     return $this->selfResponse(StatusCode::SERVER_ERROR,  StatusCode::SERVER_ERRO_MESSAGE);
+                 }
+
+                }
+            }
+            return $this->selfResponse(StatusCode::CREATED_SUCCESS,  '分配成功');
+        }else{ //指定分配
+            $customerIdArr = explode(',', $requestParam['checkNum']);
+            array_pop($customerIdArr);
+            if(empty($customerIdArr)){
+                return $this->selfResponse(StatusCode::SERVER_ERROR,  StatusCode::PARAM_WRONG);
+            }
+            foreach ($userIdArr as $userId){
+                foreach ($customerIdArr as $customerId){
+                    $insertArr['user_id'] = $userId;
+                    $insertArr['customer_id'] = $customerId;
+                    $num = CustomerDistribute::addEntity($insertArr);
+                    if($num == 0){
+                        return $this->selfResponse(StatusCode::SERVER_ERROR,  StatusCode::SERVER_ERRO_MESSAGE);
+                    }
+                }
+            }
+            return $this->selfResponse(StatusCode::CREATED_SUCCESS,  '分配成功');
+        }
     }
 
     /**

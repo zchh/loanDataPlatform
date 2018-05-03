@@ -26,12 +26,12 @@ Route::post('admin/resetPassword', 'admin/Login/resetPassword');                
 
 Route::get('/admin/user', 'admin/User/index');                                                          //用户列表
 Route::post('/admin/addUser', 'admin/User/addUser');                                                    //添加用户
-Route::get('admin/userDetail/:id', 'admin/User/userDetail');                                               //用户详情
+Route::get('admin/userDetail/:id', 'admin/User/userDetail');                                            //用户详情
+Route::post('admin/editUserStatus', 'admin/User/editUserStatus');                                       //编辑用户流量计划状态
 
 Route::get('admin/customerList', 'admin/CustomerList/index');                                           //客户列表页面
 Route::get('admin/getCustomerData', 'admin/CustomerList/getCustomerData');                              //客户列表数据
-
-
+Route::post('admin/distributeCustomer', 'admin/CustomerList/distributeCustomer');                       //分配客户
 
 Route::get('admin/customerDetail/:id', 'admin/CustomerList/customerDetail');                            //客户详情
 Route::any('admin/addCustomer', 'admin/CustomerList/addCustomer');                                      //添加客户
@@ -49,19 +49,11 @@ Route::post('admin/addService', 'admin/Service/addService');                    
 Route::get('admin/getOneService', 'admin/Service/getOneService');                                       //获取一条客户服务
 Route::post('admin/editService', 'admin/Service/editService');                                           //编辑一条客户服务
 
-
 Route::get('/admin/provincial', 'admin/Provincial/index');                                               //地址信息
-
 
 Route::post('admin/delete','admin/AdminDelete/deleteRecord');                                           //删除
 
-
-
-Route::post('admin/uploadPic','admin/Pic/uploadPic');                                                    //图片上传
-
-
 Route::resource('admin/customer','admin/userAdmin.User');
-
 
 Route::resource('admin/customer','admin/userAdmin.User');
 

@@ -29,15 +29,10 @@
 
 
     <div class="col-xs-12">
-        <!-- /.box -->
-
         <div class="box">
-
-
             <div class="box-header">
                 <h3 class="box-title">客户管理</h3>
             </div>
-            <!-- /.box-header -->
             <div class="box-body">
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
@@ -45,9 +40,9 @@
                         <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
                         </button>
                         <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o" id="checkCustomer"></i></button>
-                        <button class="pull-right" id="distribute">分配</button>
+                        <button class="pull-right" id="distribute" data-toggle="modal" data-target="#customer_distribute">分配</button>
                         <select name="quick_distribute" class="pull-right">
-                            <option>快速分配</option>
+                            <option value="">快速分配</option>
                             <option value="500">500条</option>
                             <option value="1000">1000条</option>
                             <option value="2000">2000条</option>
@@ -71,19 +66,47 @@
                     </thead>
                     <tbody class="content" id="content">
 
-
-
                    </tbody>
                 </table>
             </div>
 
 
 
-            <!-- /.box-body -->
+
+
+            <div class="modal fade" id="customer_distribute">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title"></h4>
+                        </div>
+                        <form>
+                            <div class="modal-body">
+                                <table class="table table-bordered table-striped">
+                                    <tr>
+                                        <th></th>
+                                        <th>姓名</th>
+                                        <th>电话号码</th>
+                                    </tr>
+                                    <tbody id="user_list">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="sure_distribute" data-dismiss="modal">确认分配</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
-        <!-- /.box -->
     </div>
-    <!-- /.col -->
 </div>
 
 <script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
@@ -100,35 +123,45 @@
         $(this).css("background-color","#999");
     });
 
+    //初始化数据
     $.ajax({
         type: "get",
         url: '/admin/getCustomerData',
         data: {},
         dataType: "json",
         success: function(result) {
-            var str = '';
+            var str = userStr ='';
             if(result.code == '200'){
-                for(var i=0 ; i < result.data.length ; i ++){
-                    str = str + ' <tr> <td><input type="checkbox" name="checkNum" value=" '+result.data[i].customer_id+'" class="checkSingle"></td>\n' +
-                        '                        <td>'+result.data[i].name+'</td>\n' +
-                        '                        <td>'+result.data[i].age+'</td>\n' +
-                        '                        <td>'+result.data[i].tel+'</td>\n' +
-                        '                        <td>'+result.data[i].wx_number+'</td>\n' +
-                        '                        <td>'+result.data[i].loan_amount+'</td>\n' +
-                        '                        <td>'+result.data[i].credit+'</td>\n' +
-                        '                        <td>'+result.data[i].add_time+'</td>\n' +
-                        '                        <td><a href="/admin/customerDetail/'+result.data[i].customer_id+'" type="button" class="btn btn-default">\n' +
+                for(var i=0 ; i < result.data.customerList.length ; i ++){
+                    str = str + ' <tr> <td><input type="checkbox" name="checkNum" value="'+result.data.customerList[i].customer_id+'" class="checkSingle"></td>\n' +
+                        '                        <td>'+result.data.customerList[i].name+'</td>\n' +
+                        '                        <td>'+result.data.customerList[i].age+'</td>\n' +
+                        '                        <td>'+result.data.customerList[i].tel+'</td>\n' +
+                        '                        <td>'+result.data.customerList[i].wx_number+'</td>\n' +
+                        '                        <td>'+result.data.customerList[i].loan_amount+'</td>\n' +
+                        '                        <td>'+result.data.customerList[i].credit+'</td>\n' +
+                        '                        <td>'+result.data.customerList[i].add_time+'</td>\n' +
+                        '                        <td><a href="/admin/customerDetail/'+result.data.customerList[i].customer_id+'" type="button" class="btn btn-default">\n' +
                         '                            查看\n' +
                         '                        </a>\n' +
-                        '                        <a href="/admin/editCustomer/'+result.data[i].customer_id+'" type="button" class="btn btn-default">\n' +
+                        '                        <a href="/admin/editCustomer/'+result.data.customerList[i].customer_id+'" type="button" class="btn btn-default">\n' +
                         '                                编辑\n' +
                         '                        </a>\n' +
                         '                        </td> </tr>';
+                }
+
+                for(var i=0 ; i < result.data.userList.length ; i ++){
+                    userStr += ' <tr>\n' +
+                        '                                        <td><input type="checkbox" name="checkUser" value="'+ result.data.userList[i].user_id +'" class="checkSingle"></td>\n' +
+                        '                                        <td>'+ result.data.userList[i].real_name +'</td>\n' +
+                        '                                        <td>'+ result.data.userList[i].contact +'</td>\n' +
+                        '                                    </tr>';
                 }
             }else{
                 alert('系统错误');
             }
             $("#content").append(str);
+            $("#user_list").append(userStr);
         },
         error:function(){
             alert('系统错误');
@@ -137,6 +170,7 @@
 
 
 
+    //筛选
     $("#select").click(function () {
         $("#content").empty();
         $.ajax({
@@ -151,18 +185,18 @@
                 var str = '';
                 if(result.code == '200'){
                      for(var i=0 ; i < result.data.length ; i ++){
-                         str = str + ' <tr> <td><input type="checkbox" name="checkNum" value=" '+result.data[i].customer_id+'" class="checkSingle"></td>\n' +
-                             '                        <td>'+result.data[i].name+'</td>\n' +
-                             '                        <td>'+result.data[i].age+'</td>\n' +
-                             '                        <td>'+result.data[i].tel+'</td>\n' +
-                             '                        <td>'+result.data[i].wx_number+'</td>\n' +
-                             '                        <td>'+result.data[i].loan_amount+'</td>\n' +
-                             '                        <td>'+result.data[i].credit+'</td>\n' +
-                             '                        <td>'+result.data[i].add_time+'</td>\n' +
-                             '                        <td><a href="/admin/customerDetail/'+result.data[i].customer_id+'" type="button" class="btn btn-default">\n' +
+                         str = str + ' <tr> <td><input type="checkbox" name="checkNum" value="'+result.data.customerList[i].customer_id+'" class="checkSingle"></td>\n' +
+                             '                        <td>'+result.data.customerList[i].name+'</td>\n' +
+                             '                        <td>'+result.data.customerList[i].age+'</td>\n' +
+                             '                        <td>'+result.data.customerList[i].tel+'</td>\n' +
+                             '                        <td>'+result.data.customerList[i].wx_number+'</td>\n' +
+                             '                        <td>'+result.data.customerList[i].loan_amount+'</td>\n' +
+                             '                        <td>'+result.data.customerList[i].credit+'</td>\n' +
+                             '                        <td>'+result.data.customerList[i].add_time+'</td>\n' +
+                             '                        <td><a href="/admin/customerDetail/'+result.data.customerList[i].customer_id+'" type="button" class="btn btn-default">\n' +
                              '                            查看\n' +
                              '                        </a>\n' +
-                             '                        <a href="/admin/editCustomer/'+result.data[i].customer_id+'" type="button" class="btn btn-default">\n' +
+                             '                        <a href="/admin/editCustomer/'+result.data.customerList[i].customer_id+'" type="button" class="btn btn-default">\n' +
                              '                                编辑\n' +
                              '                        </a>\n' +
                              '                        </td> </tr>';
@@ -180,7 +214,48 @@
     });
 
 
-    // $("#distribute").click
+    //确认分配点击
+    $("#sure_distribute").click(function () {
+
+        //客户id
+        var obj=document.getElementsByName('checkNum');
+        var s='';
+        for(var i=0; i<obj.length; i++){
+            if(obj[i].checked){
+                s += obj[i].value;
+                s += ',';
+            }
+        }
+        //用户id
+        var userObj =document.getElementsByName('checkUser');
+
+        var user_s = '';
+        for(var i=0; i<userObj.length; i++){
+            if(userObj[i].checked){
+                user_s += userObj[i].value;
+                user_s += ',';
+            }
+        }
+        $.ajax({
+            type: "post",
+            url: '/admin/distributeCustomer',
+            data: {
+                'checkUser': user_s,
+                'distributeNum' : $("[name='quick_distribute']").val(),
+                'checkNum' : s
+            },
+            dataType: "json",
+            success: function(data) {
+                alert(data.msg);
+                if(data.code == '201'){
+                    window.location.reload();
+                }
+            },
+            error:function(){
+                alert('系统错误');
+            }
+        });
+    })
 
 </script>
 <script>

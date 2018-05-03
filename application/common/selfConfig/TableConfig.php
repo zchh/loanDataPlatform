@@ -14,6 +14,7 @@ class TableConfig
     const MATERIAL_LIBRARY_TABLE                    =            'material_library';                    //材质库表
 
     const CUSTOMER_LIST                             =            'customer_list';                       //客户信息表
+    const CUSTOMER_DISTRIBUTE                       =            'customer_distribute';                 //客户分配表
     const QUESTION                                  =            'question';                            //信息反馈表
     const SERVICE                                   =            'service';                             //客户服务表
     const USER                                      =            'user';                                //用户表
