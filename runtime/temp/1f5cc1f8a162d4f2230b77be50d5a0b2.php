@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:86:"F:\php_project\git_project\loanDataPlatform\public/../application/admin\view\user.html";i:1524916915;s:81:"F:\php_project\git_project\loanDataPlatform\application\admin\view\base\base.html";i:1524830243;s:42:"../application/admin/view/base/header.html";i:1524830396;s:43:"../application/admin/view/base/sidebar.html";i:1524799955;s:42:"../application/admin/view/base/footer.html";i:1524624938;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:86:"F:\php_project\git_project\loanDataPlatform\public/../application/admin\view\user.html";i:1525331881;s:81:"F:\php_project\git_project\loanDataPlatform\application\admin\view\base\base.html";i:1524830243;s:42:"../application/admin/view/base/header.html";i:1524830396;s:43:"../application/admin/view/base/sidebar.html";i:1524799955;s:42:"../application/admin/view/base/footer.html";i:1524624938;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -226,7 +226,7 @@
                         <td><?php echo $single['weixin']; ?></td>
                         <td><?php echo $single['balance']; ?></td>
 
-                        <?php switch($single['flow_plan_status']): case "0": ?> <td style="color: green"><a data-toggle="modal" data-target="#edit-status" id="not_check" class="<?php echo $single['user_id']; ?>"> <?php echo $single['flow_plan']; ?></a></td><?php break; case "1": ?> <td><?php echo $single['flow_plan']; ?></td><?php break; case "2": ?> <td style="color: red"><a data-toggle="modal" data-target="#modal-status" id="not_pass_check" class="<?php echo $single['user_id']; ?>"><?php echo $single['flow_plan']; ?></a></td><?php break; endswitch; ?>
+                        <?php switch($single['flow_plan_status']): case "0": ?> <td style="color: green"><a data-toggle="modal" data-target="#edit-status" id="not_check" class="<?php echo $single['user_id']; ?>"> <?php echo $single['flow_plan']; ?></a></td><?php break; case "1": ?> <td><?php echo $single['flow_plan']; ?></td><?php break; case "2": ?> <td style="color: red"><a style="color: red;" data-toggle="modal" data-target="#edit-status" id="not_pass_check" class="<?php echo $single['user_id']; ?>"><?php echo $single['flow_plan']; ?></a></td><?php break; endswitch; ?>
 
                         <td><?php echo $single['credit']; ?></td>
                         <td><a type="button" href="/admin/userDetail/<?php echo $single['user_id']; ?>" class="btn btn-default">
@@ -323,10 +323,6 @@
 
 
 
-
-
-
-
         </div>
     </div>
 </div>
@@ -413,9 +409,8 @@
 
     //赋值
     $("#not_pass_check").click(function () {
-        var str = $(this).val();
-        var arr = str.split(" ");
-        $("#user_id").val(arr[0]);
+        var user_id = $(this).attr("class");
+        $("#user_id").val(user_id);
         $("#not_pass").attr('selected', 'selected');
     });
 
@@ -427,7 +422,6 @@
 
     //编辑状态
     $("#edit-status-sure").click(function () {
-
         $.ajax({
             type: "post",
             url: '/admin/editUserStatus',
@@ -438,7 +432,7 @@
             dataType: "json",
             success: function (data) {
                 alert(data.msg);
-                if (data.code == '204') {
+                if (data.code == '201') {
                     window.location.reload();
                 }
             },
@@ -446,14 +440,6 @@
                 alert('系统错误');
             }
         });
-
-
-
-
-
-
-
-
     });
 
 

@@ -98,7 +98,9 @@ class BalanceManage extends Base
         $updateArr['balance'] = $requestParam['balance'];
         $balance = Balance::findEntity($requestParam['id']);
         if($balance['balance'] != $requestParam['balance']){
-//            $updateArr['balance'] =
+            $updateUser['balance'] = $requestParam['balance'] - $balance['balance'];
+            UserModel::updateEntity();
+            
 
         }
         Balance::updateEntity($requestParam['id'], $updateArr);
